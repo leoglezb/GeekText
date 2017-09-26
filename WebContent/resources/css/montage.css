@@ -1,0 +1,25 @@
+.montage-size1 {
+ width: 32.199993617021278%;
+ 		float:right;
+		margin-right:-1px;
+		}
+
+.montage-size2 {
+ width: 100%;
+ 		float:right;
+		margin-right:-1px;
+		}
+.montage-size3 {
+ width: 40%;
+ 		float:none;
+		margin:0px;
+		}
+.am-wrapper{
+	float:left;
+	position:relative;
+	overflow:hidden;
+}
+.am-wrapper img{
+	position:absolute;
+	outline:none;
+}

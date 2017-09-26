@@ -1,0 +1,27 @@
+<?php
+    include("config.php");
+    if(isSet($_POST['lastmsg']))
+    {
+    $lastmsg=$_POST['lastmsg'];
+    $lastmsg=mysql_real_escape_string($lastmsg);
+    $result=mysql_query("select * from messages where msg_id<'$lastmsg' order by msg_id desc limit 9");
+    while($row=mysql_fetch_array($result))
+    {
+    $msg_id=$row['msg_id'];
+    $message=$row['message'];
+    ?>
+<li>
+	<?php echo $message; ?>
+</li>
+<?php
+    }
+    ?>
+
+//More Button here $msg_id values is a last message id value.
+<div id="more<?php echo $msg_id; ?>" class="morebox">
+	<a href="#" id="<?php echo $msg_id; ?>" class="more">more</a>
+</div>
+<?php
+    }
+    ?>
+

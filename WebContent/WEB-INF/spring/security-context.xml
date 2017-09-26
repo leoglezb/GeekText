@@ -1,0 +1,78 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<security:global-method-security
+		pre-post-annotations="enabled" />
+	<!-- Data -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:url="${jdbc.url}" p:username="${jdbc.username}"
+		p:password="${jdbc.password}" p:driverClassName="${jdbc.driverClassName}" />
+
+	<bean id="userDetailsManager"
+		class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="authenticationManager" ref="authenticationManager"></property>
+	</bean>
+	<!-- End Data -->
+
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/j_spring_security_check"
+			access="permitAll" />
+		<security:intercept-url pattern="/index"
+			access="permitAll" />
+		<security:intercept-url pattern="/signout"
+			access="permitAll" />
+		<security:intercept-url pattern="/createuser"
+			access="permitAll" />
+		<security:intercept-url pattern="/registeruser"
+			access="permitAll" />
+		<security:intercept-url pattern="/"
+			access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
+		<security:intercept-url pattern="/genres/create"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/*"
+			access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_FACEBOOK')" />
+		<security:form-login login-page="/index" />
+		<security:intercept-url pattern="/resources/photos/**"
+			access="isAuthenticated()" />
+		<!--security:logout invalidate-session="true" logout-url="/signout"/ -->
+	</security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="userDetailsManager">
+			<security:password-encoder ref="passwordEncoder">
+				<security:salt-source ref="saltSource" />
+			</security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"></bean>
+
+	<bean id="saltSource"
+		class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+		<property name="userPropertyToUse" value="username"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- Local, JDBC-based TransactionManager -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Shared JDBC Data Access Template -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+</beans>
