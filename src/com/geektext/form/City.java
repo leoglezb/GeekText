@@ -2,6 +2,7 @@ package com.geektext.form;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,9 +15,9 @@ public class City implements Serializable {
 
 	@Id
     @Column(name="id")
+	@GeneratedValue
     private String id;
     
-    @Id 
     @Column(name="id_state")
     private String id_state;
  

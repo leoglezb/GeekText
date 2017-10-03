@@ -63,9 +63,8 @@
 				<!-- Dynamic Info START -->
 				<div class="dynamic-info">
 					<div class="result">
-						<div class="number">566</div>
 						<p>
-							<a href="serviceexchange">Service exchange</a>
+							<a href="serviceexchange">Browse Books</a>
 						</p>
 					</div>
 				</div>
