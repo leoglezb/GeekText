@@ -19,9 +19,9 @@
         <tbody>
             <c:forEach items="${bookList}" var="book">
                 <tr>
-                    <td><c:out value="${book.getTitle}" /></td>
-                    <td><c:out value="${book.getPrice}" /></td>
-                    <td><c:out value="${book.getPaperback}" /></td>
+                    <td><c:out value="${book.title}" /></td>
+                    <td><c:out value="${book.price}" /></td>
+                    <td><c:out value="${book.paperback}" /></td>
                 </tr>
             </c:forEach>
         </tbody>

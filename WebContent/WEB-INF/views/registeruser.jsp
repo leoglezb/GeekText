@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Zoowaa user registration</title>
+<title>GeekText user registration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -23,34 +23,17 @@
 <!-- Le fav and touch icons -->
 </head>
 <body>
-	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="max-1200 container-fluid">
 				<div class="row-fluid">
 					<div class="span4">
 						<a class="brand" href="#"> <img
-							src="resources/img/logo-zoowaa.png">
+							src="resources/img/books-logo.png">
 						</a>
 					</div>
 					<div class="span8">
-						<p class="masthead">Know your neighbors just like the old
-							day's but in a simple &amp; modern way!</p>
-						<div class="fb-like pull-center"
-							data-href="https://www.facebook.com/ZooWaa" data-send="false"
-							data-width="320" data-show-faces="true" data-font="arial">
-						</div>
-						
+						<p class="masthead">Great Books, for Geeks &amp; for All!</p>
 					</div>
 				</div>
 			</div>
