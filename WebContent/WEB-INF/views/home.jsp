@@ -83,7 +83,7 @@
 				<div class="display-pic"><img class="img-circle" src="resources/profiles/${userdetails.username}-profile.jpg" alt=""> </div>
 				<ul class="nav pull-left">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<h4>Hello ${userdetails.name} &nbsp;<i class="icon-caret-down"></i></h4></a>
+						<h4>Hello ${userdetails.firstname} &nbsp;<i class="icon-caret-down"></i></h4></a>
 						<ul class="dropdown-menu">
 							<li><a href="<c:url value="profilepage"/>">My Profile</a></li>
 							<li><a href="<c:url value="myaccount"/>">Account Settings</a></li>
@@ -213,7 +213,7 @@
 									<div class="status">
 										${row.descrip}
 									</div>
-									<div class="hours">by: ${row.userdetails.name} ${row.userdetails.lastname} | ${row.date_add}</div>
+									<div class="hours">by: ${row.userdetails.firstname} ${row.userdetails.lastname} | ${row.date_add}</div>
 								</div>
 							</c:forEach>
 						   </div>
@@ -240,7 +240,7 @@
 							<div class="feed-option">
 								<div class="titled">${row.title}</div>
 								<a href="#" class="links">read more</a>
-								<div class="hours">by: ${row.userdetails.name} ${row.userdetails.lastname} | ${row.date_add}</div>
+								<div class="hours">by: ${row.userdetails.firstname} ${row.userdetails.lastname} | ${row.date_add}</div>
 							</div>
 					        </c:forEach>  
 						</div>
@@ -257,7 +257,7 @@
 							<div class="feed-option">
 								<div class="titled">${row.title}</div>
 								<a href="#" class="links">read more</a>
-								<div class="hours">by: ${row.userdetails.name} ${row.userdetails.lastname} | ${row.date_add}</div>
+								<div class="hours">by: ${row.userdetails.firstname} ${row.userdetails.lastname} | ${row.date_add}</div>
 							</div>
 					        </c:forEach>  
 						</div>
@@ -302,9 +302,8 @@
 								<img src="resources/profiles/${row.username}-ico.jpg" onError="this.src='resources/ico/favicon.png';">
 							</div>
 							<div class="username">
-								<a href="#">${row.name} ${row.lastname}</a>
+								<a href="#">${row.firstname} ${row.lastname}</a>
 							</div>
-							<div class="status">${row.ocupation}.</div>
 						</div>
 					</c:forEach>
 					<a class="btn-mini pull-right">View More suggestions</a>
