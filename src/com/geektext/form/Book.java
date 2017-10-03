@@ -38,12 +38,13 @@ public class Book implements Serializable{
     @Column(name="description")
     private String description;
     
+    /**
     @OneToOne(mappedBy = "book")
     private Genre genre;
     
     @OneToOne(mappedBy = "book")
     private Publisher publisher;
-
+**/
 	public int getBookid() {
 		return bookid;
 	}
@@ -92,6 +93,7 @@ public class Book implements Serializable{
 		this.description = description;
 	}
 
+	/**
 	public Genre getGenre() {
 		return genre;
 	}
@@ -107,4 +109,5 @@ public class Book implements Serializable{
 	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
+	**/
 }

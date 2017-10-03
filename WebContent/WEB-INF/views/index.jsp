@@ -42,7 +42,7 @@
 				<div class="row-fluid">
 					<div class="span4">
 						<a class="brand" href="#"> <img
-							src="resources/img/logo-zoowaa.png" alt="">
+							src="resources/img/books-logo.png" alt="">
 						</a>
 					</div>
 					<div class="span8">
@@ -64,7 +64,8 @@
 				<div class="dynamic-info">
 					<div class="result">
 						<p>
-							<a href="serviceexchange">Browse Books</a>
+							<!--  >a href="browsebooks">Browse Books</a-->
+							<a href="<c:url value="browsebooks"/>">Browse Books</a>
 						</p>
 					</div>
 				</div>
@@ -130,7 +131,7 @@
 					<a href="#">Back to top</a>
 				</p>
 				<p>
-					&copy; Geektext &middot; <a href="#">Home</a> &middot; 
+					&copy; Geektext &middot; <a href="#">Home</a> &middot;
 				</p>
 			</footer>
 		</div>
@@ -139,7 +140,7 @@
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	
+
 	<script src="resources/js/jquery.js"></script>
 	<script src="resources/js/bootstrap-transition.js"></script>
 	<script src="resources/js/bootstrap-alert.js"></script>
@@ -189,7 +190,7 @@
 							});
 							$('#myModal')
 									.on(
-										'show',
+											'show',
 											function() {
 												$("#2")
 														.attr(

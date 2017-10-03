@@ -27,6 +27,9 @@
 				<value>com.geektext.form.State</value>
 				<value>com.geektext.form.Userconnection</value-->
 				<value>com.geektext.form.Userdetails</value>
+				<value>com.geektext.form.Book</value>
+				<value>com.geektext.form.Genre</value>
+				<value>com.geektext.form.Publisher</value>
 			</list>
 		</property>
 	</bean>
