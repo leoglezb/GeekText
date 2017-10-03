@@ -70,11 +70,8 @@ public class RegisteruserController {
 			Userdetails userdetails= new Userdetails();
 			userdetails.setUsername(username);
 			userdetails.setEmail(username);
-			userdetails.setName(user_firstname);
+			userdetails.setFirstname(user_firstname);
 			userdetails.setLastname(user_lastname);
-			userdetails.setActivationcode("1");
-			userdetails.setDe("P");
-			userdetails.setDate_add(new Timestamp(java.lang.System.currentTimeMillis()));
 			service.addUserdetails(userdetails);
 			model.addAttribute("registered", "1" );
 		} else {

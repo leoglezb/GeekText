@@ -71,12 +71,8 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 			Userdetails userdetails= new Userdetails();
 			userdetails.setUsername(username);
 			userdetails.setEmail(user_email);
-			userdetails.setName(user_firstname);
+			userdetails.setFirstname(user_firstname);
 			userdetails.setLastname(connection.fetchUserProfile().getLastName());
-			//userdetails.setLastname(connection.getImageUrl());
-			userdetails.setActivationcode("1");
-			userdetails.setDe("P");
-			userdetails.setDate_add(new Timestamp(java.lang.System.currentTimeMillis()));
 			service.addUserdetails(userdetails);
 		}
 		UserDetails user = userDetailsManager.loadUserByUsername(username);

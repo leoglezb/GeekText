@@ -65,17 +65,6 @@ public class HomeController {
 		final String userHost = request.getRemoteHost();
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		if (userdetails.getLatitude()==null || userdetails.getLongitude()==null){
-			String urlStr=null;
-			if (userIpAddress.equals("127.0.0.1")){
-				urlStr="http://freegeoip.net/xml/98.203.51.54";
-			} else{
-				urlStr="http://freegeoip.net/xml/"+userIpAddress;
-			}
-			Location location = new Location(urlStr);
-			userdetails.setLongitude(location.getLongitude());
-			userdetails.setLatitude(location.getLatitude());
-		}
 		model.addAttribute("userdetails", userdetails);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
@@ -129,11 +118,6 @@ public class HomeController {
 		Generaldetails newsfeed = new Generaldetails();
 		newsfeed.setCodope(beanSpring.getOp_newsfeed());
 		newsfeed.setUserdetails(userdetails);
-		newsfeed.setAddress(userdetails.getHome_adress());
-		newsfeed.setId_state(userdetails.getId_state());
-		newsfeed.setId_city(userdetails.getId_city());
-		newsfeed.setLatitud(userdetails.getLatitude());
-		newsfeed.setLongitud(userdetails.getLongitude());
 		newsfeed.setEstado("A");
 		newsfeed.setTitle(bean.getTitle());
 		newsfeed.setDescrip(bean.getDescrip());

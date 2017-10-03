@@ -94,11 +94,6 @@ public class ServiceexchangeController {
 		Generaldetails exchange = new Generaldetails();
 		exchange.setCodope(beanSpring.getOp_exchange());
 		exchange.setUserdetails(userdetails);
-		exchange.setAddress(userdetails.getHome_adress());
-		exchange.setId_state(userdetails.getId_state());
-		exchange.setId_city(userdetails.getId_city());
-		exchange.setLatitud(userdetails.getLatitude());
-		exchange.setLongitud(userdetails.getLongitude());
 		exchange.setEstado("A");
 		exchange.setTitle(bean.getTitle());
 		exchange.setDescrip(bean.getDescrip());

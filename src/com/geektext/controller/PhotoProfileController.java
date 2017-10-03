@@ -68,7 +68,6 @@ public class PhotoProfileController {
 		int y1 = Math.round(bean.getY1());
 		int x2 = Math.round(bean.getX2());
 		int y2 = Math.round(bean.getY2());
-		userdetails.writeSubimage(path, beanSpring.getProfilesFolder(), w, h, x1,y1, x2, y2);
 		return "redirect:/myaccount";
 	}
 
@@ -81,8 +80,6 @@ public class PhotoProfileController {
 			ServletContext context = RequestContextUtils.getWebApplicationContext(
 					request).getServletContext();
 			String path = context.getRealPath("/");
-			Picture picture = userdetails.writeImageProfileTemp(file, path, beanSpring.getProfilesFolder());
-			model.addAttribute("picture", picture);
 		}		
 		return "uploadphotoprofile";
 	}

@@ -41,11 +41,6 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="resources/ico/z72.png">
 	<link rel="apple-touch-icon-precomposed" href="resources/ico/z57.png">
 	<link rel="shortcut icon" href="resources/ico/favicon.png">
-	<script type="text/javascript">
-		var lat = ${userdetails.latitude} ;
-		var lng = ${userdetails.longitude} ;
-		var mybonds = 0.002;
-	</script>
   </head>
 
 <body>

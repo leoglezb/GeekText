@@ -19,13 +19,13 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.geektext.form.City</value>
+				<!-->value>com.geektext.form.City</value>
 				<value>com.geektext.form.Contact</value>
 				<value>com.geektext.form.Country</value>
 				<value>com.geektext.form.Generaldetails</value>
 				<value>com.geektext.form.Language</value>
 				<value>com.geektext.form.State</value>
-				<value>com.geektext.form.Userconnection</value>
+				<value>com.geektext.form.Userconnection</value-->
 				<value>com.geektext.form.Userdetails</value>
 			</list>
 		</property>
