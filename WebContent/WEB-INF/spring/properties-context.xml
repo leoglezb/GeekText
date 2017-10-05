@@ -17,7 +17,7 @@
 		<prop key="jdbc.driverClassName">com.mysql.jdbc.Driver</prop>		
 		<prop key="jdbc.url">jdbc:mysql://localhost:3306/GeekText</prop>
 		<prop key="jdbc.username">root</prop>
-		<prop key="jdbc.password"></prop>
+		<prop key="jdbc.password">4343collins</prop>
 
 		
 		<prop key="valor.usuario">usuario</prop>

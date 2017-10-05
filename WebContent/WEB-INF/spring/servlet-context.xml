@@ -24,15 +24,14 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<beans:bean id="social" class="com.geektext.config.SocialConfig"></beans:bean>
-	<interceptors>
+	<!-- >interceptors>
 		<interceptor>
 			<mapping path="/*"/>
 			<beans:bean class="com.geektext.user.UserInterceptor">
 				<beans:constructor-arg ref="usersConnectionRepository" />
 			</beans:bean>
 		</interceptor>
-	</interceptors>
+	</interceptors-->
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
@@ -43,14 +42,14 @@
 	</beans:bean>
 
 
-	<beans:bean	class="org.springframework.social.connect.web.ProviderSignInController">
+	<!-- >beans:bean	class="org.springframework.social.connect.web.ProviderSignInController">
 		<beans:constructor-arg ref="connectionFactoryLocator" />
 		<beans:constructor-arg ref="usersConnectionRepository" />
 		<beans:constructor-arg>
 			<beans:bean class="com.geektext.user.SimpleSignInAdapter" />
 		</beans:constructor-arg>
 		<beans:property name="signUpUrl" value="/signin" />
-	</beans:bean>
+	</beans:bean-->
 	<!-- mvc:view-controller path="/signout"/-->			
 	<!-- mvc:view-controller path="/signin"/-->
 	<!-- mvc:view-controller path="/j_spring_security_check"/-->

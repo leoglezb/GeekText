@@ -1,21 +1,9 @@
 package com.geektext.form;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.apache.commons.io.FileUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.geektext.utils.ResizeImages;
 
 @Entity
 @Table(name="Userdetails")

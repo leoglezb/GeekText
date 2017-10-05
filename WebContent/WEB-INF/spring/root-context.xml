@@ -28,15 +28,7 @@
 		<property name="photosFolder" value="${photosFolder}" />
 		<property name="profilesFolder" value="${profilesFolder}" />
 	</beans:bean>
-	<beans:bean id="facebookConnectionFactory" class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
-		 <constructor-arg index="0" value="${facebook.clientId}"></constructor-arg>
-		 <constructor-arg index="1" value="${facebook.clientSecret}"></constructor-arg>
-	</beans:bean>
-	<beans:bean id="twitterConnectionFactory" class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
-		 <constructor-arg index="0" value="${twitter.consumerKey}"></constructor-arg>
-		 <constructor-arg index="1" value="${twitter.consumerSecret}"></constructor-arg>
-	</beans:bean>
-	
+
 	<!-- Configures Shared Data Access Resources -->
 	<import resource="security-context.xml" />
 	<import resource="hibernate-context.xml" />

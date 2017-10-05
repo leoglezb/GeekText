@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.geektext.form.Userdetails;
-import com.geektext.pojo.Location;
 import com.geektext.service.UserdetailsService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,19 +39,9 @@ public class IndexController {
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());		
 		model.addAttribute("userdetails", userdetails);
 		logger.info("Index page! The client locale is {}.", locale);
-        final String userIpAddress = request.getRemoteAddr();
-        final String userAgent = request.getHeader("user-agent");
-		final String userHost = request.getRemoteHost();
 		Date date = new Date();
 		String urlStr=null;
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		if (userIpAddress.equals("127.0.0.1")){
-			urlStr="http://freegeoip.net/xml/98.203.51.54";
-		} else{
-			urlStr="http://freegeoip.net/xml/"+userIpAddress;
-		}
-		Location location = new Location(urlStr);
-		model.addAttribute("location",location);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
 		return "index";
@@ -63,7 +51,7 @@ public class IndexController {
 		String result=null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth instanceof AnonymousAuthenticationToken) {
-			result = "ZooWaaUserNotLoggedIn";
+			result = "GeekTextUserNotLoggedIn";
 		} else {
 			result = auth.getName();
 		}

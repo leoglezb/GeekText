@@ -2,10 +2,7 @@ package com.geektext.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +30,6 @@ import com.geektext.form.Userdetails;
 @Controller
 public class RegisteruserController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RegisteruserController.class);
 	@Autowired
 	private UserDetailsManager userDetailsManager;
 	@Autowired
@@ -84,7 +80,7 @@ public class RegisteruserController {
 		String result=null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth instanceof AnonymousAuthenticationToken) {
-			result = "ZooWaaUserNotLoggedIn";
+			result = "GeekTextUserNotLoggedIn";
 		} else {
 			result = auth.getName();
 		}

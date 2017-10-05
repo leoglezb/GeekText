@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.BookDao;
 import com.geektext.form.Book;
-import com.geektext.form.City;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -56,7 +55,7 @@ public class BookDaoImpl implements BookDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Book> paginate(int[] range) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(City.class);
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Book.class);
 		criteria.setMaxResults(range[0]).setFirstResult((range[1] - 1) * range[0]);
 		return criteria.list();
 	}

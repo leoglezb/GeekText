@@ -9,7 +9,6 @@ import com.geektext.user.User;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.geektext.dao.UserDao;
 
