@@ -33,14 +33,10 @@ public class IndexController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(HttpServletRequest request, Locale locale, Model model) throws Exception{
-		/*(SecurityContext.userSignedIn()) {
-			new RedirectView("/login", true).render(null, request, response);
-		}*/
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());		
 		model.addAttribute("userdetails", userdetails);
 		logger.info("Index page! The client locale is {}.", locale);
 		Date date = new Date();
-		String urlStr=null;
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );

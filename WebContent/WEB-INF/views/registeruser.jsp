@@ -15,12 +15,6 @@
 <link href="resources/css/bootstrap.css" rel="stylesheet">
 <link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="resources/css/custom.css">
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-<!-- Le fav and touch icons -->
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">

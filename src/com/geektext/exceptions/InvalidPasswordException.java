@@ -15,10 +15,6 @@
  */
 package com.geektext.exceptions;
 
-/**
- * The password entered during an sign-in attempt was invalid.
- * @author Keith Donald
- */
 @SuppressWarnings("serial")
 public final class InvalidPasswordException extends AccountException {
 

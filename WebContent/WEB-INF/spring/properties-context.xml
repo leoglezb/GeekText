@@ -9,28 +9,10 @@
 	<context:property-placeholder properties-ref="defaultProperties" />
 	
 	<util:properties id="defaultProperties">
-		<prop key="facebook.clientId">347756678668482</prop>
-		<prop key="facebook.clientSecret">ef72de85cef26f6c55c0926b4c2bdedf</prop>
-		<prop key="twitter.consumerKey">nbizE3cL5NXAQZ1HynPIw</prop>
-		<prop key="twitter.consumerSecret">jRPvBRf3MIOBour4XknMLm1PXZy3fXoiow5Z1Ro</prop>
-
 		<prop key="jdbc.driverClassName">com.mysql.jdbc.Driver</prop>		
 		<prop key="jdbc.url">jdbc:mysql://localhost:3306/GeekText</prop>
 		<prop key="jdbc.username">root</prop>
-		<prop key="jdbc.password">4343collins</prop>
-
-		
-		<prop key="valor.usuario">usuario</prop>
-		<prop key="valor.cantidad">10</prop>
-		<prop key="op.exchange">01</prop>
-		<prop key="op.events">02</prop>
-		<prop key="op.issues">03</prop>
-		<prop key="op.business">04</prop>
-		<prop key="op.heros">05</prop>
-		<prop key="op.services">06</prop>
-		<prop key="op.newsfeed">07</prop>
-		<prop key="photosFolder">resources/photos/</prop>
-		<prop key="profilesFolder">resources/profiles/</prop>		
+		<prop key="jdbc.password"></prop>		
 	</util:properties>
 	
 </beans>

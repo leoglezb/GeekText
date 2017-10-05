@@ -15,10 +15,6 @@
  */
 package com.geektext.exceptions;
 
-/**
- * The provided signin name could not be mapped 
- * @author Keith Donald
- */
 @SuppressWarnings("serial")
 public final class SignInNotFoundException extends AccountException {
 

@@ -15,11 +15,6 @@
  */
 package com.geektext.exceptions;
 
-/**
- * Sign-up failed because the email address the Person provided is already on file.
- * The same email address can not be shared by different people.
- * @author Keith Donald
- */
 @SuppressWarnings("serial")
 public class EmailAlreadyOnFileException extends AccountException {
 	

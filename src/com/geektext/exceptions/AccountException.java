@@ -15,12 +15,6 @@
  */
 package com.geektext.exceptions;
 
-/**
- * Base class of the AccountException hierarchy.
- * Marked abstract, as its designed to be subclasses.
- * A checked Exception, as AccountExceptions are recoverable business exceptions.
- * @author Keith Donald
- */
 @SuppressWarnings("serial")
 public abstract class AccountException extends Exception {
 

@@ -14,23 +14,7 @@
 <link href="resources/css/bootstrap.css" rel="stylesheet">
 <link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="resources/css/custom.css">
-<!-- HTML5 shim, for IE support of HTML5 elements -->
-<!--[if IE]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 <link rel="stylesheet" href="resources/css/font-awesome.min.css">
-<!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
-    <![endif]-->
-<!-- Fav and touch icons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="resources/ico/z144.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="resources/ico/z114.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="resources/ico/z72.png">
-<link rel="apple-touch-icon-precomposed" href="resources/ico/z57.png">
-<link rel="shortcut icon" href="resources/ico/favicon.png">
 </head>
 
 <body>
