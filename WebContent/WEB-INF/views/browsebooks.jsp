@@ -10,14 +10,15 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
-<link rel="stylesheet" href="resources/css/leandro prototype.css" type="text/css">
+<link rel="stylesheet" href="resources/css/leandro prototype.css"
+	type="text/css">
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-md bg-primary navbar-dark">
 		<div class="container">
 			<a class="navbar-brand" href="#"><i
-				class="fa d-inline fa-lg fa-cloud"></i><b> Brand</b></a>
+				class="fa d-inline fa-lg fa-cloud"></i><b> Browse Books</b></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbar2SupportedContent"
 				aria-controls="navbar2SupportedContent" aria-expanded="false"
@@ -49,125 +50,98 @@
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
 							<h6 class="text-primary">Genre</h6>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									Fiction
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									Horror
-								</label>
-							</div>
+							<c:forEach items="${genreList}" var="genre">
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="checkbox" value="">
+										${genre.name}
+									</label>
+								</div>
+							</c:forEach>
 						</div>
 					</div>
+					<div class="row my-5">
+						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
+							<h6 class="text-primary">Top Seller</h6>
+
+						</div>
+					</div>
+
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
 							<h6 class="text-primary">Rating</h6>
 							<div class="form-check">
 								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									5 Stars
+									class="form-check-input" type="checkbox" value=""> 5
+									Stars
 								</label>
 							</div>
 							<div class="form-check">
 								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									4 Stars
+									class="form-check-input" type="checkbox" value=""> 4
+									Stars
 								</label>
 							</div>
 							<div class="form-check">
 								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									3 Stars
+									class="form-check-input" type="checkbox" value=""> 3
+									Stars
 								</label>
 							</div>
 							<div class="form-check">
 								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									2 Stars
+									class="form-check-input" type="checkbox" value=""> 2
+									Stars
 								</label>
 							</div>
 							<div class="form-check">
 								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value="">
-									1 Star
+									class="form-check-input" type="checkbox" value=""> 1
+									Star
 								</label>
 							</div>
-						</div>
-					</div>
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">Connect</h6>
-							<p>
-								In-app chat panel 24/7 active. <br>The support you need,
-								right there.
-							</p>
 						</div>
 					</div>
 				</div>
 				<div class="text-left col-md-9">
 					<div class="row my-5">
-						<div class="col-10 col-md-4">
-							<h4 class="text-primary">
-								Card -1 <br>
-							</h4>
-							<p>
-								El principe y el mendigo <br>
-							</p>
-						</div>
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<img class="img-fluid d-block"
-								src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-						</div>
-					</div>
-					<div class="row my-5">
-						<div class="col-10 col-md-4">
-							<h4 class="text-primary">
-								Card -1 <br>
-							</h4>
-							<p>
-								El principe y el mendigo <br>
-							</p>
-						</div>
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<img class="img-fluid d-block"
-								src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-						</div>
-					</div>
-					<div class="row my-5">
-						<div class="col-10 col-md-4">
-							<h4 class="text-primary">
-								Card -2 <br>
-							</h4>
-							<p>
-								Romeo y Julieta <br>
-							</p>
-						</div>
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<img class="img-fluid d-block"
-								src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-						</div>
-					</div>
-					<div class="row my-5">
-						<div class="col-10 col-md-4">
-							<h4 class="text-primary">
-								Card -3 <br>
-							</h4>
-							<p>
-								Por seguir tus huellas, me cague las patas <br>
-							</p>
-						</div>
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<img class="img-fluid d-block"
-								src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-						</div>
+						<c:forEach items="${bookList}" var="book">
+							<div class="col-10 col-md-4">
+								<h4 class="text-primary">
+									 ${book.title} <br>
+								</h4>
+								<p>
+									Author: ${book.author.firstname}  ${book.author.lastname}<br>
+								</p>
+								<p>
+									${book.description} <br>
+								</p>
+								<p>
+									${book.releasedate} <br>
+								</p>
+							</div>
+							<div class="col-md-4">
+								<p>
+									${book.price} <br>
+								</p>
+								<p>
+									Genre: ${book.genre.name} <br>
+								</p>
+								<p>
+									Publisher: ${book.publisher.name} <br>
+								</p>
+								<p>
+									Paperback here <br>
+								</p>
+								<p>
+									Link Add to cart <br>
+								</p>
+							</div>
+							<div class="col-md-4">
+								<img class="img-fluid d-block"
+									src="resources/img/bookcover/${book.bookid}.png">
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

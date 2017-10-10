@@ -5,45 +5,63 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.CascadeType;
+
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.TemporalType;
+
 import java.io.Serializable;
 
 @Entity
-@Table(name="Book")
-public class Book implements Serializable{
+@Table(name = "Book")
+public class Book implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4769748653701863186L;
+
+	/**
+	 * 
+	 */
 
 	@Id
-    @Column(name="BookId")
+	@Column(name = "BookId")
 	@GeneratedValue
-    private int bookid;
+	private int bookid;
 
-    @Column(name="title")
-    private String title;
-	
-    @Column(name="price")
-    private double price;
+	@Column(name = "title")
+	private String title;
 
-    @Column(name="paperback")
-    private int paperback;
+	@Column(name = "price")
+	private double price;
 
-    @Column(name="releasedate")
-    private Date releasedate;
-    
-    @Column(name="description")
-    private String description;
-    
-    /**
-    @OneToOne(mappedBy = "book")
-    private Genre genre;
-    
-    @OneToOne(mappedBy = "book")
-    private Publisher publisher;
-**/
+	@Column(name = "paperback")
+	private int paperback;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "releasedate")
+	private Date releasedate;
+
+	@Column(name = "description")
+	private String description;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "authorid")
+	private Author author;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "genreid")
+	private Genre genre;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "publisherid")
+	private Publisher publisher;
+
 	public int getBookid() {
 		return bookid;
 	}
@@ -92,21 +110,16 @@ public class Book implements Serializable{
 		this.description = description;
 	}
 
-	/**
-	public Genre getGenre() {
-		return genre;
+	public Author getAuthor() {
+		return author;
 	}
 
-	public void setGenre(Genre genre) {
-		this.genre = genre;
+	public Genre getGenre() {
+		return genre;
 	}
 
 	public Publisher getPublisher() {
 		return publisher;
 	}
 
-	public void setPublisher(Publisher publisher) {
-		this.publisher = publisher;
-	}
-	**/
 }

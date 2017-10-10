@@ -11,10 +11,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Genre")
 public class Genre implements Serializable {
+	
+	private static final long serialVersionUID = -1460199869238167060L;
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	
 
 	@Id
     @Column(name="GenreId")
