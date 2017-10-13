@@ -32,6 +32,8 @@
 							class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
 							class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"><i
+							class="fa d-inline fa-lg fa-shopping-cart"></i> Cart</a></li>
 				</ul>
 				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
 					class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>
@@ -171,18 +173,18 @@
 					<h4 class="mb-4">Contact</h4>
 					<p>
 						<a href="tel:+246 - 542 550 5462" class="text-white"><i
-							class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542
-							550 5462</a>
+							class="fa d-inline mr-3 text-secondary fa-phone"></i>+1 305 - 555 
+							- 5555</a>
 					</p>
 					<p>
 						<a href="mailto:info@pingendo.com" class="text-white"><i
-							class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@pingendo.com</a>
+							class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@geektext.com</a>
 					</p>
 					<p>
 						<a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white"
 							target="_blank"><i
-							class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365
-							Park Street, NY</a>
+							class="fa d-inline mr-3 fa-map-marker text-secondary"></i>
+								11200 SW 8th St</a>
 					</p>
 				</div>
 				<div class="p-4 col-md-3">
@@ -199,7 +201,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 mt-3">
-					<p class="text-center text-white">© Copyright 2017 Pingendo -
+					<p class="text-center text-white">Â© Copyright 2017 GeekText -
 						All rights reserved.</p>
 				</div>
 			</div>
