@@ -17,8 +17,7 @@
 <body>
 	<nav class="navbar navbar-expand-md bg-primary navbar-dark">
 		<div class="container">
-			<a class="navbar-brand" href="#"><i
-				class="fa d-inline fa-lg fa-cloud"></i><b> Browse Books</b></a>
+			<a class="navbar-brand" href="<c:url value="browsebooks"/>"><b> Browse Books</b></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbar2SupportedContent"
 				aria-controls="navbar2SupportedContent" aria-expanded="false"
@@ -27,17 +26,13 @@
 			</button>
 			<div class="collapse navbar-collapse text-center justify-content-end"
 				id="navbar2SupportedContent">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a></li>
-				</ul>
 				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
-					class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>
+					class="fa d-inline fa-lg fa-user-circle-o"></i> Hello
+					${userdetails.firstname}</a>
 			</div>
 		</div>
 	</nav>
+
 	<div class="py-5 text-center bg-light">
 		<div class="container">
 			<div class="row">
@@ -108,10 +103,15 @@
 						<c:forEach items="${bookList}" var="book">
 							<div class="col-10 col-md-4">
 								<h4 class="text-primary">
-									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>"> ${book.title} <br> </a>
+									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>">
+										${book.title} <br>
+									</a>
 								</h4>
 								<p>
-									Author: ${book.author.firstname}&nbsp;${book.author.lastname}<br>
+									Author: <a
+										href="<c:url value="browsebooks?authorid=${book.author.authorid}"/>">
+										${book.author.firstname}&nbsp;${book.author.lastname}<br>
+									</a>
 								</p>
 							</div>
 							<div class="col-md-4">
@@ -132,64 +132,20 @@
 			</div>
 		</div>
 	</div>
-	<div class="bg-dark text-white">
-		<div class="container">
-			<div class="row">
-				<div class="p-4 col-md-3">
-					<h4 class="mb-4 text-secondary">Pingendo</h4>
-					<p class="text-white">A company for whatever you may need, from
-						website prototyping to publishing</p>
-				</div>
-				<div class="p-4 col-md-3">
-					<h4 class="mb-4 text-secondary">Mapsite</h4>
-					<ul class="list-unstyled">
-						<a href="#" class="text-white">Home</a>
-						<br>
-						<a href="#" class="text-white">About us</a>
-						<br>
-						<a href="#" class="text-white">Our services</a>
-						<br>
-						<a href="#" class="text-white">Stories</a>
-					</ul>
-				</div>
-				<div class="p-4 col-md-3">
-					<h4 class="mb-4">Contact</h4>
-					<p>
-						<a href="tel:+246 - 542 550 5462" class="text-white"><i
-							class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542
-							550 5462</a>
-					</p>
-					<p>
-						<a href="mailto:info@pingendo.com" class="text-white"><i
-							class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@pingendo.com</a>
-					</p>
-					<p>
-						<a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white"
-							target="_blank"><i
-							class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365
-							Park Street, NY</a>
-					</p>
-				</div>
-				<div class="p-4 col-md-3">
-					<h4 class="mb-4 text-light">Subscribe</h4>
-					<form>
-						<fieldset class="form-group text-white">
-							<label for="exampleInputEmail1">Get our newsletter</label> <input
-								type="email" class="form-control" id="exampleInputEmail1"
-								placeholder="Enter email">
-						</fieldset>
-						<button type="submit" class="btn btn-outline-secondary">Submit</button>
-					</form>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 mt-3">
-					<p class="text-center text-white">© Copyright 2017 Pingendo -
-						All rights reserved.</p>
-				</div>
-			</div>
+	<!-- FOOTER -->
+	<div class="container">
+		<div class="row">
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					&copy; Geektext &middot; <a href="#">Home</a> &middot;
+				</p>
+			</footer>
 		</div>
 	</div>
+	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>

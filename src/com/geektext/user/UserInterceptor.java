@@ -84,7 +84,7 @@ public class UserInterceptor implements HandlerInterceptor {
 		SecurityContext.setCurrentUser(new User(userId, firstName));
 	}
 
-	private boolean handleSignOut(HttpServletRequest request, HttpServletResponse response) {
+	public boolean handleSignOut(HttpServletRequest request, HttpServletResponse response) {
 		boolean result=false;
 		if (request.getServletPath().startsWith("/signout")){
 			if (SecurityContext.userSignedIn()) {
