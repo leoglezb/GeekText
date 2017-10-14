@@ -2,6 +2,7 @@ package com.geektext.dao.impl;
 
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,17 @@ public class BookDaoImpl implements BookDao {
 
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<Book> listBook() {
-		return sessionFactory.getCurrentSession().createQuery("from Book").list();
+	public List<Book> listBook(int authorId) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Book where :authorid = 0 or authorid = :authorid");
+		query.setParameter("authorid", authorId);
+		return query.list();
+	}
+	
+	@Transactional(readOnly = true)
+	public Book bookById(int bookId) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Book where bookid = :bookid");
+		query.setParameter("bookid", bookId);
+		return (Book) query.list().get(0);
 	}
 
 	@Override

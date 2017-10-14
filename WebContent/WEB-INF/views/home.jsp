@@ -48,7 +48,7 @@
 								<li><a href="<c:url value="profilepage"/>">My Profile</a></li>
 								<li><a href="<c:url value="myaccount"/>">Account
 										Settings</a></li>
-								<li><a href="<c:url value="/signout"/>">Logout</a></li>
+								<li><a href="<c:url value="/logout"/>">Logout</a></li>
 							</ul></li>
 					</ul>
 				</div>
