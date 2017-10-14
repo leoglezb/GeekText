@@ -29,12 +29,25 @@ public class BookController {
 	 */
 	@RequestMapping(value = "/browsebooks", method = RequestMethod.GET)
 	public String browsebooks(HttpServletRequest request, Model model) {
-		List<Book> bookList = bookService.listBook();
+		int authorId = 0;
+		String strAuthorId = request.getParameter("authorid");
+		if(strAuthorId != null)
+			authorId = Integer.parseInt(strAuthorId);
+		List<Book> bookList = bookService.listBook(authorId);
 		List<Genre> genreList = genreService.listGenre();
 		
 		
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("genreList", genreList);
 		return "browsebooks";
+	}
+	
+	@RequestMapping(value = "/bookdetails", method = RequestMethod.GET)
+	public String bookdetails(HttpServletRequest request, Model model) {
+		int bookId = Integer.parseInt(request.getParameter("bookid"));
+		Book book = bookService.bookById(bookId);
+		
+		model.addAttribute("book", book);
+		return "bookdetails";
 	}
 }

@@ -108,30 +108,15 @@
 						<c:forEach items="${bookList}" var="book">
 							<div class="col-10 col-md-4">
 								<h4 class="text-primary">
-									 ${book.title} <br>
+									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>"> ${book.title} <br> </a>
 								</h4>
 								<p>
-									Author: ${book.author.firstname}  ${book.author.lastname}<br>
-								</p>
-								<p>
-									${book.description} <br>
-								</p>
-								<p>
-									${book.releasedate} <br>
+									Author: ${book.author.firstname}&nbsp;${book.author.lastname}<br>
 								</p>
 							</div>
 							<div class="col-md-4">
 								<p>
 									${book.price} <br>
-								</p>
-								<p>
-									Genre: ${book.genre.name} <br>
-								</p>
-								<p>
-									Publisher: ${book.publisher.name} <br>
-								</p>
-								<p>
-									Paperback here <br>
 								</p>
 								<p>
 									Link Add to cart <br>
