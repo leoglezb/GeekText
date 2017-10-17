@@ -45,7 +45,7 @@
 		<security:form-login login-page="/index" />
 		<security:intercept-url pattern="/resources/photos/**"
 			access="isAuthenticated()" />
-		<!--security:logout invalidate-session="true" logout-url="/signout"/ -->
+		<security:logout invalidate-session="true" logout-url="/signout"/>
 	</security:http>
 
 	<security:authentication-manager alias="authenticationManager">
