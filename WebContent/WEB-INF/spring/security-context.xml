@@ -36,6 +36,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/browsebooks"
 			access="permitAll" />
+		<security:intercept-url pattern="/bookdetails"
+			access="permitAll" />
 		<security:intercept-url pattern="/"
 			access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
 		<security:intercept-url pattern="/genres/create"

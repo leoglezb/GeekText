@@ -28,8 +28,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Transactional
-	public List<Book> listBook() {
-		return BookDAO.listBook();
+	public List<Book> listBook(int authorId) {
+		return BookDAO.listBook(authorId);
 	}
 
 	@Transactional
@@ -41,6 +41,11 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	public boolean exist(Book id) {
 		return BookDAO.exist(id);
+	}
+
+	@Override
+	public Book bookById(int bookId) {
+		return BookDAO.bookById(bookId);
 	}
 
 }
