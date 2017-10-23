@@ -17,7 +17,8 @@
 <body>
 	<nav class="navbar navbar-expand-md bg-primary navbar-dark">
 		<div class="container">
-			<a class="navbar-brand" href="<c:url value="browsebooks"/>"><b> Browse Books</b></a>
+			<a class="navbar-brand" href="<c:url value="browsebooks"/>"><b>
+					Browse Books</b></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbar2SupportedContent"
 				aria-controls="navbar2SupportedContent" aria-expanded="false"
@@ -28,8 +29,8 @@
 				id="navbar2SupportedContent">
 				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
 					class="fa d-inline fa-lg fa-user-circle-o"></i> Hello
-					${userdetails.firstname}</a>
-				<a class="btn navbar-btn ml-2 text-white btn-secondary" href="#"><i
+					${userdetails.firstname}</a> <a
+					class="btn navbar-btn ml-2 text-white btn-secondary" href="#"><i
 					class="fa d-inline fa-lg fa-shopping-cart"></i> Cart</a>
 			</div>
 		</div>
@@ -46,15 +47,14 @@
 				<div class="text-right col-md-3">
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">Genre</h6>
-							<c:forEach items="${genreList}" var="genre">
-								<div class="form-check">
-									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" value="">
-										${genre.name}
-									</label>
-								</div>
-							</c:forEach>
+							<div id="GenreDiv">
+								<h6 class="text-primary">Genre</h6>
+								<c:forEach items="${genreList}" var="genre">
+									<label><input type="checkbox" name="${genre.name}"
+										value="${genre.genreid}" /> ${genre.name}</label>
+									<br />
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 					<div class="row my-5">
@@ -147,18 +147,32 @@
 			</footer>
 		</div>
 	</div>
-	
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-		crossorigin="anonymous"></script>
 </body>
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery-ui.custom.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery.validate.js"></script>
+<script src="resources/js/jquery.form.js"></script>
+<script src="resources/js/tag-it.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="resources/js/tag-it-function.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="resources/js/jquery.nicescroll.min.js"
+	type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
 
+var el = document.getElementById("GenreDiv");
+
+//get reference to input elements in toppings container element
+var tops = el.getElementsByTagName('input');
+
+//assign function to onclick property of each checkbox
+for (var i=0, len=tops.length; i<len; i++) {
+ if ( tops[i].type === 'checkbox' ) {
+     tops[i].onclick = function() {
+    	 alert(this.value);
+     }
+ }
+}
+</script>
 </html>
