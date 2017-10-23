@@ -50,7 +50,7 @@
 							<div id="GenreDiv">
 								<h6 class="text-primary">Genre</h6>
 								<c:forEach items="${genreList}" var="genre">
-									<label><input type="checkbox" name="${genre.name}"
+									<label><input type="checkbox" name="genres[]"
 										value="${genre.genreid}" /> ${genre.name}</label>
 									<br />
 								</c:forEach>
@@ -160,19 +160,25 @@
 <script src="resources/js/jquery.nicescroll.min.js"
 	type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+	var el = document.getElementById("GenreDiv");
 
-var el = document.getElementById("GenreDiv");
+	//get reference to input elements in toppings container element
+	var tops = el.getElementsByTagName('input');
 
-//get reference to input elements in toppings container element
-var tops = el.getElementsByTagName('input');
+	var selected = [];
 
-//assign function to onclick property of each checkbox
-for (var i=0, len=tops.length; i<len; i++) {
- if ( tops[i].type === 'checkbox' ) {
-     tops[i].onclick = function() {
-    	 alert(this.value);
-     }
- }
-}
+	//assign function to onclick property of each checkbox
+	for (var i = 0, len = tops.length; i < len; i++) {
+		if (tops[i].type === 'checkbox') {
+			tops[i].onclick = function() {
+				for (var j = 0, l = tops.length; j < l; j++) {
+					if (tops[j].checked)
+						selected.push(tops[j].value);
+				}
+				alert(selected);
+				selected = [];
+			}
+		}
+	}
 </script>
 </html>
