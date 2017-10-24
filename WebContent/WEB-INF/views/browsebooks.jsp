@@ -159,6 +159,8 @@
 	charset="utf-8"></script>
 <script src="resources/js/jquery.nicescroll.min.js"
 	type="text/javascript" charset="utf-8"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var el = document.getElementById("GenreDiv");
 
@@ -170,15 +172,40 @@
 	//assign function to onclick property of each checkbox
 	for (var i = 0, len = tops.length; i < len; i++) {
 		if (tops[i].type === 'checkbox') {
-			tops[i].onclick = function() {
-				for (var j = 0, l = tops.length; j < l; j++) {
-					if (tops[j].checked)
-						selected.push(tops[j].value);
-				}
-				alert(selected);
-				selected = [];
-			}
+			tops[i].onclick = doWork;
 		}
+	}
+	
+	function() {
+		for (var j = 0, l = tops.length; j < l; j++) {
+			if (tops[j].checked)
+				selected.push(tops[j].value);
+		}
+		alert(selected);
+		var list = {
+			testArray : [ "a", "b", "c" ]
+		};
+		selected = [];
+		alert("entering");
+		$.ajax({
+			url : "filterbooks",
+			data : $.toJSON(list),
+			type : 'POST', //<== not 'GET',
+			contentType : "application/json; charset=utf-8",
+			dataType : 'json',
+			error : function() {
+				alert("error");
+			},
+			success : function(arr) {
+				alert("success");
+				console.log(arr.testArray);
+				var testArray = arr.testArray;
+				$.each(function(i, e) {
+					document.writeln(e);
+				});
+			}
+		});
+		alert("done");
 	}
 </script>
 </html>
