@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.geektext.form.Book;
@@ -59,17 +60,13 @@ public class BookController {
 
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
 	@ResponseBody
-	public String filterbooks(HttpServletRequest request,
-		    HttpServletResponse response,
-		    @RequestBody Arr arr, 
-		    Model model,
-		    BindingResult errors) {
+	public String filterbooks(HttpServletRequest request, HttpServletResponse response, @RequestBody Arr arr,
+			Model model, BindingResult errors) {
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		model.addAttribute("userdetails", userdetails);
 
 		List<String> list = arr.getTestArray();
-		
-		
+
 		int authorId = 0;
 		String strAuthorId = request.getParameter("authorid");
 		if (strAuthorId != null)
@@ -79,6 +76,15 @@ public class BookController {
 
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("genreList", genreList);
+		return "browsebooks";
+	}
+
+	@RequestMapping(value = "/YourActionName", method = RequestMethod.GET)
+	public String YourActionName(HttpServletRequest request, Model model, @RequestParam("memberId") String id,
+			@RequestParam("memberPw") String pw) {
+		List<Book> bookList = bookService.listBook(1);
+
+		model.addAttribute("bookList", bookList);
 		return "browsebooks";
 	}
 

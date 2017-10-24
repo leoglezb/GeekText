@@ -45,6 +45,9 @@
 			</div>
 			<div class="row">
 				<div class="text-right col-md-3">
+					<div id="exampleDiv">
+						<h6 class="text-primary">TEST</h6>
+					</div>
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
 							<div id="GenreDiv">
@@ -102,7 +105,7 @@
 				</div>
 				<div class="text-left col-md-9">
 					<div class="row my-5">
-						<c:forEach items="${bookList}" var="book">
+						<div id="test"> <c:forEach items="${bookList}" var="book">
 							<div class="col-10 col-md-4">
 								<h4 class="text-primary">
 									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>">
@@ -134,6 +137,7 @@
 			</div>
 		</div>
 	</div>
+	</div>
 	<!-- FOOTER -->
 	<div class="container">
 		<div class="row">
@@ -162,6 +166,25 @@
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+	$('#exampleDiv').click(function(e) {
+		var loginData = {
+			memberId : "test1",
+			memberPw : "test2"
+		}
+		$.ajax({
+			type : "GET",
+			url : "YourActionName",
+			data : loginData,
+			success : function(result) {
+				$('#test').html(result);
+				//$('#test').${bookList}(result);
+			},
+			error : function(result) {
+				// do something.
+			}
+		});
+	});
+
 	var el = document.getElementById("GenreDiv");
 
 	//get reference to input elements in toppings container element
@@ -175,8 +198,8 @@
 			tops[i].onclick = doWork;
 		}
 	}
-	
-	function() {
+
+	function doWork() {
 		for (var j = 0, l = tops.length; j < l; j++) {
 			if (tops[j].checked)
 				selected.push(tops[j].value);
