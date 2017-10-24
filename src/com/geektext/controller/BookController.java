@@ -59,25 +59,15 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
-	@ResponseBody
-	public String filterbooks(HttpServletRequest request, HttpServletResponse response, @RequestBody Arr arr,
-			Model model, BindingResult errors) {
-		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
-		model.addAttribute("userdetails", userdetails);
-
-		List<String> list = arr.getTestArray();
-
-		int authorId = 0;
-		String strAuthorId = request.getParameter("authorid");
-		if (strAuthorId != null)
-			authorId = Integer.parseInt(strAuthorId);
-		List<Book> bookList = bookService.listBook(authorId);
-		List<Genre> genreList = genreService.listGenre();
+	public String filterbooks(HttpServletRequest request, Model model, @RequestParam("pName") String id,
+			@RequestParam("lName") int pw) {
+	
+		List<Book> bookList = bookService.listBook(1);	
 
 		model.addAttribute("bookList", bookList);
-		model.addAttribute("genreList", genreList);
-		return "browsebooks";
+		return "filterbooks";
 	}
+	
 
 	@RequestMapping(value = "/YourActionName", method = RequestMethod.GET)
 	public String YourActionName(HttpServletRequest request, Model model, @RequestParam("memberId") String id,
@@ -108,15 +98,22 @@ public class BookController {
 		return result;
 	}
 
-	public class Arr {
-		private List<String> testArray;
-
-		public void setTestArray(List<String> testArray) {
-			this.testArray = testArray;
+	class Search {
+	    private String pName;
+	    public String getpName() {
+			return pName;
 		}
-
-		public List<String> getTestArray() {
-			return testArray;
+		public void setpName(String pName) {
+			this.pName = pName;
 		}
+		public String getlName() {
+			return lName;
+		}
+		public void setlName(String lName) {
+			this.lName = lName;
+		}
+		private String lName;
+
+	    // getter and setters for above variables
 	}
 }

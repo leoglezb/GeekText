@@ -203,27 +203,20 @@
 				selected.push(tops[j].value);
 		}
 		alert(selected);
-		var list = {
-			testArray : [ "a", "b", "c" ]
-		};
 		selected = [];
 		alert("entering");
+		var search = {
+			pName : "bhanu",
+			lName : 1
+		}
 		$.ajax({
-			url : "filterbooks",
-			data : $.toJSON(list),
-			type : 'POST', //<== not 'GET',
-			contentType : "application/json; charset=utf-8",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
 			dataType : 'json',
-			error : function() {
-				alert("error");
-			},
-			success : function(arr) {
-				alert("success");
-				console.log(arr.testArray);
-				var testArray = arr.testArray;
-				$.each(function(i, e) {
-					document.writeln(e);
-				});
+			url : "filterbooks",
+			data : search,//JSON.stringify(search), // Note it is important
+			success : function(result) {
+				alert("yeahh");
 			}
 		});
 		alert("done");
