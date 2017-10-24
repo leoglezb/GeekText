@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.geektext.dao.BookDao;
 import com.geektext.form.Book;
 import com.geektext.pojo.Filter;
@@ -48,5 +49,7 @@ public class BookServiceImpl implements BookService {
 	public Book bookById(int bookId) {
 		return BookDAO.bookById(bookId);
 	}
+	
+	
 
 }

@@ -44,7 +44,9 @@ public class BookDaoImpl implements BookDao {
 	public List<Book> listBook(Filter filter) {
 		int authorId = filter.getAuthorId();
 		Integer[] genres = filter.getGenres();
-		String queryStr = "from Book where (:authorid = 0 or authorid = :authorid)";
+		String sortBy = filter.getSortBy();
+		String order = filter.getOrder();
+		String queryStr = "from Book b where (:authorid = 0 or authorid = :authorid)";
 		if(genres != null && genres.length > 0 && !(genres.length == 1 && genres[0] == 0)) {
 			String allGenre = "(";
 			for(int i = 0; i < genres.length; i++) {
@@ -52,6 +54,9 @@ public class BookDaoImpl implements BookDao {
 			}
 			allGenre = allGenre.substring(0, allGenre.length()-1) + ")";
 			queryStr += " and (genreid in " + allGenre + ")";
+		}
+		if(!sortBy.equals("") && !order.equals("")) {
+			queryStr += " order by " + sortBy + " " + order;
 		}
 		Query query = sessionFactory.getCurrentSession().createQuery(queryStr);
 		query.setParameter("authorid", authorId);
@@ -88,5 +93,4 @@ public class BookDaoImpl implements BookDao {
 		boolean result = session.get(Book.class, id) != null;
 		return result;
 	}
-
 }

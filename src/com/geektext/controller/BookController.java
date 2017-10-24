@@ -64,10 +64,14 @@ public class BookController {
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
 	public String filterbooks(HttpServletRequest request, Model model, 
 			@RequestParam(value="genres[]") Integer[] genres,
-			@RequestParam(value="ratings[]") Integer[] ratings) {
+			@RequestParam(value="ratings[]") Integer[] ratings ,
+			@RequestParam(value="sortBy") String sortBy ,
+			@RequestParam(value="order") String order ) {
 	
 		Filter filter = new Filter();
 		filter.setGenres(genres);
+		filter.setSortBy(sortBy);
+		filter.setOrder(order);
 		List<Book> bookList = bookService.listBook(filter);
 
 		model.addAttribute("bookList", bookList);

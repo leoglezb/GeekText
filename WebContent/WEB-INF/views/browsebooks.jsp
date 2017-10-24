@@ -102,6 +102,23 @@
 							</div>
 						</div>
 					</div>
+					
+					
+					<div class="row my-5">
+						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
+							<h6 class="text-primary">Sort</h6>
+							<h6 class="text-primary" id="TitleDESC">Title DESC</h6>
+							<h6 class="text-primary" id="TitleASC">Title ASC</h6>
+							<h6 class="text-primary" id="PriceDESC">Price DESC</h6>
+							<h6 class="text-primary" id="PriceASC">Price ASC</h6>
+							<h6 class="text-primary" id="ReleaseDtDESC">ReleaseDt DESC</h6>
+							<h6 class="text-primary" id="ReleaseDtASC">ReleaseDt ASC</h6>
+							<h6 class="text-primary" id="AuthorDESC">Author DESC</h6>
+							<h6 class="text-primary" id="AuthorASC">Author ASC</h6>
+						</div>
+					</div>
+					
+					
 				</div>
 				<div class="text-left col-md-9">
 					<div class="row my-5" id="test">
@@ -183,6 +200,65 @@
 		});
 	});
 
+	var sortProperty = "";
+	var sortOrder = "";
+	
+	$('#TitleDESC').click(function(e) {
+		sortProperty = "title";
+		sortOrder = "DESC";
+		
+		doWork();
+	});
+	
+	$('#TitleASC').click(function(e) {
+		sortProperty = "title";
+		sortOrder = "ASC";
+		
+		doWork();
+	});
+	
+	$('#PriceDESC').click(function(e) {
+		sortProperty = "price";
+		sortOrder = "DESC";
+		
+		doWork();
+	});
+	
+	$('#PriceASC').click(function(e) {
+		sortProperty = "price";
+		sortOrder = "ASC";
+		
+		doWork();
+	});
+	
+	$('#ReleaseDtDESC').click(function(e) {
+		sortProperty = "releasedate";
+		sortOrder = "DESC";
+		
+		doWork();
+	});
+	
+	$('#ReleaseDtASC').click(function(e) {
+		sortProperty = "releasedate";
+		sortOrder = "ASC";
+		
+		doWork();
+	});
+	
+	$('#AuthorDESC').click(function(e) {
+		sortProperty = "firstname";
+		sortOrder = "DESC";
+		
+		doWork();
+	});
+	
+	$('#AuthorASC').click(function(e) {
+		sortProperty = "firstname";
+		sortOrder = "ASC";
+		
+		doWork();
+	});
+	
 	var el = document.getElementById("GenreDiv");
 
 	//get reference to input elements in toppings container element
@@ -207,7 +283,9 @@
 		
 		var search = {
 				genres : selected,
-				ratings : ar2
+				ratings : ar2 ,
+				sortBy: sortProperty,
+				order: sortOrder
 		}
 		$.ajax({
 			type : "GET",
@@ -237,6 +315,8 @@
 			}
 		});
 		selected = [0];
+		sortProperty = "";
+		sortOrder = "";
 	}
 </script>
 </html>
