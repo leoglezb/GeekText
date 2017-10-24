@@ -202,8 +202,12 @@
 			if (tops[j].checked)
 				selected.push(tops[j].value);
 		}
+		
+		var ar2 = [1,23,4,5];
+		
 		var search = {
-			pName : selected,
+				genres : selected,
+				ratings : ar2
 		}
 		$.ajax({
 			type : "GET",

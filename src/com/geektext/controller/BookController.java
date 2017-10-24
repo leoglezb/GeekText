@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.geektext.form.Book;
 import com.geektext.form.Genre;
 import com.geektext.form.Userdetails;
+import com.geektext.pojo.Filter;
 import com.geektext.service.BookService;
 import com.geektext.service.GenreService;
 import com.geektext.service.UserService;
@@ -59,7 +61,9 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
-	public String filterbooks(HttpServletRequest request, Model model, @RequestParam(value="pName[]") Integer[] id) {
+	public String filterbooks(HttpServletRequest request, Model model, 
+			@RequestParam(value="genres[]") Integer[] genres,
+			@RequestParam(value="ratings[]") Integer[] ratings) {
 	
 		List<Book> bookList = bookService.listBook(5);
 
@@ -97,22 +101,5 @@ public class BookController {
 		return result;
 	}
 
-	class Search {
-	    private String pName;
-	    public String getpName() {
-			return pName;
-		}
-		public void setpName(String pName) {
-			this.pName = pName;
-		}
-		public String getlName() {
-			return lName;
-		}
-		public void setlName(String lName) {
-			this.lName = lName;
-		}
-		private String lName;
 
-	    // getter and setters for above variables
-	}
 }
