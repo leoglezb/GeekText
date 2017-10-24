@@ -104,8 +104,8 @@
 					</div>
 				</div>
 				<div class="text-left col-md-9">
-					<div class="row my-5">
-						<div id="test"> <c:forEach items="${bookList}" var="book">
+					<div class="row my-5" id="test">
+						<c:forEach items="${bookList}" var="book">
 							<div class="col-10 col-md-4">
 								<h4 class="text-primary">
 									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>">
@@ -136,7 +136,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<!-- FOOTER -->
 	<div class="container">
@@ -177,7 +176,6 @@
 			data : loginData,
 			success : function(result) {
 				$('#test').html(result);
-				//$('#test').${bookList}(result);
 			},
 			error : function(result) {
 				// do something.

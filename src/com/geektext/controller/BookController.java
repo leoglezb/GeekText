@@ -82,10 +82,10 @@ public class BookController {
 	@RequestMapping(value = "/YourActionName", method = RequestMethod.GET)
 	public String YourActionName(HttpServletRequest request, Model model, @RequestParam("memberId") String id,
 			@RequestParam("memberPw") String pw) {
-		List<Book> bookList = bookService.listBook(1);
+		List<Book> bookList = bookService.listBook(5);
 
 		model.addAttribute("bookList", bookList);
-		return "browsebooks";
+		return "filterbooks";
 	}
 
 	@RequestMapping(value = "/bookdetails", method = RequestMethod.GET)
