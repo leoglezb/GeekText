@@ -59,10 +59,9 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
-	public String filterbooks(HttpServletRequest request, Model model, @RequestParam("pName") String id,
-			@RequestParam("lName") int pw) {
+	public String filterbooks(HttpServletRequest request, Model model, @RequestParam(value="pName[]") Integer[] id) {
 	
-		List<Book> bookList = bookService.listBook(1);	
+		List<Book> bookList = bookService.listBook(5);
 
 		model.addAttribute("bookList", bookList);
 		return "filterbooks";

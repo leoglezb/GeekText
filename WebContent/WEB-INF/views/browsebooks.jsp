@@ -202,24 +202,37 @@
 			if (tops[j].checked)
 				selected.push(tops[j].value);
 		}
-		alert(selected);
-		selected = [];
-		alert("entering");
 		var search = {
-			pName : "bhanu",
-			lName : 1
+			pName : selected,
 		}
 		$.ajax({
 			type : "GET",
-			contentType : 'application/json; charset=utf-8',
-			dataType : 'json',
 			url : "filterbooks",
 			data : search,//JSON.stringify(search), // Note it is important
 			success : function(result) {
-				alert("yeahh");
+				$('#test').html(result);
+			},
+			error : function(jqXHR, exception) {
+				   var msg = '';
+			        if (jqXHR.status === 0) {
+			            msg = 'Not connect.\n Verify Network.';
+			        } else if (jqXHR.status == 404) {
+			            msg = 'Requested page not found. [404]';
+			        } else if (jqXHR.status == 500) {
+			            msg = 'Internal Server Error [500].';
+			        } else if (exception === 'parsererror') {
+			            msg = 'Requested JSON parse failed.';
+			        } else if (exception === 'timeout') {
+			            msg = 'Time out error.';
+			        } else if (exception === 'abort') {
+			            msg = 'Ajax request aborted.';
+			        } else {
+			            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+			        }
+			        alert("Error " + msg);
 			}
 		});
-		alert("done");
+		selected = [];
 	}
 </script>
 </html>
