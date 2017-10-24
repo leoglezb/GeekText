@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.BookDao;
 import com.geektext.form.Book;
+import com.geektext.pojo.Filter;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -40,8 +41,19 @@ public class BookDaoImpl implements BookDao {
 
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<Book> listBook(int authorId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Book where :authorid = 0 or authorid = :authorid");
+	public List<Book> listBook(Filter filter) {
+		int authorId = filter.getAuthorId();
+		Integer[] genres = filter.getGenres();
+		String queryStr = "from Book where (:authorid = 0 or authorid = :authorid)";
+		if(genres != null && genres.length > 0) {
+			String allGenre = "(";
+			for(int i = 0; i < genres.length; i++) {
+				allGenre += genres[i] + ",";
+			}
+			allGenre = allGenre.substring(0, allGenre.length()-1) + ")";
+			queryStr += " and (genreid in " + allGenre + ")";
+		}
+		Query query = sessionFactory.getCurrentSession().createQuery(queryStr);
 		query.setParameter("authorid", authorId);
 		return query.list();
 	}

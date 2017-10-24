@@ -3,27 +3,36 @@ package com.geektext.pojo;
 import java.util.List;
 
 public class Filter {
-    private Integer[] firstArray;
+	private int authorId;
+	private Integer[] genres;
     private Integer[] secondArray;
     private Integer[] thirdArray;
 
     public Filter() {
-    	firstArray = null;
+    	authorId = 0;
+    	genres = null;
     	secondArray = null;
     	thirdArray = null;
     }
     
-    public Filter(Integer[] firstArray, Integer[] secondArray, Integer[] thirdArray) {
-    	this.firstArray = firstArray;
+    public Filter(Integer[] genres, Integer[] secondArray, Integer[] thirdArray) {
+    	this.genres = genres;
     	this.secondArray = secondArray;
     	this.thirdArray = thirdArray;
     }
     
-    public Integer[] getFirstArray() {
-		return firstArray;
+    public int getAuthorId() {
+		return authorId;
 	}
-	public void setFirstArray(Integer[] firstArray) {
-		this.firstArray = firstArray;
+
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
+	}
+    public Integer[] getGenres() {
+		return genres;
+	}
+	public void setGenres(Integer[] genres) {
+		this.genres = genres;
 	}
 	public Integer[] getSecondArray() {
 		return secondArray;

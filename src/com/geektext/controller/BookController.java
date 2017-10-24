@@ -48,11 +48,12 @@ public class BookController {
 
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		model.addAttribute("userdetails", userdetails);
+		Filter filter = new Filter();
 		int authorId = 0;
 		String strAuthorId = request.getParameter("authorid");
 		if (strAuthorId != null)
-			authorId = Integer.parseInt(strAuthorId);
-		List<Book> bookList = bookService.listBook(authorId);
+			filter.setAuthorId(Integer.parseInt(strAuthorId));
+		List<Book> bookList = bookService.listBook(filter);
 		List<Genre> genreList = genreService.listGenre();
 
 		model.addAttribute("bookList", bookList);
@@ -65,7 +66,9 @@ public class BookController {
 			@RequestParam(value="genres[]") Integer[] genres,
 			@RequestParam(value="ratings[]") Integer[] ratings) {
 	
-		List<Book> bookList = bookService.listBook(5);
+		Filter filter = new Filter();
+		filter.setGenres(genres);
+		List<Book> bookList = bookService.listBook(filter);
 
 		model.addAttribute("bookList", bookList);
 		return "filterbooks";
@@ -75,9 +78,9 @@ public class BookController {
 	@RequestMapping(value = "/YourActionName", method = RequestMethod.GET)
 	public String YourActionName(HttpServletRequest request, Model model, @RequestParam("memberId") String id,
 			@RequestParam("memberPw") String pw) {
-		List<Book> bookList = bookService.listBook(5);
+		//List<Book> bookList = bookService.listBook(5);
 
-		model.addAttribute("bookList", bookList);
+		//model.addAttribute("bookList", bookList);
 		return "filterbooks";
 	}
 
