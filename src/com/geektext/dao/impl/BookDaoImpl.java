@@ -45,7 +45,7 @@ public class BookDaoImpl implements BookDao {
 		int authorId = filter.getAuthorId();
 		Integer[] genres = filter.getGenres();
 		String queryStr = "from Book where (:authorid = 0 or authorid = :authorid)";
-		if(genres != null && genres.length > 0) {
+		if(genres != null && genres.length > 0 && !(genres.length == 1 && genres[0] == 0)) {
 			String allGenre = "(";
 			for(int i = 0; i < genres.length; i++) {
 				allGenre += genres[i] + ",";

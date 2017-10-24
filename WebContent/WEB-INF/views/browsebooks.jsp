@@ -188,7 +188,7 @@
 	//get reference to input elements in toppings container element
 	var tops = el.getElementsByTagName('input');
 
-	var selected = [];
+	var selected = [0];
 
 	//assign function to onclick property of each checkbox
 	for (var i = 0, len = tops.length; i < len; i++) {
@@ -236,7 +236,7 @@
 			        alert("Error " + msg);
 			}
 		});
-		selected = [];
+		selected = [0];
 	}
 </script>
 </html>
