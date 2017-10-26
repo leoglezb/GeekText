@@ -66,8 +66,31 @@
 							<p>
 							    Leave a review!
 							</p>
-							<textarea rows="4" cols="40" maxlength=140></textarea>
-							<button onclick = "sendFunc()">Send review</button>    
+							<div>Name (leave blank to stay anonymous)</div>
+							<input type="text" id="reviewerName">
+							<div>Comment</div>
+							<textarea id="commentArea" rows="4" cols="40" maxlength=140></textarea>
+							<button onclick = "sendFunc()">Send</button>
+							<script>
+								function sendFunc()
+							    {
+									var name = document.getElementById("reviewerName").value ;
+									var comment = document.getElementById("commentArea").value ;
+									//var textbox = document.getElementById("reviewerName") ;
+									if(!name.replace(/\s/g, '').length) //Checks if name is either empty or only spaces
+									{
+										name = "anonymous" ;
+									}
+									if(!comment.replace(/\s/g, '').length) //Checks for invalid comment
+									{
+										alert("Cannot leave an empty comment") ;
+									}
+									else
+									{
+										//Send comment and name to server
+									}	
+							    }
+							</script>    
 						</div>
 						<div class="col-md-6">
 							<img class="img-fluid d-block w-100 mb-3 rounded"
