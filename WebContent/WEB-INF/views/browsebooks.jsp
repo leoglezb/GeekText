@@ -45,9 +45,6 @@
 			</div>
 			<div class="row">
 				<div class="text-right col-md-3">
-					<div id="exampleDiv">
-						<h6 class="text-primary">TEST</h6>
-					</div>
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
 							<div id="GenreDiv">
@@ -182,24 +179,6 @@
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$('#exampleDiv').click(function(e) {
-		var loginData = {
-			memberId : "test1",
-			memberPw : "test2"
-		}
-		$.ajax({
-			type : "GET",
-			url : "YourActionName",
-			data : loginData,
-			success : function(result) {
-				$('#test').html(result);
-			},
-			error : function(result) {
-				// do something.
-			}
-		});
-	});
-
 	var sortProperty = "";
 	var sortOrder = "";
 	
@@ -279,11 +258,8 @@
 				selected.push(tops[j].value);
 		}
 		
-		var ar2 = [1,23,4,5];
-		
 		var search = {
 				genres : selected,
-				ratings : ar2 ,
 				sortBy: sortProperty,
 				order: sortOrder
 		}

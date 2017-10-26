@@ -63,6 +63,11 @@
 							<p>
 								Author Bio: ${book.author.biography}<br>
 							</p>
+							<p>
+							    Leave a review!
+							</p>
+							<textarea rows="4" cols="40" maxlength=140></textarea>
+							<button onclick = "sendFunc()">Send</button>    
 						</div>
 						<div class="col-md-6">
 							<img class="img-fluid d-block w-100 mb-3 rounded"

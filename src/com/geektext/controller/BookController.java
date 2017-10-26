@@ -64,7 +64,7 @@ public class BookController {
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
 	public String filterbooks(HttpServletRequest request, Model model, 
 			@RequestParam(value="genres[]") Integer[] genres,
-			@RequestParam(value="ratings[]") Integer[] ratings ,
+			//@RequestParam(value="ratings[]") Integer[] ratings ,
 			@RequestParam(value="sortBy") String sortBy ,
 			@RequestParam(value="order") String order ) {
 	
@@ -78,16 +78,6 @@ public class BookController {
 		return "filterbooks";
 	}
 	
-
-	@RequestMapping(value = "/YourActionName", method = RequestMethod.GET)
-	public String YourActionName(HttpServletRequest request, Model model, @RequestParam("memberId") String id,
-			@RequestParam("memberPw") String pw) {
-		//List<Book> bookList = bookService.listBook(5);
-
-		//model.addAttribute("bookList", bookList);
-		return "filterbooks";
-	}
-
 	@RequestMapping(value = "/bookdetails", method = RequestMethod.GET)
 	public String bookdetails(HttpServletRequest request, Model model) {
 		int bookId = Integer.parseInt(request.getParameter("bookid"));

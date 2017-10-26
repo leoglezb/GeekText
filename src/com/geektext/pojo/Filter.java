@@ -32,6 +32,16 @@ public class Filter {
 	}
 
 	public Integer[] getGenres() {
+		/*
+		String allGenre = "";
+		if(genres != null && genres.length > 0 && !(genres.length == 1 && genres[0] == 0)) {
+			allGenre = "(";
+			for(int i = 0; i < genres.length; i++) {
+				allGenre += genres[i] + ",";
+			}
+			allGenre = allGenre.substring(0, allGenre.length()-1) + ")";
+		}
+		*/
 		return genres;
 	}
 
