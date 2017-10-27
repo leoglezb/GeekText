@@ -69,6 +69,13 @@
 							</div>
 						</div>
 						<div class="control-group">
+							<label class="control-label" for="input01">Nickname</label>
+							<div class="controls">
+								<input type="text" id="user_nickname"
+									name="user_nickname">
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label" for="input01">Password</label>
 							<div class="controls">
 								<input type="password" id="password" name="password">
@@ -139,6 +146,12 @@
 					user_firstname : {
 						required : true
 					},
+					user_lastname: {
+						required : true
+					},
+					user_nickname : {
+						required : true
+					},
 					password : {
 						required : true,
 						minlength : 3
@@ -157,6 +170,8 @@
 						email : "Enter valid email address"
 					},
 					user_firstname: "Enter your first and last name",
+					user_lastname: "Enter your last name",
+					user_nickname: "Enter your nickname",
 					password : {
 						required : "Enter your password",
 						minlength : "Password must be minimum 6 characters"

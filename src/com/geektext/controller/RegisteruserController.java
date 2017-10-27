@@ -57,6 +57,7 @@ public class RegisteruserController {
 		String password = bean.getPassword();
 		String user_firstname = bean.getUser_firstname();
 		String user_lastname = bean.getUser_lastname();
+		String user_nickname = bean.getUser_nickname();
 		if (!userDetailsManager.userExists(username)) {
 			List<GrantedAuthority> authorites = new ArrayList<GrantedAuthority>();
 			authorites.add(new GrantedAuthorityImpl("ROLE_USER"));
@@ -68,6 +69,7 @@ public class RegisteruserController {
 			userdetails.setEmail(username);
 			userdetails.setFirstname(user_firstname);
 			userdetails.setLastname(user_lastname);
+			userdetails.setNickname(user_nickname);
 			service.addUserdetails(userdetails);
 			model.addAttribute("registered", "1" );
 		} else {
