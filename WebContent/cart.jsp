@@ -85,7 +85,7 @@ html,body {
 								<th>Quantity</th>
 								<th class="text-center">Price</th>
 								<th class="text-center">Total</th>
-								<th> </th>
+								<th>Â </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -157,18 +157,18 @@ html,body {
 										</tr>
 									</c:forEach>
 									<tr>
-										<td> </td>
-										<td> </td>
-										<td> </td>
+										<td>Â </td>
+										<td>Â </td>
+										<td>Â </td>
 										<td><h5>Subtotal</h5></td>
 										<td class="text-right"><h5>
 												<strong>$<c:out value="${cart.total}" /></strong>
 											</h5></td>
 									</tr>
 									<tr>
-										<td> </td>
-										<td> </td>
-										<td> </td>
+										<td>Â </td>
+										<td>Â </td>
+										<td>Â </td>
 										<td><h3>Total</h3></td>
 										<td class="text-right"><h3>
 												<strong>$<c:out value="${cart.total}" /></strong>
