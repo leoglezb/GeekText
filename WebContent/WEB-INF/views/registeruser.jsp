@@ -43,7 +43,7 @@
 							Congratulations, you are registered!</div>
 					</c:if>
 					<c:if test="${registered==0}">
-						<div class="alert alert-success">Sorry, this username has
+						<div class="alert alert-success">Sorry, this email has
 							already been taken.</div>
 					</c:if>
 
