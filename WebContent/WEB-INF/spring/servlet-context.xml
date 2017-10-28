@@ -50,7 +50,7 @@
 		</beans:constructor-arg>
 		<beans:property name="signUpUrl" value="/signin" />
 	</beans:bean-->
-	<!-- mvc:view-controller path="/signout"/-->			
+	<!-- >mvc:view-controller path="/signout"/-->			
 	<!-- mvc:view-controller path="/signin"/-->
 	<!-- mvc:view-controller path="/j_spring_security_check"/-->
 </beans:beans>

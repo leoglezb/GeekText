@@ -5,6 +5,7 @@ public class BeanRegisterUser {
     private String user;
     private String user_firstname;
     private String user_lastname;
+    private String user_nickname;
     private String password;
 	public String getUser() {
 		return user;
@@ -23,6 +24,12 @@ public class BeanRegisterUser {
 	}
 	public void setUser_lastname(String user_lastname) {
 		this.user_lastname = user_lastname;
+	}
+	public String getUser_nickname(){
+		return user_nickname;
+	}
+	public void setUser_nickname(String user_nickname) {
+		this.user_nickname = user_nickname;
 	}
 	public String getPassword() {
 		return password;

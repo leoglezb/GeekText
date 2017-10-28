@@ -5,12 +5,15 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.BookDao;
 import com.geektext.form.Book;
+import com.geektext.pojo.Filter;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -40,10 +43,26 @@ public class BookDaoImpl implements BookDao {
 
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<Book> listBook(int authorId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Book where :authorid = 0 or authorid = :authorid");
-		query.setParameter("authorid", authorId);
-		return query.list();
+	public List<Book> listBook(Filter filter) {
+		int authorId = filter.getAuthorId();
+		Integer[] genres = filter.getGenres();
+		String sortBy = filter.getSortBy();
+		String order = filter.getOrder();
+		
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(Book.class);
+		crit.createAlias("author", "a");
+		crit.createAlias("genre", "g");
+		if(authorId > 0)
+			crit.add(Restrictions.eq( "a.authorid", new Integer(authorId) ));
+		if(genres != null && genres.length > 0 && !(genres.length == 1 && genres[0] == 0))
+			crit.add(Restrictions.in( "g.genreid", genres));
+		if(!sortBy.equals("")) {
+			if(order.equals("ASC"))
+				crit.addOrder(Order.asc(sortBy.equals("firstname")?"a.firstname":sortBy));
+			else
+				crit.addOrder(Order.desc(sortBy.equals("firstname")?"a.firstname":sortBy));
+		}
+		return crit.list();
 	}
 	
 	@Transactional(readOnly = true)
@@ -76,5 +95,4 @@ public class BookDaoImpl implements BookDao {
 		boolean result = session.get(Book.class, id) != null;
 		return result;
 	}
-
 }
