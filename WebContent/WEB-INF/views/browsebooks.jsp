@@ -30,7 +30,7 @@
 				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
 					class="fa d-inline fa-lg fa-user-circle-o"></i> Hello
 					${userdetails.firstname}</a> <a
-					class="btn navbar-btn ml-2 text-white btn-secondary" href="#"><i
+					class="btn navbar-btn ml-2 text-white btn-secondary" href="<c:url value="cart.jsp"/>"><i
 					class="fa d-inline fa-lg fa-shopping-cart"></i> Cart</a>
 			</div>
 		</div>
