@@ -78,6 +78,14 @@ public class RegisteruserController {
 		return "registeruser";
 	}	
 
+	@RequestMapping(value="/profilemanagement", method=RequestMethod.GET)
+	public String updateUser(HttpServletRequest request, Model model) {
+		Userdetails userdetails = service.getUserdetails(loggedInUserName());
+		model.addAttribute("userdetails", userdetails);
+		
+		
+		return "profilemanagement";
+	}	
 	private String loggedInUserName() {
 		String result=null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
