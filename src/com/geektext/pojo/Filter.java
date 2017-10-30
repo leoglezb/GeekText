@@ -3,24 +3,21 @@ package com.geektext.pojo;
 public class Filter {
 	private int authorId;
 	private Integer[] genres;
-	private Integer[] secondArray;
-	private Integer[] thirdArray;
+	private int minRating;
 	private String sortBy;
 	private String order;
 
 	public Filter() {
 		authorId = 0;
 		genres = null;
-		secondArray = null;
-		thirdArray = null;
+		minRating = 0;
 		sortBy = "";
 		order = "";
 	}
 
-	public Filter(Integer[] genres, Integer[] secondArray, Integer[] thirdArray) {
+	public Filter(Integer[] genres, int minRating) {
 		this.genres = genres;
-		this.secondArray = secondArray;
-		this.thirdArray = thirdArray;
+		this.minRating = minRating;
 	}
 
 	public int getAuthorId() {
@@ -49,20 +46,12 @@ public class Filter {
 		this.genres = genres;
 	}
 
-	public Integer[] getSecondArray() {
-		return secondArray;
+	public int getMinRating() {
+		return minRating;
 	}
 
-	public void setSecondArray(Integer[] secondArray) {
-		this.secondArray = secondArray;
-	}
-
-	public Integer[] getThirdArray() {
-		return thirdArray;
-	}
-
-	public void setThirdArray(Integer[] thirdArray) {
-		this.thirdArray = thirdArray;
+	public void setMinRating(int minRating) {
+		this.minRating = minRating;
 	}
 
 	public String getSortBy() {
