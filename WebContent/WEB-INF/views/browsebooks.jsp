@@ -112,6 +112,8 @@
 							<h6 class="text-primary" id="ReleaseDtASC">ReleaseDt ASC</h6>
 							<h6 class="text-primary" id="AuthorDESC">Author DESC</h6>
 							<h6 class="text-primary" id="AuthorASC">Author ASC</h6>
+							<h6 class="text-primary" id="RatingDESC">Rating DESC</h6>
+							<h6 class="text-primary" id="RatingASC">Rating ASC</h6>
 						</div>
 					</div>
 					
@@ -233,6 +235,20 @@
 	
 	$('#AuthorASC').click(function(e) {
 		sortProperty = "firstname";
+		sortOrder = "ASC";
+		
+		doWork();
+	});
+	
+	$('#RatingDESC').click(function(e) {
+		sortProperty = "avgrating";
+		sortOrder = "DESC";
+		
+		doWork();
+	});
+	
+	$('#RatingASC').click(function(e) {
+		sortProperty = "avgrating";
 		sortOrder = "ASC";
 		
 		doWork();
