@@ -13,6 +13,8 @@
 <link rel="stylesheet"
 	href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css"
 	type="text/css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel = "stylesheet" href="resources/css/5star.css">
 </head>
 
 <body>
@@ -66,6 +68,21 @@
 							<p>
 							    Leave a review!
 							</p>
+							<div class="stars">
+  								<form action="">
+    								<input class="star star-5" id="star-5" type="radio" name="star"/>
+    								<label class="star star-5" for="star-5"></label>
+    								<input class="star star-4" id="star-4" type="radio" name="star"/>
+    								<label class="star star-4" for="star-4"></label>
+    								<input class="star star-3" id="star-3" type="radio" name="star"/>
+    								<label class="star star-3" for="star-3"></label>
+    								<input class="star star-2" id="star-2" type="radio" name="star"/>
+   								 	<label class="star star-2" for="star-2"></label>
+    								<input class="star star-1" id="star-1" type="radio" name="star"/>
+    								<label class="star star-1" for="star-1"></label>
+  								</form>
+							</div>
+							
 							<div>Name (leave blank to stay anonymous)</div>
 							<input type="text" id="reviewerName">
 							<div>Comment</div>
@@ -76,7 +93,7 @@
 							    {
 									var name = document.getElementById("reviewerName").value ;
 									var comment = document.getElementById("commentArea").value ;
-									//var textbox = document.getElementById("reviewerName") ;
+									
 									if(!name.replace(/\s/g, '').length) //Checks if name is either empty or only spaces
 									{
 										name = "anonymous" ;
