@@ -61,6 +61,12 @@ public class Book implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "publisherid")
 	private Publisher publisher;
+	
+	@Column(name = "sold")
+	private int sold;
+	
+	@Column(name = "avgrating")
+	private double avgrating;
 
 	public int getBookid() {
 		return bookid;
@@ -120,6 +126,22 @@ public class Book implements Serializable {
 
 	public Publisher getPublisher() {
 		return publisher;
+	}
+
+	public int getSold() {
+		return sold;
+	}
+
+	public void setSold(int sold) {
+		this.sold = sold;
+	}
+
+	public double getAvgrating() {
+		return avgrating;
+	}
+
+	public void setAvgrating(double avgrating) {
+		this.avgrating = avgrating;
 	}
 
 }

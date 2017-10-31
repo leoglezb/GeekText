@@ -45,6 +45,7 @@ public class BookDaoImpl implements BookDao {
 	@SuppressWarnings("unchecked")
 	public List<Book> listBook(Filter filter) {
 		int authorId = filter.getAuthorId();
+		double minRating = filter.getMinRating();
 		Integer[] genres = filter.getGenres();
 		String sortBy = filter.getSortBy();
 		String order = filter.getOrder();
@@ -56,6 +57,7 @@ public class BookDaoImpl implements BookDao {
 			crit.add(Restrictions.eq( "a.authorid", new Integer(authorId) ));
 		if(genres != null && genres.length > 0 && !(genres.length == 1 && genres[0] == 0))
 			crit.add(Restrictions.in( "g.genreid", genres));
+		crit.add(Restrictions.ge( "avgrating", new Double(minRating)));
 		if(!sortBy.equals("")) {
 			if(order.equals("ASC"))
 				crit.addOrder(Order.asc(sortBy.equals("firstname")?"a.firstname":sortBy));
