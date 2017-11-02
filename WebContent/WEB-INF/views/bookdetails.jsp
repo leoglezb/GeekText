@@ -29,7 +29,7 @@
 </style>
 </head>
 
-<body>
+<body onload = "disableFunc()">
 	<div class="py-5">
 		<div class="container">
 			<div class="row">
@@ -78,7 +78,7 @@
 								Author Bio: ${book.author.biography}<br>
 							</p>
 							<p>
-							    Leave a review!
+							    Leave a review!<br>
 							</p>
 							<div id="ratingErr">*Must add a star rating*</div>
     						<input class="star star-5" id="star-5" type="radio" name="star"/>
@@ -92,16 +92,14 @@
     						<input class="star star-1" id="star-1" type="radio" name="star"/>
     					    <label class="star star-1" for="star-1"></label>
   							
-							<div>Name (leave blank to stay anonymous)</div>
-							<input type="text" id="reviewerName">
 							<div>Comment</div>
 							<div id="commentErr">*Cannot leave an empty comment*</div>
 							<textarea id="commentArea" rows="4" cols="40" maxlength=140></textarea>
-							<button type="button" onclick = "sendFunc()">Send</button>
+							<button type="button" id="sendButton" onclick = "sendFunc()">Send</button>
 							<script>
 								function sendFunc()
 							    {
-									var name = document.getElementById("reviewerName").value ;
+									//sendFunc(); 
 									var comment = document.getElementById("commentArea").value ;
 									var commentErr = document.getElementById("commentErr") ;
 									var textArea = document.getElementById("commentArea") ;
@@ -113,11 +111,7 @@
 									var star3 = document.getElementById("star-3") ;
 									var star4 = document.getElementById("star-4") ;
 									var star5 = document.getElementById("star-5") ;
-									
-									if(!name.replace(/\s/g, '').length) //Checks if name is either empty or only spaces
-									{
-										name = "anonymous" ;
-									}
+
 									if(!comment.replace(/\s/g, '').length) //Checks for invalid comment
 									{
 										commentErr.style.display = "block" ;
@@ -154,12 +148,27 @@
 										{
 											rating = 5 ;
 										}	
-										
-										
 										//Send comment, name and rating to server
 									}	
 							    }
-							</script>    
+							</script> 
+							<script>	
+							    
+								function disableFunc() //Greys out textbox, send button and stars
+								{
+									if(check === "Pizza")
+									{
+										
+										document.getElementById("commentArea").disabled = true ;
+										document.getElementById("sendButton").disabled = true ;
+										document.getElementById("star-1").disabled = true ;
+										document.getElementById("star-2").disabled = true ;
+										document.getElementById("star-3").disabled = true ;
+										document.getElementById("star-4").disabled = true ;
+										document.getElementById("star-5").disabled = true ;
+									}
+								}
+							</script>   
 						</div>
 						<div class="col-md-6">
 							<img class="img-fluid d-block w-100 mb-3 rounded"
@@ -181,6 +190,4 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
 		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
 		crossorigin="anonymous"></script>
-</body>
-
 </html>
