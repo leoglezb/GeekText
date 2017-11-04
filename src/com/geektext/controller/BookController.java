@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.geektext.form.Book;
 import com.geektext.form.Genre;
+import com.geektext.form.BookRating;
 import com.geektext.form.Userdetails;
 import com.geektext.pojo.Filter;
 import com.geektext.service.BookService;
 import com.geektext.service.GenreService;
+import com.geektext.service.RatingService;
 import com.geektext.service.UserService;
 import com.geektext.service.UserdetailsService;
 
@@ -39,6 +41,9 @@ public class BookController {
 
 	@Autowired
 	private UserdetailsService serviceuser;
+	
+	@Autowired
+	private RatingService ratingService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -82,11 +87,33 @@ public class BookController {
 	@RequestMapping(value = "/bookdetails", method = RequestMethod.GET)
 	public String bookdetails(HttpServletRequest request, Model model) {
 		int bookId = Integer.parseInt(request.getParameter("bookid"));
+		
+		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		Book book = bookService.bookById(bookId);
+		List<BookRating> ratingList  = ratingService.listRating(bookId);
 
 		model.addAttribute("book", book);
+		model.addAttribute("userdetails", userdetails);
+		model.addAttribute("ratingList", ratingList);
 		return "bookdetails";
 	}
+	
+	@RequestMapping(value = "/addRating", method = RequestMethod.POST)
+	public String addrating(HttpServletRequest request, Model model, 
+			@RequestParam(value="bookid") int bookid,
+			@RequestParam(value="comment") String comment ,
+			@RequestParam(value="rating") int rating ) {
+	
+		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
+		Book book = bookService.bookById(bookid);
+		
+		ratingService.addRating(book, userdetails, rating, comment);
+		
+		List<BookRating> ratingList  = ratingService.listRating(bookid);
+		model.addAttribute("ratingList", ratingList);
+		return "ratinglist";
+	}
+
 
 	private String loggedInUserName() {
 		String result = null;

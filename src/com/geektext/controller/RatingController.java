@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.geektext.form.Book;
-import com.geektext.form.Rating;
+import com.geektext.form.BookRating;
 import com.geektext.form.Genre;
 import com.geektext.form.Userdetails;
 import com.geektext.pojo.Filter;
@@ -36,6 +36,7 @@ public class RatingController {
 	@Autowired
 	private RatingService rateService;
 
+	/**
 	@RequestMapping(value = "/bookdetails", method = RequestMethod.GET)
 	public String bookratingdetails(HttpServletRequest request, Model model) {
 		int rateId = Integer.parseInt(request.getParameter("bookratingid"));
@@ -47,6 +48,7 @@ public class RatingController {
 		}	
 		return "bookdetails";
 	}
+	**/
 	
 	//Checks if user is logged in
 	private Boolean loggedInUserName() {

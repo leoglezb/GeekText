@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.RatingDao;
-import com.geektext.form.Rating;
+import com.geektext.form.Book;
+import com.geektext.form.BookRating;
+import com.geektext.form.Userdetails;
 import com.geektext.service.RatingService;
 
 @Service
@@ -16,32 +18,32 @@ public class RatingServiceImpl implements RatingService{
 	private RatingDao ratingDao ;
 
 	@Transactional
-	public Rating getRating(Rating id) {
+	public BookRating getRating(BookRating id) {
 		return ratingDao.getRating(id);
 	}
 
 	@Transactional
-	public void addRating(Rating rating) {
-		ratingDao.addRating(rating);
+	public void addRating(Book book, Userdetails user, int rating, String comment) {
+		ratingDao.addRating(book, user, rating, comment);
 	}
 
 	@Transactional
-	public List<Rating> listRating() {
-		return ratingDao.listRating() ;
+	public List<BookRating> listRating(int bookid) {
+		return ratingDao.listRating( bookid) ;
 	}
 
 	@Transactional
-	public void removeRating(Rating id) {
+	public void removeRating(BookRating id) {
 		ratingDao.removeRating(id);
 	}
 
 	@Transactional
-	public boolean exist(Rating id) {
+	public boolean exist(BookRating id) {
 		return ratingDao.exist(id);
 	}
 	
 	@Transactional
-	public Rating ratingById(int ratingId)
+	public BookRating ratingById(int ratingId)
 	{
 		return ratingDao.ratingById(ratingId) ;
 	}
