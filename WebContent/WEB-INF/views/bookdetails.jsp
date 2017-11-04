@@ -15,6 +15,7 @@
 	type="text/css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <link rel = "stylesheet" href="resources/css/5star.css">
+
 <style>
 	#commentErr
 	{
@@ -152,13 +153,49 @@
 									}	
 							    }
 							</script> 
-							<script>	
-							    
+
+							<script type="text/javascript">	
 								function disableFunc() //Greys out textbox, send button and stars
 								{
-									if(check === "Pizza")
+									$(document).ready(function(){
+										var data = $.parseJSON($.ajax({
+											url: '/rating',
+											dataType: "json",
+											async: false
+										}).responceText) ;
+									}) ;
+									var check = data
+									console.log(check) ;
+									/*
+									$.ajax({
+										type : "GET",
+										url : "/rating",
+										data : userDetails,//JSON.stringify(search), // Note it is important
+										success : function(result) {
+											$('#test').html(result);
+										},
+										error : function(jqXHR, exception) {
+											var msg = '';
+											if (jqXHR.status === 0) {
+												msg = 'Not connect.\n Verify Network.';
+											} else if (jqXHR.status == 404) {
+												msg = 'Requested page not found. [404]';
+											} else if (jqXHR.status == 500) {
+												msg = 'Internal Server Error [500].';
+											} else if (exception === 'parsererror') {
+												msg = 'Requested JSON parse failed.';
+											} else if (exception === 'timeout') {
+												msg = 'Time out error.';
+											} else if (exception === 'abort') {
+												msg = 'Ajax request aborted.';
+											} else {
+												msg = 'Uncaught Error.\n' + jqXHR.responseText;
+											}
+											alert("Error " + msg);
+										}
+									});*/
+									if(email === false)
 									{
-										
 										document.getElementById("commentArea").disabled = true ;
 										document.getElementById("sendButton").disabled = true ;
 										document.getElementById("star-1").disabled = true ;
