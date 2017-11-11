@@ -30,7 +30,8 @@
 				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
 					class="fa d-inline fa-lg fa-user-circle-o"></i> Hello
 					${userdetails.firstname}</a> <a
-					class="btn navbar-btn ml-2 text-white btn-secondary" href="#"><i
+					class="btn navbar-btn ml-2 text-white btn-secondary"
+					href="<c:url value="cart.jsp"/>"><i
 					class="fa d-inline fa-lg fa-shopping-cart"></i> Cart</a>
 			</div>
 		</div>
@@ -59,48 +60,22 @@
 					</div>
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">Top Seller</h6>
-
+							<h6 class="text-primary">See Top Sellers</h6>
 						</div>
 					</div>
 
 					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">Rating</h6>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value=""> 5
-									Stars
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value=""> 4
-									Stars
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value=""> 3
-									Stars
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value=""> 2
-									Stars
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" value=""> 1
-									Star
-								</label>
-							</div>
+						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12"
+							id="RatingDiv">
+							<h5 class="text-primary">Rating</h5>
+							<h6 class="text-primary" id="Rating4">4 & Up</h6>
+							<h6 class="text-primary" id="Rating3">3 & Up</h6>
+							<h6 class="text-primary" id="Rating2">2 & Up</h6>
+							<h6 class="text-primary" id="Rating1">1 & Up</h6>
 						</div>
 					</div>
-					
-					
+
+
 					<div class="row my-5">
 						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
 							<h6 class="text-primary">Sort</h6>
@@ -112,10 +87,12 @@
 							<h6 class="text-primary" id="ReleaseDtASC">ReleaseDt ASC</h6>
 							<h6 class="text-primary" id="AuthorDESC">Author DESC</h6>
 							<h6 class="text-primary" id="AuthorASC">Author ASC</h6>
+							<h6 class="text-primary" id="RatingDESC">Rating DESC</h6>
+							<h6 class="text-primary" id="RatingASC">Rating ASC</h6>
 						</div>
 					</div>
-					
-					
+
+
 				</div>
 				<div class="text-left col-md-9">
 					<div class="row my-5" id="test">
@@ -148,6 +125,74 @@
 						</c:forEach>
 					</div>
 				</div>
+
+
+
+
+				<div class="text-left col-md-9">
+					<div class="row my-5" id="test">
+						<div class="well">
+							<div class="list-group">
+
+								<c:forEach items="${bookList}" var="book">
+
+									<a href="#" class="list-group-item active">
+										<div class="media col-md-3">
+											<figure class="pull-left">
+												<img class="media-object img-rounded img-responsive"
+													src="http://placehold.it/350x250"
+													alt="placehold.it/350x250">
+											</figure>
+										</div>
+										<div class="col-md-6">
+											<h4 class="list-group-item-heading">List group heading</h4>
+											<p class="list-group-item-text">Qui diam libris ei,
+												vidisse incorrupte at mel. His euismod salutandi dissentiunt
+												eu. Habeo offendit ea mea. Nostro blandit sea ea, viris
+												timeam molestiae an has. At nisl platonem eum. Vel et nonumy
+												gubergren, ad has tota facilis probatus. Ea legere legimus
+												tibique cum, sale tantas vim ea, eu vivendo expetendis vim.
+												Voluptua vituperatoribus et mel, ius no elitr deserunt
+												mediocrem. Mea facilisi torquatos ad.</p>
+										</div>
+										<div class="col-md-3 text-center">
+											<h2>
+												14240 <small> votes </small>
+											</h2>
+											<button type="button"
+												class="btn btn-default btn-lg btn-block">Vote Now!</button>
+											<div class="stars">
+												<span class="glyphicon glyphicon-star"></span> <span
+													class="glyphicon glyphicon-star"></span> <span
+													class="glyphicon glyphicon-star"></span> <span
+													class="glyphicon glyphicon-star"></span> <span
+													class="glyphicon glyphicon-star-empty"></span>
+											</div>
+											<p>
+												Average 4.5 <small> / </small> 5
+											</p>
+										</div>
+									</a>
+
+
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 		</div>
 	</div>
@@ -181,87 +226,128 @@
 <script type="text/javascript">
 	var sortProperty = "";
 	var sortOrder = "";
-	
+	var minRating = 0;
+
 	$('#TitleDESC').click(function(e) {
 		sortProperty = "title";
 		sortOrder = "DESC";
-		
+
 		doWork();
 	});
-	
+
 	$('#TitleASC').click(function(e) {
 		sortProperty = "title";
 		sortOrder = "ASC";
-		
+
 		doWork();
 	});
-	
+
 	$('#PriceDESC').click(function(e) {
 		sortProperty = "price";
 		sortOrder = "DESC";
-		
+
 		doWork();
 	});
-	
+
 	$('#PriceASC').click(function(e) {
 		sortProperty = "price";
 		sortOrder = "ASC";
-		
+
 		doWork();
 	});
-	
+
 	$('#ReleaseDtDESC').click(function(e) {
 		sortProperty = "releasedate";
 		sortOrder = "DESC";
-		
+
 		doWork();
 	});
-	
+
 	$('#ReleaseDtASC').click(function(e) {
 		sortProperty = "releasedate";
 		sortOrder = "ASC";
-		
+
 		doWork();
 	});
-	
+
 	$('#AuthorDESC').click(function(e) {
 		sortProperty = "firstname";
 		sortOrder = "DESC";
-		
+
 		doWork();
 	});
-	
+
 	$('#AuthorASC').click(function(e) {
 		sortProperty = "firstname";
 		sortOrder = "ASC";
-		
+
 		doWork();
 	});
-	
-	var el = document.getElementById("GenreDiv");
+
+	$('#RatingDESC').click(function(e) {
+		sortProperty = "avgrating";
+		sortOrder = "DESC";
+
+		doWork();
+	});
+
+	$('#RatingASC').click(function(e) {
+		sortProperty = "avgrating";
+		sortOrder = "ASC";
+
+		doWork();
+	});
+
+	$('#Rating4').click(function(e) {
+		minRating = 4;
+
+		doWork();
+	});
+
+	$('#Rating3').click(function(e) {
+		minRating = 3;
+
+		doWork();
+	});
+
+	$('#Rating2').click(function(e) {
+		minRating = 2;
+
+		doWork();
+	});
+
+	$('#Rating1').click(function(e) {
+		minRating = 1;
+
+		doWork();
+	});
+
+	var genreDiv = document.getElementById("GenreDiv");
+	var ratingDiv = document.getElementById("RatingDiv");
 
 	//get reference to input elements in toppings container element
-	var tops = el.getElementsByTagName('input');
+	var genreInput = genreDiv.getElementsByTagName('input');
 
-	var selected = [0];
+	var selectedGenre = [ 0 ];
 
 	//assign function to onclick property of each checkbox
-	for (var i = 0, len = tops.length; i < len; i++) {
-		if (tops[i].type === 'checkbox') {
-			tops[i].onclick = doWork;
+	for (var i = 0, len = genreInput.length; i < len; i++) {
+		if (genreInput[i].type === 'checkbox') {
+			genreInput[i].onclick = doWork;
 		}
 	}
 
 	function doWork() {
-		for (var j = 0, l = tops.length; j < l; j++) {
-			if (tops[j].checked)
-				selected.push(tops[j].value);
+		for (var j = 0, l = genreInput.length; j < l; j++) {
+			if (genreInput[j].checked)
+				selectedGenre.push(genreInput[j].value);
 		}
-		
+
 		var search = {
-				genres : selected,
-				sortBy: sortProperty,
-				order: sortOrder
+			genres : selectedGenre,
+			minRating : minRating,
+			sortBy : sortProperty,
+			order : sortOrder
 		}
 		$.ajax({
 			type : "GET",
@@ -271,26 +357,27 @@
 				$('#test').html(result);
 			},
 			error : function(jqXHR, exception) {
-				   var msg = '';
-			        if (jqXHR.status === 0) {
-			            msg = 'Not connect.\n Verify Network.';
-			        } else if (jqXHR.status == 404) {
-			            msg = 'Requested page not found. [404]';
-			        } else if (jqXHR.status == 500) {
-			            msg = 'Internal Server Error [500].';
-			        } else if (exception === 'parsererror') {
-			            msg = 'Requested JSON parse failed.';
-			        } else if (exception === 'timeout') {
-			            msg = 'Time out error.';
-			        } else if (exception === 'abort') {
-			            msg = 'Ajax request aborted.';
-			        } else {
-			            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-			        }
-			        alert("Error " + msg);
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect.\n Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				}
+				alert("Error " + msg);
 			}
 		});
-		selected = [0];
+		selectedGenre = [ 0 ];
+		minRating = 0;
 		sortProperty = "";
 		sortOrder = "";
 	}

@@ -45,9 +45,7 @@
 								</h4>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a href="<c:url value="profilepage"/>">My Profile</a></li>
-								<li><a href="<c:url value="myaccount"/>">Account
-										Settings</a></li>
+								<li><a href="<c:url value="profilemanagement"/>">My Profile</a></li>
 								<li><a href="<c:url value="/signout"/>">Logout</a></li>
 							</ul></li>
 					</ul>
