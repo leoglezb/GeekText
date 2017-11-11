@@ -1,7 +1,6 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page trimDirectiveWhitespaces="true"%><!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 
 <head>
@@ -95,8 +94,9 @@
 
 				</div>
 				<div class="text-left col-md-9">
+					<c:set var="pageListHolder" value="${bookList}" />
 					<div class="row my-5" id="test">
-						<c:forEach items="${bookList}" var="book">
+						<c:forEach items="${pageListHolder.pageList}" var="book">
 							<div class="col-10 col-md-4">
 								<h4 class="text-primary">
 									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>">
@@ -125,71 +125,32 @@
 						</c:forEach>
 					</div>
 				</div>
-
-
-
-
-				<div class="text-left col-md-9">
-					<div class="row my-5" id="test">
-						<div class="well">
-							<div class="list-group">
-
-								<c:forEach items="${bookList}" var="book">
-
-									<a href="#" class="list-group-item active">
-										<div class="media col-md-3">
-											<figure class="pull-left">
-												<img class="media-object img-rounded img-responsive"
-													src="http://placehold.it/350x250"
-													alt="placehold.it/350x250">
-											</figure>
-										</div>
-										<div class="col-md-6">
-											<h4 class="list-group-item-heading">List group heading</h4>
-											<p class="list-group-item-text">Qui diam libris ei,
-												vidisse incorrupte at mel. His euismod salutandi dissentiunt
-												eu. Habeo offendit ea mea. Nostro blandit sea ea, viris
-												timeam molestiae an has. At nisl platonem eum. Vel et nonumy
-												gubergren, ad has tota facilis probatus. Ea legere legimus
-												tibique cum, sale tantas vim ea, eu vivendo expetendis vim.
-												Voluptua vituperatoribus et mel, ius no elitr deserunt
-												mediocrem. Mea facilisi torquatos ad.</p>
-										</div>
-										<div class="col-md-3 text-center">
-											<h2>
-												14240 <small> votes </small>
-											</h2>
-											<button type="button"
-												class="btn btn-default btn-lg btn-block">Vote Now!</button>
-											<div class="stars">
-												<span class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star-empty"></span>
-											</div>
-											<p>
-												Average 4.5 <small> / </small> 5
-											</p>
-										</div>
-									</a>
-
-
-								</c:forEach>
-							</div>
-						</div>
-					</div>
+				<div>
+					<span style="float: left;"> <c:choose>
+							<c:when test="${pageListHolder.firstPage}">Prev</c:when>
+							<c:otherwise>
+								<a id="prev" href="browsebooks?page=prev">Prev</a>
+							</c:otherwise>
+						</c:choose>
+					</span> <span> <c:forEach begin="0"
+							end="${pageListHolder.pageCount-1}" varStatus="loop">
+						    &nbsp;&nbsp;
+						    <c:choose>
+								<c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
+								<c:otherwise>
+									<a id="Page${loop.index}" href="browsebooks?page=${loop.index}">${loop.index+1}</a>
+								</c:otherwise>
+							</c:choose>
+    &nbsp;&nbsp;
+    </c:forEach>
+					</span> <span> <c:choose>
+							<c:when test="${pageListHolder.lastPage}">Next</c:when>
+							<c:otherwise>
+								<a href="browsebooks?page=next">Next</a>
+							</c:otherwise>
+						</c:choose>
+					</span>
 				</div>
-
-
-
-
-
-
-
-
-
-
 
 
 
