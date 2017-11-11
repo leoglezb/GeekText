@@ -85,7 +85,7 @@
 							</p>
 							<div id="list">
 								<c:forEach items="${ratingList}" var="rating">
-									<h4>
+									<p>
 										<c:choose>
 											<c:when test="${rating.user.anonymous == 1}">
 											Name: Anonymous<br/>
@@ -96,7 +96,7 @@
 										</c:choose>
 										Rating: ${rating.rating} <br/>
 									    Comment: ${rating.comment}
-									</h4>
+									</p>
 									<br />
 								</c:forEach>
 							</div>
