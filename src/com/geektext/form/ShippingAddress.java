@@ -19,9 +19,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "ShippingAddress")
 public class ShippingAddress implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4769748653701863186L;	 
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -33,6 +31,7 @@ public class ShippingAddress implements Serializable {
 	@JoinColumn(name = "AddressId")
 	private Address address;
 
+	
 	public Userdetails getUsername() {
 		return username;
 	}

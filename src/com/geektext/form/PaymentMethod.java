@@ -44,12 +44,15 @@ public class PaymentMethod implements Serializable {
 	@JoinColumn(name = "username")
 	private Userdetails username;
 	
-	//FIX ME?
-	//add homeaddressid
+	//CHECK
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "billingAddressid")
+	@JoinColumn(name = "AddressId")
 	private Address billingaddress;
 
+	public Address getAddressid() {
+		return billingaddress;
+	}
+	
 	public int getPaymentid() {
 		return paymentid;
 	}

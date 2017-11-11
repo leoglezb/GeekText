@@ -38,8 +38,9 @@ public class Address implements Serializable {
 	private int zipCode;
 	
 	
+	@Column(name = "AddressId", nullable = false)
 	public int getAddressId() {
-		return addressId;
+		return this.addressId;
 	}
 
 	public void setAddressId(int addressId) {
