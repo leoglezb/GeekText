@@ -139,6 +139,12 @@ public class BookController {
 		return "ratinglist";
 	}
 
+	@RequestMapping(value = "/logIn", method = RequestMethod.GET)
+	public String logIng(HttpServletRequest request, Model model) {
+
+		return "logIn";
+	}
+	
 	private String loggedInUserName() {
 		String result = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

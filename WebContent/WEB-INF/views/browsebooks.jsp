@@ -4,184 +4,206 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+<title>Geek Text - Books</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"
 	type="text/css">
-<link rel="stylesheet" href="resources/css/leandro prototype.css"
-	type="text/css">
+<link rel="stylesheet" href="resources/css/style.css" type="text/css">
+
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-md bg-primary navbar-dark">
-		<div class="container">
-			<a class="navbar-brand" href="<c:url value="browsebooks"/>"><b>
-					Browse Books</b></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbar2SupportedContent"
-				aria-controls="navbar2SupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse text-center justify-content-end"
-				id="navbar2SupportedContent">
-				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
-					class="fa d-inline fa-lg fa-user-circle-o"></i> Hello
-					${userdetails.firstname}</a> <a
-					class="btn navbar-btn ml-2 text-white btn-secondary"
-					href="<c:url value="cart.jsp"/>"><i
-					class="fa d-inline fa-lg fa-shopping-cart"></i> Cart</a>
+	<div class="row site-nav">
+		<div class="col-md-12">
+			<div class="logo">
+				<a href="/GeekText"><h1>Geek Books</h1></a>
+			</div>
+			<ul class="nav-list">
+				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="/cart.jsp"/>">Cart</a></li>
+
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="row books-details">
+		<div class="col-sm-4">
+			<div class="radio col-sm-6" style="display: inline;">
+				<h3 style="display: inline;">
+					<input type="radio" name="optradio" checked="checked">Browse
+					All
+				</h3>
+			</div>
+			<div class="radio col-sm-6" style="display: inline;">
+				<h3 style="display: inline;">
+					<input type="radio" name="optradio">Top Seller
+				</h3>
 			</div>
 		</div>
-	</nav>
+		<div class="col-sm-2">
+			<label>View</label> <select>
+				<option value="10" selected="selected">5</option>
+				<option value="20">20</option>
+			</select>
+		</div>
+		<div class="col-sm-2 sort-button">
+			<div class="dropdown">
+				<button type="button" class="btn dropdown-toggle"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" id="TitleASC">Title Asc.</a> <a
+						class="dropdown-item" id="TitleDESC">Title Desc.</a> <a
+						class="dropdown-item" id="AuthorASC">Author Asc.</a> <a
+						class="dropdown-item" id="AuthorDESC">Author Desc.</a> <a
+						class="dropdown-item" id="PriceASC">Price Asc.</a> <a
+						class="dropdown-item" id="PriceDESC">Price Desc.</a> <a
+						class="dropdown-item" id="RatingASC">Rating Asc.</a> <a
+						class="dropdown-item" id="RatingDESC">Rating Desc.</a> <a
+						class="dropdown-item" id="ReleaseDtASC">Release Date Asc.</a> <a
+						class="dropdown-item" id="ReleaseDtDESC">Release Date Desc</a>
 
-	<div class="py-5 text-center bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="pb-3 text-secondary">Find Great Books.&nbsp;</h1>
 				</div>
 			</div>
-			<div class="row">
-				<div class="text-right col-md-3">
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<div id="GenreDiv">
-								<h6 class="text-primary">Genre</h6>
-								<c:forEach items="${genreList}" var="genre">
-									<label><input type="checkbox" name="genres[]"
-										value="${genre.genreid}" /> ${genre.name}</label>
-									<br />
-								</c:forEach>
-							</div>
-						</div>
+		</div>
+		<div class="col-sm-4">
+
+			<form class="navbar-form" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" name="srch-term"
+						id="srch-term">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit">Search</button>
 					</div>
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">See Top Sellers</h6>
-						</div>
-					</div>
-
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12"
-							id="RatingDiv">
-							<h5 class="text-primary">Rating</h5>
-							<h6 class="text-primary" id="Rating4">4 & Up</h6>
-							<h6 class="text-primary" id="Rating3">3 & Up</h6>
-							<h6 class="text-primary" id="Rating2">2 & Up</h6>
-							<h6 class="text-primary" id="Rating1">1 & Up</h6>
-						</div>
-					</div>
-
-
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">Sort</h6>
-							<h6 class="text-primary" id="TitleDESC">Title DESC</h6>
-							<h6 class="text-primary" id="TitleASC">Title ASC</h6>
-							<h6 class="text-primary" id="PriceDESC">Price DESC</h6>
-							<h6 class="text-primary" id="PriceASC">Price ASC</h6>
-							<h6 class="text-primary" id="ReleaseDtDESC">ReleaseDt DESC</h6>
-							<h6 class="text-primary" id="ReleaseDtASC">ReleaseDt ASC</h6>
-							<h6 class="text-primary" id="AuthorDESC">Author DESC</h6>
-							<h6 class="text-primary" id="AuthorASC">Author ASC</h6>
-							<h6 class="text-primary" id="RatingDESC">Rating DESC</h6>
-							<h6 class="text-primary" id="RatingASC">Rating ASC</h6>
-						</div>
-					</div>
-
-
 				</div>
-				<div class="text-left col-md-9">
-					<c:set var="pageListHolder" value="${bookList}" />
-					<div class="row my-5" id="test">
-						<c:forEach items="${pageListHolder.pageList}" var="book">
-							<div class="col-10 col-md-4">
-								<h4 class="text-primary">
-									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>">
-										${book.title} <br>
-									</a>
-								</h4>
-								<p>
-									Author: <a
-										href="<c:url value="browsebooks?authorid=${book.author.authorid}"/>">
-										${book.author.firstname}&nbsp;${book.author.lastname}<br>
-									</a>
-								</p>
-							</div>
-							<div class="col-md-4">
-								<p>
-									${book.price} <br>
-								</p>
-								<p>
-									Link Add to cart <br>
-								</p>
-							</div>
-							<div class="col-md-4">
-								<img class="img-fluid d-block"
-									src="resources/img/bookcover/${book.bookid}.png">
-							</div>
-						</c:forEach>
-					</div>
+			</form>
+
+		</div>
+	</div>
+
+	<div class="row books-row">
+		<div class="col-md-2 books-sidebar">
+
+			<div class="col-md-12 books-sidewidget" id="GenreDiv">
+				<h3>Genre</h3>
+				<c:forEach items="${genreList}" var="genre">
+					<label><input type="checkbox" name="genres[]"
+						value="${genre.genreid}" /> ${genre.name}</label>
+					<br />
+				</c:forEach>
+			</div>
+
+			<div class="col-md-12 books-sidewidget" id="RatingDiv">
+				<h3>Rating</h3>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating4">4
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating3">3
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating2">2
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating1">1
+						and Up</label>
 				</div>
 				<div>
-					<span style="float: left;"> <c:choose>
-							<c:when test="${pageListHolder.firstPage}">Prev</c:when>
-							<c:otherwise>
-								<a id="prev" href="browsebooks?page=prev">Prev</a>
-							</c:otherwise>
-						</c:choose>
-					</span> <span> <c:forEach begin="0"
-							end="${pageListHolder.pageCount-1}" varStatus="loop">
-						    &nbsp;&nbsp;
-						    <c:choose>
-								<c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
-								<c:otherwise>
-									<a id="Page${loop.index}" href="browsebooks?page=${loop.index}">${loop.index+1}</a>
-								</c:otherwise>
-							</c:choose>
-    &nbsp;&nbsp;
-    </c:forEach>
-					</span> <span> <c:choose>
-							<c:when test="${pageListHolder.lastPage}">Next</c:when>
-							<c:otherwise>
-								<a href="browsebooks?page=next">Next</a>
-							</c:otherwise>
-						</c:choose>
-					</span>
+					<small id="ClearRating">Clear</small>
 				</div>
-
-
-
 			</div>
 		</div>
-	</div>
-	<!-- FOOTER -->
-	<div class="container">
-		<div class="row">
-			<footer>
-				<p class="pull-right">
-					<a href="#">Back to top</a>
-				</p>
-				<p>
-					&copy; Geektext &middot; <a href="#">Home</a> &middot;
-				</p>
-			</footer>
+
+		<div class="col-md-10 books-mainside">
+
+
+			<div class="row books-book" id="Books">
+				<c:set var="pageListHolder" value="${bookList}" />
+				<c:forEach items="${pageListHolder.pageList}" var="book">
+					<div class="col-sm-3">
+						<div class="col-sm">
+							<img src="resources/img/bookcover/${book.bookid}.png">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<h3 class="book-information">${book.title}</h3>
+						<a
+							href="<c:url value="browsebooks?authorid=${book.author.authorid}"/>"><h5
+								class="book-information">${book.author.firstname}&nbsp;${book.author.lastname}</h5></a>
+					</div>
+					<div class="col-sm-3">
+						<p class="book-information" style="margin: 15px;">${book.avgrating}</p>
+						<p class="book-information" style="margin: 15px;">${book.price}</p>
+						<p class="book-information" style="margin: 15px;">${book.releasedate}</p>
+					</div>
+					<div class="col-sm-3">
+						<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>"><p
+								class="btn btn-full">See More</p></a>
+					</div>
+
+				</c:forEach>
+			</div>
+			<div class="row page-index">
+				<div class="col-md-4"></div>
+				<div class="col-md-4" style="margin-left: 50px;">
+					<nav aria-label="Page navigation example text-xs-center">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+							</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+									class="sr-only">Next</span>
+							</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="col-md-4"></div>
+
+			</div>
+
 		</div>
+
+
 	</div>
+
+
+
+
 </body>
-<script src="resources/js/jquery.js"></script>
-<script src="resources/js/jquery-ui.custom.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.validate.js"></script>
-<script src="resources/js/jquery.form.js"></script>
-<script src="resources/js/tag-it.min.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="resources/js/tag-it-function.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="resources/js/jquery.nicescroll.min.js"
-	type="text/javascript" charset="utf-8"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -288,6 +310,7 @@
 
 	//get reference to input elements in toppings container element
 	var genreInput = genreDiv.getElementsByTagName('input');
+	var ratingInput = genreDiv.getElementsByTagName('input');
 
 	var selectedGenre = [ 0 ];
 
@@ -297,6 +320,19 @@
 			genreInput[i].onclick = doWork;
 		}
 	}
+
+	$('#ClearRating').click(function(e) {
+		minRating = 0;
+
+		//for (var i = 0, len = ratingInput.length; i < len; i++) {
+		//	if (ratingInput[i].type === 'radio') {
+		//		ratingInput[i].checked = false;
+		//	}
+		//}
+
+		$('input:radio').parent().removeClass("active");
+		doWork();
+	});
 
 	function doWork() {
 		for (var j = 0, l = genreInput.length; j < l; j++) {
@@ -315,7 +351,7 @@
 			url : "filterbooks",
 			data : search,//JSON.stringify(search), // Note it is important
 			success : function(result) {
-				$('#test').html(result);
+				$('#Books').html(result);
 			},
 			error : function(jqXHR, exception) {
 				var msg = '';
@@ -343,4 +379,5 @@
 		sortOrder = "";
 	}
 </script>
+
 </html>
