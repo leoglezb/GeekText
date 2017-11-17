@@ -50,6 +50,33 @@ public class RegisteruserController {
 		return "registeruser";
 	}
 	
+	/**
+	 * Checks if password is a min of 8 characters in length, contains one uppercase character,
+	 * one lowercase character, and a numerical value. 
+	 */
+	public boolean passwordCheck(String password)
+	{
+		boolean hasUpperCase = !password.equals(password.toLowerCase()) ;
+		boolean hasLowerCase = !password.equals(password.toUpperCase()) ;
+		boolean hasSpecial   = password.matches(".*\\d+.*");;
+		
+		if(password.length() > 8){
+			return false ;
+		}
+		else if(!hasUpperCase) {
+			return false ;
+		}
+		else if(!hasLowerCase){
+			return false ;
+		}
+		else if(!hasSpecial) {
+			return false ;
+		}
+		else {
+			return true ;	
+		}
+	}
+	
 	@RequestMapping(value="/createuser", method=RequestMethod.POST)
 	public String createUser(@ModelAttribute("command") BeanRegisterUser bean,
 			BindingResult result, MultipartHttpServletRequest request, Model model) {
@@ -59,19 +86,22 @@ public class RegisteruserController {
 		String user_lastname = bean.getUser_lastname();
 		String user_nickname = bean.getUser_nickname();
 		if (!userDetailsManager.userExists(username)) {
-			List<GrantedAuthority> authorites = new ArrayList<GrantedAuthority>();
-			authorites.add(new GrantedAuthorityImpl("ROLE_USER"));
-			User user = new User(username, password, true, false, false, false, authorites);
-			User saltedUser = new User(username, passwordEncoder.encodePassword(password, saltSource.getSalt(user)),true, false, false, false, authorites);
-			userDetailsManager.createUser(saltedUser);
-			Userdetails userdetails= new Userdetails();
-			userdetails.setUsername(username);
-			userdetails.setEmail(username);
-			userdetails.setFirstname(user_firstname);
-			userdetails.setLastname(user_lastname);
-			userdetails.setNickname(user_nickname);
-			service.addUserdetails(userdetails);
-			model.addAttribute("registered", "1" );
+			if(passwordCheck(password))
+			{	
+				List<GrantedAuthority> authorites = new ArrayList<GrantedAuthority>();
+				authorites.add(new GrantedAuthorityImpl("ROLE_USER"));
+				User user = new User(username, password, true, false, false, false, authorites);
+				User saltedUser = new User(username, passwordEncoder.encodePassword(password, saltSource.getSalt(user)),true, false, false, false, authorites);
+				userDetailsManager.createUser(saltedUser);
+				Userdetails userdetails= new Userdetails();
+				userdetails.setUsername(username);
+				userdetails.setEmail(username);
+				userdetails.setFirstname(user_firstname);
+				userdetails.setLastname(user_lastname);
+				userdetails.setNickname(user_nickname);
+				service.addUserdetails(userdetails);
+				model.addAttribute("registered", "1" );
+			}
 		} else {
 			model.addAttribute("registered", "0" );
 		}
