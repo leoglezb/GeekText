@@ -1,6 +1,9 @@
 package com.geektext.controller;
 
+
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,14 +54,13 @@ public class BookController {
 	 */
 	@RequestMapping(value = "/browsebooks", method = RequestMethod.GET)
 	public String browsebooks(HttpServletRequest request, Model model) {
-
+		
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		model.addAttribute("userdetails", userdetails);
 		Filter filter = new Filter();
 		int authorId = 0;
 
 		String strAuthorId = request.getParameter("authorid");
-		String strPage = request.getParameter("page");
 		if (strAuthorId != null)
 			filter.setAuthorId(Integer.parseInt(strAuthorId));
 
@@ -69,27 +71,8 @@ public class BookController {
 
 		productList = new PagedListHolder<Book>();
 		productList.setSource(bookList);
-		productList.setPageSize(5);
+		productList.setPageSize(10);
 		model.addAttribute("bookList", productList);
-
-		if ("next".equals(strPage)) {
-			//productList = (PagedListHolder<Book>) request.getSession().getAttribute("bookList");
-
-			productList.nextPage();
-
-		} else if ("prev".equals(strPage)) {
-			// Return previous set of list
-			//productList = (PagedListHolder<Book>) request.getSession().getAttribute("bookList");
-
-			productList.previousPage();
-
-		} else if(strPage != null){
-			//productList = (PagedListHolder<Book>) request.getSession().getAttribute("bookList");
-
-			int pageNum = Integer.parseInt(strPage);
-
-			productList.setPage(pageNum);
-		}
 
 		model.addAttribute("genreList", genreList);
 		return "browsebooks";
@@ -98,19 +81,64 @@ public class BookController {
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
 	public String filterbooks(HttpServletRequest request, Model model,
 			@RequestParam(value = "genres[]") Integer[] genres, @RequestParam(value = "minRating") int minRating,
-			@RequestParam(value = "sortBy") String sortBy, @RequestParam(value = "order") String order) {
+			@RequestParam(value = "sortBy") String sortBy, @RequestParam(value = "order") String order, @RequestParam(value = "pageSize") int pageSize) {
 
 		Filter filter = new Filter();
 		filter.setGenres(genres);
 		filter.setMinRating(minRating);
 		filter.setSortBy(sortBy);
 		filter.setOrder(order);
+		
+		PagedListHolder<Book> productList = null;
 		List<Book> bookList = bookService.listBook(filter);
+		
+		productList = new PagedListHolder<Book>();
+		productList.setSource(bookList);
+		productList.setPageSize(pageSize);
+		
 
-		model.addAttribute("bookList", bookList);
+		model.addAttribute("bookList", productList);
 		return "filterbooks";
 	}
 
+	
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public String page(HttpServletRequest request, Model model,
+			@RequestParam(value = "genres[]") Integer[] genres, @RequestParam(value = "minRating") int minRating,
+			@RequestParam(value = "sortBy") String sortBy, @RequestParam(value = "order") String order, 
+			@RequestParam(value = "page") String page, 
+			@RequestParam(value = "pageSize") int pageSize) {
+
+		Filter filter = new Filter();
+		filter.setGenres(genres);
+		filter.setMinRating(minRating);
+		filter.setSortBy(sortBy);
+		filter.setOrder(order);
+		
+		PagedListHolder<Book> productList = null;
+		List<Book> bookList = bookService.listBook(filter);
+		
+		productList = new PagedListHolder<Book>();
+		productList.setSource(bookList);
+		productList.setPageSize(pageSize);
+		
+		if("prev".equals(page)) {
+			productList.previousPage();
+		}
+		else if("next".equals(page)) {
+			productList.nextPage();
+		}
+		else {
+			int pageNum = Integer.parseInt(page);
+            
+            productList.setPage(pageNum);
+		}
+
+		model.addAttribute("bookList", productList);
+		return "filterbooks";
+	}
+
+	
 	@RequestMapping(value = "/bookdetails", method = RequestMethod.GET)
 	public String bookdetails(HttpServletRequest request, Model model) {
 		int bookId = Integer.parseInt(request.getParameter("bookid"));

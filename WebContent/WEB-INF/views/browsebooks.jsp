@@ -56,8 +56,8 @@
 			</div>
 		</div>
 		<div class="col-sm-2">
-			<label>View</label> <select>
-				<option value="10" selected="selected">5</option>
+			<label>View</label> <select id="PageSize" onChange="doWork()">
+				<option value="10" selected="selected">10</option>
 				<option value="20">20</option>
 			</select>
 		</div>
@@ -159,29 +159,32 @@
 					</div>
 
 				</c:forEach>
-			</div>
-			<div class="row page-index">
+				
+				<div class="row page-index" id="PageDiv">
 				<div class="col-md-4"></div>
 				<div class="col-md-4" style="margin-left: 50px;">
 					<nav aria-label="Page navigation example text-xs-center">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
+							<!--  <li class="page-item" id="Prev"><a class="page-link" onClick="getPage('prev')"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
+							</a></li>-->
+							<c:forEach begin="0" end="${pageListHolder.pageCount-1}"
+								varStatus="loop">
+								<li class="page-item" value="${loop.index}"><a class="page-link" onClick="getPage(${loop.index})">${loop.index+1}</a></li>
+							</c:forEach>
+							<!--<li class="page-item" id="Next"><a class="page-link" onClick="getPage('next')"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 									class="sr-only">Next</span>
-							</a></li>
+							</a></li>-->
 						</ul>
 					</nav>
 				</div>
 				<div class="col-md-4"></div>
 
 			</div>
+			</div>
+			
 
 		</div>
 
@@ -310,7 +313,7 @@
 
 	//get reference to input elements in toppings container element
 	var genreInput = genreDiv.getElementsByTagName('input');
-	var ratingInput = genreDiv.getElementsByTagName('input');
+	var ratingInput = ratingDiv.getElementsByTagName('input');
 
 	var selectedGenre = [ 0 ];
 
@@ -340,11 +343,14 @@
 				selectedGenre.push(genreInput[j].value);
 		}
 
+		var pageSize = document.getElementById("PageSize").value;
+		
 		var search = {
 			genres : selectedGenre,
 			minRating : minRating,
 			sortBy : sortProperty,
-			order : sortOrder
+			order : sortOrder ,
+			pageSize : pageSize 
 		}
 		$.ajax({
 			type : "GET",
@@ -374,9 +380,57 @@
 			}
 		});
 		selectedGenre = [ 0 ];
-		minRating = 0;
 		sortProperty = "";
 		sortOrder = "";
+	}
+	
+	function getPage(page){
+		for (var j = 0, l = genreInput.length; j < l; j++) {
+			if (genreInput[j].checked)
+				selectedGenre.push(genreInput[j].value);
+		}
+
+		var pageSize = document.getElementById("PageSize").value;
+		
+		var search = {
+			genres : selectedGenre,
+			minRating : minRating,
+			sortBy : sortProperty,
+			order : sortOrder,
+			page : page,
+			pageSize : pageSize 
+		}
+		$.ajax({
+			type : "GET",
+			url : "page",
+			data : search,//JSON.stringify(search), // Note it is important
+			success : function(result) {
+				$('#Books').html(result);
+			},
+			error : function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect.\n Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				}
+				alert("Error " + msg);
+			}
+		});
+		selectedGenre = [ 0 ];
+		sortProperty = "";
+		sortOrder = "";
+		
 	}
 </script>
 
