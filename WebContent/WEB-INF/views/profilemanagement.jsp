@@ -65,7 +65,10 @@
 								<p>
 									Email: ${userdetails.username}<br/>
 								</p>
-						
+								<div class="button-awesome">
+									<a href="<c:url value="address"/>" class="btn btn-full">Edit Profile Information</a>
+									<a href="<c:url value="address"/>" class="btn btn-full">Addresses on File</a>
+									<a href="<c:url value="creditcard"/>" class="btn btn-full">Credit Cards on File</a>
 							</div>
 							<script src="resources/js/jquery.js"></script>
 	<script src="resources/js/bootstrap-transition.js"></script>

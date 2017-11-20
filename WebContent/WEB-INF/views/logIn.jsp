@@ -31,7 +31,7 @@
 				</label>
 			</div>
 			<div class="checkbox">
-				<a href="#" style="text-decoration: none; color: black;"><small>
+				<a href="<c:url value="/registeruser"/>" style="text-decoration: none; color: black;"><small>
 						New User? Click Here</small> </a>
 			</div>
 

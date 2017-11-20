@@ -77,7 +77,7 @@ public class RegisteruserController {
 		}
 	}
 	
-	@RequestMapping(value="/createuser", method=RequestMethod.POST)
+	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String createUser(@ModelAttribute("command") BeanRegisterUser bean,
 			BindingResult result, MultipartHttpServletRequest request, Model model) {
 		String username = bean.getUser();
@@ -112,7 +112,6 @@ public class RegisteruserController {
 	public String updateUser(HttpServletRequest request, Model model) {
 		Userdetails userdetails = service.getUserdetails(loggedInUserName());
 		model.addAttribute("userdetails", userdetails);
-		
 		
 		return "profilemanagement";
 	}	

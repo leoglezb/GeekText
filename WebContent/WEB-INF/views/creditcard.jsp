@@ -38,18 +38,9 @@
 			<legend>Registration</legend>
 			<form class="form-horizontal" id="registerHere" method='post' action='createuser' enctype="multipart/form-data">
 				<fieldset>
-					<c:if test="${registered==1}">
-						<div class="alert alert-success">Well done!
-							Congratulations, you are registered!</div>
-					</c:if>
-					<c:if test="${registered==0}">
-						<div class="alert alert-success">Sorry, this email has
-							already been taken.</div>
-					</c:if>
-
 					<div class="span6">
 						<div class="control-group">
-							<label class="control-label" for="input01">Email</label>
+							<label class="control-label" for="input01"></label>
 							<div class="controls">
 								<input type="text" id="user_email" name="user" value="${user_email}">
 							</div>
@@ -154,12 +145,15 @@
 					},
 					password : {
 						required : true,
-						minlength : 8
+						minlength : 3
 					},
 					cpwd : {
 						required : true,
 						equalTo : "#password"
-					}				
+					},
+					photo:{
+						accept:'^.*\.(jpg|jpeg|png|gif)$' 
+					}					
 				},
 				messages : {
 					user : {
@@ -170,13 +164,15 @@
 					user_lastname: "Enter your last name",
 					user_nickname: "Enter your nickname",
 					password : {
-						user_password: "Enter your password",
-						required : "Password must be 8 characters in length, contain 1 Numerical Value, 1 Uppercase and 1 Lowercase letter",
-						minlength : "Password must be minimum 8 characters"
+						required : "Enter your password",
+						minlength : "Password must be minimum 6 characters"
 					},
 					cpwd : {
 						required : "Enter confirm password",
 						equalTo : "Password and Confirm Password must match"
+					},
+					photo:{
+						accept: "Only image type jpg/png/jpeg/gif is allowed"
 					}
 				},
 			    errorClass: "error",

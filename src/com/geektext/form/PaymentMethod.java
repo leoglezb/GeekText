@@ -28,6 +28,9 @@ public class PaymentMethod implements Serializable {
 	@GeneratedValue
 	private int paymentid;
 	
+	@Column(name = "CardholderName")
+	private String cardHolderName;
+	
 	@Column(name = "CardNumber")
 	private int cardnumber;
 
@@ -46,17 +49,25 @@ public class PaymentMethod implements Serializable {
 	
 	//CHECK
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "AddressId")
+	@JoinColumn(name = "BillingAddressId")
 	private Address billingaddress;
 
 	public Address getAddressid() {
 		return billingaddress;
 	}
 	
+	public int getcardHolderName() {
+		return paymentid;
+	}
+	
+	public void setcardHolderName(String cardHolderName) {
+		this.cardHolderName = cardHolderName;
+	}
+	
 	public int getPaymentid() {
 		return paymentid;
 	}
-
+	
 	public void setPaymentid(int paymentid) {
 		this.paymentid = paymentid;
 	}
