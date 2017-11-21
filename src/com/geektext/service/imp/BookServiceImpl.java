@@ -50,6 +50,9 @@ public class BookServiceImpl implements BookService {
 		return BookDAO.bookById(bookId);
 	}
 	
-	
+	@Transactional
+	public boolean canComment(String username, int bookId) {
+		return BookDAO.canComment(username, bookId);
+	}	
 
 }

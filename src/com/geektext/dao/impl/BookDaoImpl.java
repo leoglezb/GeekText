@@ -1,5 +1,6 @@
 package com.geektext.dao.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -96,5 +97,16 @@ public class BookDaoImpl implements BookDao {
 		Session session = sessionFactory.getCurrentSession();
 		boolean result = session.get(Book.class, id) != null;
 		return result;
+	}
+	
+	@Transactional(readOnly = true)
+	public boolean canComment(String username, int bookId) {
+		Session session = sessionFactory.getCurrentSession();
+	    Query query = session
+	            .createSQLQuery("CALL CanComment(:username,:bookId)");
+	    query.setParameter("username", username);
+	    query.setParameter("bookId", bookId);
+	    BigInteger result = (BigInteger) query.uniqueResult();	
+	    return result.equals(BigInteger.valueOf(1)) ? true : false;
 	}
 }

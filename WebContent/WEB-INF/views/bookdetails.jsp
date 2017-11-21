@@ -121,7 +121,7 @@
 							<textarea id="commentArea" rows="4" cols="40" maxlength=140></textarea>
 							<button type="button" id="sendButton" onclick="sendFunc()">Send</button>
 
-							<c:if test="${empty userdetails.username}">
+							<c:if test="${!canComment}">
 								<script type="text/javascript">
 									document.getElementById("commentArea").disabled = true;
 									document.getElementById("sendButton").disabled = true;
