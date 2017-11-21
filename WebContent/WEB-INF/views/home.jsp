@@ -38,8 +38,8 @@
 						<button type="button" class="btn dropdown-toggle"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</button>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Profile</a> <a
-								class="dropdown-item" href="<c:url value="/signout"/>">Log Out</a>
+							<a class="dropdown-item" href="<c:url value="profilemanagement"/>">Profile</a> 
+							<a class="dropdown-item" href="<c:url value="/signout"/>">Log Out</a>
 						</div>
 					</div></li>
 			</ul>
@@ -51,8 +51,8 @@
 			<h1>Welcome to Geek Books.</h1>
 			<h2>Are you ready to find your next favorite book?</h2>
 			<div class="button-awesome">
-				<a href="<c:url value="browsebooks"/>" class="btn btn-full">Browse All Books</a> <a
-					href="<c:url value="browsebooks"/>" class="btn btn-full">See Top Sellers</a>
+				<a href="<c:url value="browsebooks"/>" class="btn btn-full">Browse All Books</a> 
+				<a href="<c:url value="browsebooks"/>" class="btn btn-full">See Top Sellers</a>
 			</div>
 		</div>
 	</div>

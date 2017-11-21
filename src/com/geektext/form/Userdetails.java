@@ -17,9 +17,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Userdetails")
 public class Userdetails {
-	/*
-	private Set<Address> billingAddresses = new HashSet<Address>(0);
-	*/
+	
+	//private Set<Address> billingAddresses = new HashSet<Address>(0);
+	
 	@Id
     @Column(name="username") //column name
     private String username; //variable of our object
@@ -41,11 +41,18 @@ public class Userdetails {
     
     
     //NEEDS TO BE FIXED, THIS BREAKS THE CODE
-    /*
+    
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "HomeAddressId")
 	private Address homeAddress ;
-    
+	
+	public void setHomeAddress(Address homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+	public Address getHomeAddress() {
+		return homeAddress;
+	}
+	/*
     @ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ShippingAddress", joinColumns = { @JoinColumn(name = "username") }, inverseJoinColumns = { @JoinColumn(name = "addressId") })
 	public Set<Address> getBillingAddresses() {

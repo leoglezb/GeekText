@@ -1,10 +1,18 @@
 package com.geektext.form;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
@@ -29,14 +37,13 @@ public class Address implements Serializable {
 	private String city;
 
 	@Column(name = "State")
-	private String State;
+	private String state;
 
 	@Column(name = "Country")
 	private String country;
 	
 	@Column(name = "ZipCode")
 	private int zipCode;
-	
 	
 	@Column(name = "AddressId", nullable = false)
 	public int getAddressId() {
@@ -72,11 +79,11 @@ public class Address implements Serializable {
 	}
 
 	public String getState() {
-		return State;
+		return state;
 	}
 
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 
 	public String getCountry() {

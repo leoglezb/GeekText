@@ -30,7 +30,7 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">Hello ${userdetails.firstname}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Profile</a> <a
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
 									class="dropdown-item" href="<c:url value="/signout"/>">Log
 									Out</a>
 							</div>
