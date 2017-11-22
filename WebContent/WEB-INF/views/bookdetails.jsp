@@ -39,19 +39,28 @@
 	<div class="row site-nav">
 		<div class="col-md-12">
 			<div class="logo">
-				<a href="index"><h1>Geek Books</h1></a>
+				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
-				<li><a class="prettyHover" href="books.html">Browse</a></li>
-				<li><a class="prettyHover" href="shoppingCart.html">Cart</a></li>
-				<li><div class="dropdown">
-						<button type="button" class="btn dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="profile.html">Profile</a> <a
-								class="dropdown-item" href="logIn.html">Log Out</a>
-						</div>
-					</div></li>
+				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="/cart.jsp"/>">Cart</a></li>
+
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
+
 			</ul>
 		</div>
 	</div>
@@ -66,7 +75,7 @@
 		<div class="col-md-9  book-details-right">
 
 			<h1>${book.title}</h1>
-			<a href="author.html"><h3>${book.author.firstname}&nbsp;${book.author.lastname}</h3></a>
+			<a href="<c:url value="author?authorid=${book.author.authorid}"/>"><h3>${book.author.firstname}&nbsp;${book.author.lastname}</h3></a>
 			<p>Author Bio: ${book.author.biography}</p>
 			<p>Book Description: ${book.description}</p>
 			<p>Genre: ${book.genre.name}</p>

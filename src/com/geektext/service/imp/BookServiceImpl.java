@@ -33,6 +33,11 @@ public class BookServiceImpl implements BookService {
 	public List<Book> listBook(Filter filter) {
 		return BookDAO.listBook(filter);
 	}
+	
+	@Transactional
+	public List<Book> listTopSellers() {
+		return BookDAO.listTopSellers();
+	}
 
 	@Transactional
 	public void removeBook(Book id) {

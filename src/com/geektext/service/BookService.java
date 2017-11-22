@@ -13,4 +13,5 @@ public interface BookService {
     public boolean exist(Book id);  
     public Book bookById(int bookId);
     public boolean canComment(String username, int bookId);
+    public List<Book> listTopSellers();
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.geektext.form.Author;
 
 public interface AuthorDao {
-	public Author getAuthor(Author id);
+	public Author getAuthor(int id);
     public void addAuthor(Author book);
     public List<Author> listAuthor();
     public void removeAuthor(Author id);

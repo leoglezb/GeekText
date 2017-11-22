@@ -29,19 +29,26 @@
 	<div class="row site-nav">
 		<div class="col-md-12">
 			<div class="logo">
-				<a href="#"><h1>Geek Books</h1></a>
+				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
 				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
 				<li><a href="<c:url value="cart.jsp"/>">Cart</a></li>
-				<li><div class="dropdown">
-						<button type="button" class="btn dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<c:url value="profilemanagement"/>">Profile</a> 
-							<a class="dropdown-item" href="<c:url value="/signout"/>">Log Out</a>
-						</div>
-					</div></li>
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>
@@ -52,7 +59,7 @@
 			<h2>Are you ready to find your next favorite book?</h2>
 			<div class="button-awesome">
 				<a href="<c:url value="browsebooks"/>" class="btn btn-full">Browse All Books</a> 
-				<a href="<c:url value="browsebooks"/>" class="btn btn-full">See Top Sellers</a>
+				<a href="<c:url value="topsellers"/>" class="btn btn-full">See Top Sellers</a>
 			</div>
 		</div>
 	</div>

@@ -30,7 +30,8 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">Hello ${userdetails.firstname}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+								<a class="dropdown-item"
+									href="<c:url value="/profilemanagement"/>">Profile</a> <a
 									class="dropdown-item" href="<c:url value="/signout"/>">Log
 									Out</a>
 							</div>
@@ -43,17 +44,13 @@
 
 	<div class="row books-details">
 		<div class="col-sm-4">
-			<div class="radio col-sm-6" style="display: inline;">
-				<h3 style="display: inline;">
-					<input type="radio" name="optradio" checked="checked">Browse
-					All
-				</h3>
-			</div>
-			<div class="radio col-sm-6" style="display: inline;">
-				<h3 style="display: inline;">
-					<input type="radio" name="optradio">Top Seller
-				</h3>
-			</div>
+			<h3>
+				<a href="<c:url value="browsebooks"/>"
+					style="text-decoration: underline; color: black;">Browse All</a> <a
+					href="<c:url value="topsellers"/>" style="color: black;">Top
+					Seller</a>
+			</h3>
+
 		</div>
 		<div class="col-sm-2">
 			<label>View</label> <select id="PageSize" onChange="doWork()">
@@ -81,17 +78,12 @@
 			</div>
 		</div>
 		<div class="col-sm-4">
-
-			<form class="navbar-form" role="search">
-				<div class="input-group">
-					<input type="text" class="form-control" name="srch-term"
-						id="srch-term">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">Search</button>
-					</div>
+			<div class="input-group">
+				<input type="text" id="srch-term">
+				<div class="input-group-btn">
+					<button class="btn btn-default" id="srch-btn" onClick="doWork()">Search</button>
 				</div>
-			</form>
-
+			</div>
 		</div>
 	</div>
 
@@ -125,15 +117,17 @@
 					<label><input type="radio" name="optradio" id="Rating1">1
 						and Up</label>
 				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="All"
+						checked="checked">All </label>
+				</div>
 				<div>
-					<small id="ClearRating">Clear</small>
+					<a href="<c:url value="/browsebooks"/>"><small id="ClearRating">Clear</small></a>
 				</div>
 			</div>
 		</div>
 
 		<div class="col-md-10 books-mainside">
-
-
 			<div class="row books-book" id="Books">
 				<c:set var="pageListHolder" value="${bookList}" />
 				<c:forEach items="${pageListHolder.pageList}" var="book">
@@ -144,8 +138,7 @@
 					</div>
 					<div class="col-sm-3">
 						<h3 class="book-information">${book.title}</h3>
-						<a
-							href="<c:url value="browsebooks?authorid=${book.author.authorid}"/>"><h5
+						<a href="<c:url value="author?authorid=${book.author.authorid}"/>"><h5
 								class="book-information">${book.author.firstname}&nbsp;${book.author.lastname}</h5></a>
 					</div>
 					<div class="col-sm-3">
@@ -159,32 +152,33 @@
 					</div>
 
 				</c:forEach>
-				
+
 				<div class="row page-index" id="PageDiv">
-				<div class="col-md-4"></div>
-				<div class="col-md-4" style="margin-left: 50px;">
-					<nav aria-label="Page navigation example text-xs-center">
-						<ul class="pagination">
-							<!--  <li class="page-item" id="Prev"><a class="page-link" onClick="getPage('prev')"
+					<div class="col-md-4"></div>
+					<div class="col-md-4" style="margin-left: 50px;">
+						<nav aria-label="Page navigation example text-xs-center">
+							<ul class="pagination">
+								<!--  <li class="page-item" id="Prev"><a class="page-link" onClick="getPage('prev')"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
 							</a></li>-->
-							<c:forEach begin="0" end="${pageListHolder.pageCount-1}"
-								varStatus="loop">
-								<li class="page-item" value="${loop.index}"><a class="page-link" onClick="getPage(${loop.index})">${loop.index+1}</a></li>
-							</c:forEach>
-							<!--<li class="page-item" id="Next"><a class="page-link" onClick="getPage('next')"
+								<c:forEach begin="0" end="${pageListHolder.pageCount-1}"
+									varStatus="loop">
+									<li class="page-item" value="${loop.index}"><a
+										class="page-link" onClick="getPage(${loop.index})">${loop.index+1}</a></li>
+								</c:forEach>
+								<!--<li class="page-item" id="Next"><a class="page-link" onClick="getPage('next')"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 									class="sr-only">Next</span>
 							</a></li>-->
-						</ul>
-					</nav>
-				</div>
-				<div class="col-md-4"></div>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-4"></div>
 
+				</div>
 			</div>
-			</div>
-			
+
 
 		</div>
 
@@ -307,6 +301,12 @@
 
 		doWork();
 	});
+	
+	$('#All').click(function(e) {
+		minRating = 0;
+
+		doWork();
+	});
 
 	var genreDiv = document.getElementById("GenreDiv");
 	var ratingDiv = document.getElementById("RatingDiv");
@@ -324,19 +324,15 @@
 		}
 	}
 
-	$('#ClearRating').click(function(e) {
-		minRating = 0;
-
-		//for (var i = 0, len = ratingInput.length; i < len; i++) {
-		//	if (ratingInput[i].type === 'radio') {
-		//		ratingInput[i].checked = false;
-		//	}
-		//}
-
-		$('input:radio').parent().removeClass("active");
-		doWork();
+	document.getElementById("srch-term")
+    .addEventListener("keyup", function(event) {
+	    event.preventDefault();
+	    if (event.keyCode === 13) {
+	        document.getElementById("srch-btn").click();
+	    }
 	});
 
+	
 	function doWork() {
 		for (var j = 0, l = genreInput.length; j < l; j++) {
 			if (genreInput[j].checked)
@@ -345,12 +341,15 @@
 
 		var pageSize = document.getElementById("PageSize").value;
 		
+		var searchCrit = document.getElementById("srch-term").value;
+		
 		var search = {
 			genres : selectedGenre,
 			minRating : minRating,
 			sortBy : sortProperty,
-			order : sortOrder ,
-			pageSize : pageSize 
+			order : sortOrder,
+			pageSize : pageSize,
+			searchCrit : searchCrit
 		}
 		$.ajax({
 			type : "GET",

@@ -16,7 +16,7 @@ public class AuthorServiceImpl implements AuthorService{
 	private AuthorDao AuthorDAO;
 
 	@Transactional
-	public Author getAuthor(Author id) {
+	public Author getAuthor(int id) {
 		return AuthorDAO.getAuthor(id);
 	}
 

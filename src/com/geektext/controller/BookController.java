@@ -23,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.geektext.form.Author;
 import com.geektext.form.Book;
 import com.geektext.form.Genre;
 import com.geektext.form.BookRating;
 import com.geektext.form.Userdetails;
 import com.geektext.pojo.Filter;
+import com.geektext.service.AuthorService;
 import com.geektext.service.BookService;
 import com.geektext.service.GenreService;
 import com.geektext.service.RatingService;
@@ -48,6 +50,9 @@ public class BookController {
 
 	@Autowired
 	private RatingService ratingService;
+	
+	@Autowired
+	private AuthorService authorService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -78,16 +83,48 @@ public class BookController {
 		return "browsebooks";
 	}
 
+	@RequestMapping(value = "/topsellers", method = RequestMethod.GET)
+	public String topsellers(HttpServletRequest request, Model model) {
+		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
+		model.addAttribute("userdetails", userdetails);
+		
+		List<Book> bookList = bookService.listTopSellers();
+		model.addAttribute("bookList", bookList);
+		
+		return "booksTop";
+	}
+
+	@RequestMapping(value = "/author", method = RequestMethod.GET)
+	public String author(HttpServletRequest request, Model model) {
+		Filter filter = new Filter();
+		
+		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
+		model.addAttribute("userdetails", userdetails);
+		
+		String strAuthorId = request.getParameter("authorid");
+		filter.setAuthorId(Integer.parseInt(strAuthorId));
+		
+		List<Book> bookList = bookService.listBook(filter);
+		model.addAttribute("bookList", bookList);
+		
+		Author author = authorService.getAuthor(Integer.parseInt(strAuthorId));
+		model.addAttribute("author", author);
+		
+		return "author";
+	}
+	
 	@RequestMapping(value = "/filterbooks", method = RequestMethod.GET)
 	public String filterbooks(HttpServletRequest request, Model model,
 			@RequestParam(value = "genres[]") Integer[] genres, @RequestParam(value = "minRating") int minRating,
-			@RequestParam(value = "sortBy") String sortBy, @RequestParam(value = "order") String order, @RequestParam(value = "pageSize") int pageSize) {
+			@RequestParam(value = "sortBy") String sortBy, @RequestParam(value = "order") String order, @RequestParam(value = "pageSize") int pageSize,
+			@RequestParam(value = "searchCrit") String searchCrit) {
 
 		Filter filter = new Filter();
 		filter.setGenres(genres);
 		filter.setMinRating(minRating);
 		filter.setSortBy(sortBy);
 		filter.setOrder(order);
+		filter.setSearchCrit(searchCrit);
 		
 		PagedListHolder<Book> productList = null;
 		List<Book> bookList = bookService.listBook(filter);
