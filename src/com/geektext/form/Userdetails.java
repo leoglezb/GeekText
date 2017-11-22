@@ -1,12 +1,12 @@
 package com.geektext.form;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -39,9 +39,6 @@ public class Userdetails {
     @Column(name="anonymous")
     private int anonymous;
     
-    
-    //NEEDS TO BE FIXED, THIS BREAKS THE CODE
-    
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "HomeAddressId")
 	private Address homeAddress ;
@@ -49,32 +46,31 @@ public class Userdetails {
 	public void setHomeAddress(Address homeAddress) {
 		this.homeAddress = homeAddress;
 	}
+	
 	public Address getHomeAddress() {
 		return homeAddress;
 	}
-	/*
-    @ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ShippingAddress", joinColumns = { @JoinColumn(name = "username") }, inverseJoinColumns = { @JoinColumn(name = "addressId") })
-	public Set<Address> getBillingAddresses() {
-		return this.billingAddresses;
-	}
-
-    public void setHomeAddress(Set<Address> billingAddresses) {
-		this.billingAddresses = billingAddresses;
-	}
-
-	public Address getHomeAddress() {
-		return homeAddress;
-	}
-
-	public void setHomeAddress(Address homeAddress) {
-		this.homeAddress = homeAddress;
-	}
-*/
+	
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable(
+		name = "ShippingAddress",
+		joinColumns = { @JoinColumn(name = "username") }, 
+		inverseJoinColumns = { @JoinColumn(name = "addressId") }
+	)
+	List<Address> shippingAddresses = new ArrayList<Address>();
+	
 	public String getUsername() {
 		return username;
 	}
 
+	public List<Address> getShippingAddresses() {
+		return shippingAddresses;
+	}
+	
+	public void setShippingAddresses(List<Address> billingAddresses) {
+		this.shippingAddresses = billingAddresses;
+	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -118,4 +114,8 @@ public class Userdetails {
 	public void setAnonymous(int anonymous) {
 		this.anonymous = anonymous;
 	}
+	
+    public void addShippingAddress(Address address) {
+    	this.shippingAddresses.add(address);
+    }
 }    	

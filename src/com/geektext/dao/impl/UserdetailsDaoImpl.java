@@ -3,6 +3,7 @@ package com.geektext.dao.impl;
 import java.util.List;
 
 import com.geektext.dao.UserdetailsDao;
+import com.geektext.form.Address;
 import com.geektext.form.Userdetails;
 
 import org.hibernate.Criteria;
@@ -44,10 +45,11 @@ public class UserdetailsDaoImpl implements UserdetailsDao {
         sessionFactory.getCurrentSession().save(userdetails);
     }
 
+    
     public void updateUserdetails(Userdetails userdetails) {
-        sessionFactory.getCurrentSession().update(userdetails);
+        sessionFactory.getCurrentSession().saveOrUpdate(userdetails);
     }
- 
+    
     public void removeUserdetails(String id) {
         Session session = sessionFactory.getCurrentSession();
         Userdetails Userdetails = (Userdetails) session.load(Userdetails.class, id);

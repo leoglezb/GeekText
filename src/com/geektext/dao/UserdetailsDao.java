@@ -2,6 +2,7 @@ package com.geektext.dao;
 
 import java.util.List;
 
+import com.geektext.form.Address;
 import com.geektext.form.Userdetails;
 
  

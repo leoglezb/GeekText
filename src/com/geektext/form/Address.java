@@ -1,11 +1,14 @@
 package com.geektext.form;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -45,7 +48,17 @@ public class Address implements Serializable {
 	@Column(name = "ZipCode")
 	private int zipCode;
 	
-	@Column(name = "AddressId", nullable = false)
+	 @ManyToMany(fetch = FetchType.EAGER, mappedBy = "shippingAddresses")
+	 private List<Userdetails> users = new ArrayList<>();
+	 
+	public List<Userdetails> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<Userdetails> users) {
+		this.users = users;
+	}
+
 	public int getAddressId() {
 		return this.addressId;
 	}

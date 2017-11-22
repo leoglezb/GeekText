@@ -31,7 +31,7 @@ public class AddressDaoImpl implements AddressDao{
 		Address u = (Address) session.get(Address.class, id);
 		return u;
 	}
-
+	
 	@Override
 	public Address addAddress(String address1, String address2, String city,  String state, String country, int zipCode) {
 		Address address = new Address() ;
@@ -40,6 +40,7 @@ public class AddressDaoImpl implements AddressDao{
 		address.setCity(city);
 		address.setCountry(country);
 		address.setZipCode(zipCode) ;
+		address.setState(state);
 		
 		sessionFactory.getCurrentSession().save(address);
 	

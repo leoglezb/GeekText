@@ -47,15 +47,6 @@ public class PaymentMethod implements Serializable {
 	@JoinColumn(name = "username")
 	private Userdetails username;
 	
-	//CHECK
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "BillingAddressId")
-	private Address billingaddress;
-
-	public Address getAddressid() {
-		return billingaddress;
-	}
-	
 	public int getcardHolderName() {
 		return paymentid;
 	}
@@ -107,5 +98,4 @@ public class PaymentMethod implements Serializable {
 	public Userdetails getUsername() {
 		return username;
 	}
-	
 }

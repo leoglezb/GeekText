@@ -36,11 +36,10 @@
 	<div class="container">
 		<div class="row">
 			<legend>Address</legend>
-			<form class="form-horizontal" id="registerHere"  method='post' action='address' enctype="multipart/form-data">
+			<form class="form-horizontal" id="registerHere">
 				<fieldset>
 					
-
-					<div class="span6">
+					<div class="span6" id="Address">
 						<div class="control-group">
 							<label class="control-label" for="input01">Address 1</label>
 							<div class="controls">
@@ -77,14 +76,14 @@
 						<div class="control-group">
 							<label class="control-label" for="input01">Zip</label>
 							<div class="controls">
-								<input type="text" id="zip" name="zip">
+								<input type="text" id="zipCode" name="zipCode">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01"></label>
 							<div class="controls">
 								<div class="btn-group">
-									<button type="submit" class="btn btn-primary" title="first tooltip">Submit</button>
+									<button type="submit" class="btn btn-primary"  onClick="addAddress()">Submit</button>
 								</div>
 								<div class="btn-group">
 									<button id="cancel" type="button" class="btn btn-primary" title="first tooltip">Back to home</button>
@@ -121,6 +120,59 @@
 	<script type="text/javascript"	src="resources/js/jquery.validate.js"></script>
 	<script src="resources/js/maps/error-replace.js"></script>
 	<script type="text/javascript">
+	function addAddress() {
+		//DO FORMS
+		
+		//var address1 = document.getElementById("address1").value;
+		//var address2 = document.getElementById("address2").value;
+		//var city = document.getElementById("city").value;
+	//	var state = document.getElementById("state").value;
+		//var country = document.getElementById("country").value;
+		//var zip = document.getElementById("zip").value;
+			
+		var param = {
+			address1 : "asfgsdf",
+			address2 : "sdgfsdfgsfd",
+			city : "asdgggggggg",
+			state : "as" ,
+			country : "aaff",
+			zip : 10012
+		}
+		alert("we made it");
+		$.ajax({
+			type : "POST",
+			url : "addAddress",
+			data : param,
+			success : function(result) {
+				alert("It worked!");
+
+			},
+			error : function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect.\n Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				}
+				alert("Error " + msg);
+			}
+		});
+		address1 = [ 0 ];
+		sortProperty = "";
+		sortOrder = "";
+	}
+	</script>
+	<!-- script type="text/javascript">
 		$(document).ready(function() {
 			jQuery.validator.addMethod("accept", function(value, element, param) {
 				if(value==null || value==""){
@@ -156,7 +208,7 @@
 						minlength : 3,
 						maxlength : 45
 					},
-					zip : {
+					zipCode : {
 						required : true,
 						minlength : 5,
 						maxlength : 5
@@ -192,8 +244,8 @@
 						minlength : "Minimum length is 3 characters",
 						maxlength : "Maximum length is 45 characters"
 					},
-					zip : {
-						zip: "Zip code is required",
+					zipCode : {
+						zipCode: "Zip code is required",
 						required : "Zip code is required",
 						minlength : "Zip code must be 5 characters",
 						maxlength : "Maximum length is 5 characters"
@@ -223,7 +275,7 @@
 				$('#formCancel').submit();
 			});
 		});
-	</script>
+	</script> -->
 </body>
 </html>
 

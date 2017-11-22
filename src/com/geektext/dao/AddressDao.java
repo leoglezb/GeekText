@@ -12,5 +12,5 @@ public interface AddressDao {
     public void removeAddress(Address id);
     public List<Address> paginate(int[] range);
     public boolean exist(Address id);
-	
+   
 }
