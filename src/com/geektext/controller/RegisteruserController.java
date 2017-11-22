@@ -42,6 +42,8 @@ public class RegisteruserController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	//FIX REGISTERUSER2 TO /registeruser
+	
 	@RequestMapping(value = "/registeruser", method = RequestMethod.GET)
 	public String registeruser(HttpServletRequest request, Model model) {
 		String user_email = request.getParameter("user_email");
@@ -77,7 +79,7 @@ public class RegisteruserController {
 		}
 	}
 	
-	@RequestMapping(value="/home", method=RequestMethod.POST)
+	@RequestMapping(value="/createuser", method=RequestMethod.POST)
 	public String createUser(@ModelAttribute("command") BeanRegisterUser bean,
 			BindingResult result, MultipartHttpServletRequest request, Model model) {
 		String username = bean.getUser();

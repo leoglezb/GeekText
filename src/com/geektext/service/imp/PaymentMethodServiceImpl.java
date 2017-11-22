@@ -22,8 +22,8 @@ public class PaymentMethodServiceImpl {
 	}
 
 	@Transactional
-	public void addPaymentMethod(PaymentMethod paymentMethod) {
-		PaymentMethodDAO.addPaymentMethod(paymentMethod);
+	public PaymentMethod addPaymentMethod(String cardHolderName, int cardnumber, int cvv,  int expirationMonth, int expirationYear) {
+		return PaymentMethodDAO.addPaymentMethod(cardHolderName, cardnumber, cvv, expirationMonth, expirationYear);
 
 	}
 

@@ -48,6 +48,31 @@ public class AddressController {
 		return "address";
 	}
 	
+	/*CHECK IF WORKING THIS WILL ADD HOME ADDRESS
+	@RequestMapping(value="/addHomeAddress", method=RequestMethod.POST)
+	public String updateUserHomeAddress(HttpServletRequest request, Model model, @RequestParam(value = "address1") String address1,
+			@RequestParam(value = "address2") String address2, @RequestParam(value = "city") String city, 
+			@RequestParam(value = "state") String state, @RequestParam(value = "country") String country, 
+			@RequestParam(value = "zip") int zipCode) {
+		
+		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
+		
+		Address address = new Address() ;
+		address.setAddress1(address1);
+		address.setAddress2(address2);
+		address.setCity(city);
+		address.setCountry(country);
+		address.setZipCode(zipCode) ;
+		address.setState(state);
+		
+		userdetails.setHomeAddress(address);
+		
+		serviceuser.updateUserdetails(userdetails);
+		model.addAttribute("userdetails", userdetails);
+		
+		return "address"; //FIX THIS FORM
+	}
+	*/
 	@RequestMapping(value="/addAddress", method=RequestMethod.POST)
 	public String updateUser(HttpServletRequest request, Model model, @RequestParam(value = "address1") String address1,
 			@RequestParam(value = "address2") String address2, @RequestParam(value = "city") String city, 
@@ -105,7 +130,7 @@ public class AddressController {
 		model.addAttribute("userdetails", userdetails);
 		
 		
-		return "address";
+		return "address"; //FIX THIS FORM
 	}
 
 	/*Checks if user is logged in*/
