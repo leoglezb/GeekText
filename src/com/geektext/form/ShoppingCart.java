@@ -56,7 +56,7 @@ public class ShoppingCart implements Serializable{
 	@OneToMany(
 	        mappedBy = "cart", 
 	        cascade = CascadeType.ALL, 
-	        //orphanRemoval = true ,
+	        orphanRemoval = true ,
 	        fetch = FetchType.EAGER
 	    )
 	@Fetch(value = FetchMode.SUBSELECT)

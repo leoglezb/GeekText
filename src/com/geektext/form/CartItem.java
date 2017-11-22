@@ -59,6 +59,14 @@ public class CartItem implements Serializable{
     @JoinColumn(name = "ShoppingCartId")
     private ShoppingCart cart;
 	
+	public ShoppingCart getCart() {
+		return cart;
+	}
+
+	public void setCart(ShoppingCart cart) {
+		this.cart = cart;
+	}
+
 	public Long getCartItemId() {
 		return cartItemId;
 	}
