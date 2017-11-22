@@ -24,7 +24,6 @@ public class Address implements Serializable {
 	
 	private static final long serialVersionUID = -4769748653701863186L;
 
-
 	@Id
 	@Column(name = "AddressId")
 	@GeneratedValue
@@ -48,8 +47,8 @@ public class Address implements Serializable {
 	@Column(name = "ZipCode")
 	private int zipCode;
 	
-	 @ManyToMany(fetch = FetchType.EAGER, mappedBy = "shippingAddresses")
-	 private List<Userdetails> users = new ArrayList<>();
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "shippingAddresses")
+	private List<Userdetails> users = new ArrayList<>();
 	 
 	public List<Userdetails> getUsers() {
 		return users;

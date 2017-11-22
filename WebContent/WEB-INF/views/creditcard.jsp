@@ -35,54 +35,49 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<legend>Registration</legend>
-			<form class="form-horizontal" id="registerHere" method='post' action='createuser' enctype="multipart/form-data">
+			<legend>Payment Method</legend>
+			<form class="form-horizontal" id="registerHere" >
 				<fieldset>
-					<div class="span6">
+					
+					<div class="span6" id="PaymentMethod">
 						<div class="control-group">
-							<label class="control-label" for="input01"></label>
+							<label class="control-label" for="input01">CardHolder Name</label>
 							<div class="controls">
-								<input type="text" id="user_email" name="user" value="${user_email}">
+								<input type="text" id="cardHolderName" name="cardHolderName">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">First name</label>
+							<label class="control-label" for="input01">Card Number</label>
 							<div class="controls">
-								<input type="text" id="user_firstname"
-									name="user_firstname">
+								<input type="text" id="cardnumber"
+									name="cardnumber">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">Last name</label>
+							<label class="control-label" for="input01">CVV</label>
 							<div class="controls">
-								<input type="text" id="user_lastname"
-									name="user_lastname">
+								<input type="text" id="cvv"
+									name="cvv">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">Nickname</label>
+							<label class="control-label" for="input01">Expiration Month</label>
 							<div class="controls">
-								<input type="text" id="user_nickname"
-									name="user_nickname">
+								<input type="text" id="expirationMonth"
+									name="expirationMonth">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">Password</label>
+							<label class="control-label" for="input01">Expiration Year</label>
 							<div class="controls">
-								<input type="password" id="password" name="password">
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="input01">Confirm Password</label>
-							<div class="controls">
-								<input type="password" id="cpwd" name="cpwd">
+								<input type="text" id="expirationYear" name="expirationYear">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01"></label>
 							<div class="controls">
 								<div class="btn-group">
-									<button type="submit" class="btn btn-primary" title="first tooltip">Create account</button>
+									<button type="submit" class="btn btn-primary"  onClick="addCreditCard()">Submit</button>
 								</div>
 								<div class="btn-group">
 									<button id="cancel" type="button" class="btn btn-primary" title="first tooltip">Back to home</button>
@@ -119,6 +114,51 @@
 	<script type="text/javascript"	src="resources/js/jquery.validate.js"></script>
 	<script src="resources/js/maps/error-replace.js"></script>
 	<script type="text/javascript">
+	function addCreditCard() {
+		//DO FORMS
+			
+		var param = {
+			cardHolderName : "asfgsdf",
+			cardnumber : 1234,
+			cvv : 123,
+			expirationMonth : 01 ,
+			expirationYear : 02
+		}
+		alert("we made it");
+		$.ajax({
+			type : "POST",
+			url : "addCreditCard",
+			data : param,
+			success : function(result) {
+				alert("It worked!");
+
+			},
+			error : function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect.\n Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				}
+				alert("Error " + msg);
+			}
+		});
+		cardHolderName = [ 0 ];
+		sortProperty = "";
+		sortOrder = "";
+	}
+	</script>
+	<!-- script type="text/javascript">
 		$(document).ready(function() {
 			jQuery.validator.addMethod("accept", function(value, element, param) {
 				if(value==null || value==""){
@@ -130,50 +170,72 @@
 			});	
 			$("#registerHere").validate({
 				rules : {
-					user : {
+					address1 : {
 						required : true,
-						email : true
+						minlength: 3, 
+						maxlength : 45
 					},
-					user_firstname : {
-						required : true
+					address2 : {
+						required : false,
+						maxlength : 45
 					},
-					user_lastname: {
-						required : true
-					},
-					user_nickname : {
-						required : true
-					},
-					password : {
+					city: {
 						required : true,
-						minlength : 3
+						minlength: 3, 
+						maxlength : 45
 					},
-					cpwd : {
+					state : {
 						required : true,
-						equalTo : "#password"
+						minlength : 2,
+						maxlength : 2
 					},
-					photo:{
-						accept:'^.*\.(jpg|jpeg|png|gif)$' 
-					}					
+					country: {
+						required : true,
+						minlength : 3,
+						maxlength : 45
+					},
+					zipCode : {
+						required : true,
+						minlength : 5,
+						maxlength : 5
+					},					
 				},
 				messages : {
-					user : {
-						required : "Email address is required",
-						email : "Enter valid email address"
+					address1 : {
+						address1: "Enter your address",
+						required : "Address 1 Field is required",
+						minlength : "Minimum length is 3 characters",
+						maxlength : "Maximum length is 45 characters"
 					},
-					user_firstname: "Enter your first and last name",
-					user_lastname: "Enter your last name",
-					user_nickname: "Enter your nickname",
-					password : {
-						required : "Enter your password",
-						minlength : "Password must be minimum 6 characters"
+					address2 : {
+						address2: "Enter your address",
+						required : "Address 2 Field is not required",
+						maxlength : "Maximum length is 45 characters"
 					},
-					cpwd : {
-						required : "Enter confirm password",
-						equalTo : "Password and Confirm Password must match"
+					city : {
+						city: "City is required",
+						required : "City is required",
+						minlength : "Minimum length is 3 characters",
+						maxlength : "Maximum length is 45 characters"
 					},
-					photo:{
-						accept: "Only image type jpg/png/jpeg/gif is allowed"
-					}
+					state : {
+						state: "State is required",
+						required : "State is required",
+						minlength : "Minimum length is 2 characters",
+						maxlenth: "Maximum length is 2 characters"
+					},
+					country : {
+						country: "Country is required",
+						required : "Country is required",
+						minlength : "Minimum length is 3 characters",
+						maxlength : "Maximum length is 45 characters"
+					},
+					zipCode : {
+						zipCode: "Zip code is required",
+						required : "Zip code is required",
+						minlength : "Zip code must be 5 characters",
+						maxlength : "Maximum length is 5 characters"
+					},
 				},
 			    errorClass: "error",
 			    validClass: "checked",
@@ -199,7 +261,8 @@
 				$('#formCancel').submit();
 			});
 		});
-	</script>
+	</script> -->
 </body>
 </html>
 
+	

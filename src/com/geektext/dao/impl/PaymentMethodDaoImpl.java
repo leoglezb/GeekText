@@ -33,9 +33,17 @@ public class PaymentMethodDaoImpl implements PaymentMethodDao{
 	}
 
 	@Override
-	public void addPaymentMethod(PaymentMethod paymentMethod) {
-		sessionFactory.getCurrentSession().save(paymentMethod);
+	public PaymentMethod addPaymentMethod(String cardHolderName, int cardnumber, int cvv,  int expirationMonth, int expirationYear) {
+		PaymentMethod payment = new PaymentMethod() ;
+		payment.setcardHolderName(cardHolderName);
+		payment.setCardnumber(cardnumber);
+		payment.setCvv(cvv);
+		payment.setExpirationMonth(expirationMonth);
+		payment.setExpirationYear(expirationYear);
+	
+		sessionFactory.getCurrentSession().save(payment);
 		
+		return payment ;
 	}
 
 	@Transactional(readOnly = true)

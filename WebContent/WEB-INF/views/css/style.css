@@ -10,7 +10,6 @@ html{
 body{
 	font-family: tahoma;
 	height: 100vh;
-	background-color: #FFE4C4;
 }
 
 .welcome-message{
@@ -36,12 +35,13 @@ body{
 	font-weight: bold;
 }
 
-.nav-list li a:hover{
+ a.prettyHover:hover{
 	color: #e67e22;
 	border-bottom: 2px solid #e67e22;
 	transition: all 0.5s ease-in;
 	padding: 10px 0;
 }
+
 
 .logo h1{
 	float:left;
@@ -64,6 +64,7 @@ body{
 	margin-top: 10px;
 	padding: 15px;
 	text-align: left;
+	background-color: lightblue;
 }
 
 .footer-left{
@@ -105,6 +106,7 @@ body{
 
 .site-nav{
 	border-bottom: solid;
+	background-color: lightblue;
 }
 
 .books-row{
@@ -133,7 +135,7 @@ body{
 }
 
 .books-book{
-	border-bottom: solid;
+	border-bottom: solid 1px;
 	padding: 10px;
 }
 
@@ -203,4 +205,25 @@ body{
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+
+.book-details{
+	padding-top:50px;
+	padding-bottom: 50px;
+}
+.comments{
+	padding-top:50px;
+	padding-bottom: 50px;
+	margin-left:15px;
+}
+
+.user-comment{
+	border-top: solid 1px;
+	margin-right: 30px;
+}
+
+.imageContainer > img:active {
+  width: 200%;
+  height: 200%;
 }
