@@ -67,7 +67,10 @@ public class ShoppingCartController {
 		item.setBook(book);
 		item.setQuantity(1);
 		item.setSavedForLater(false);
-		cart.addCartItem(item);
+		
+		List<CartItem> items = cartService.getCartItems(cart.getShoppingCartId());
+		items.add(item);
+		cart.setItems(items);
 
 		cartService.updateShoppingCart(cart);
 		

@@ -8,8 +8,8 @@
 
 <title>Book Details</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -73,7 +73,7 @@
 			<p>Publisher: ${book.publisher.name}</p>
 			<p>Release Date: ${book.releasedate}</p>
 			<p>Average Book Rating: ${book.avgrating}</p>
-			<a href="shoppingCart.html"><button type="button"
+			<a href="<c:url value="addCart?bookId=${book.bookid}"/>"><button type="button"
 					class="btn btn-lg">Add to Shopping Cart</button></a>
 		</div>
 	</div>

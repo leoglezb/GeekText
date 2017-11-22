@@ -59,6 +59,14 @@ public class ShoppingCart implements Serializable{
 	    )
 	    private List<CartItem> items = new ArrayList<>();
 	
+	public List<CartItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<CartItem> items) {
+		this.items = items;
+	}
+
 	public Userdetails getUser() {
 		return user;
 	}

@@ -1,10 +1,13 @@
 package com.geektext.service.imp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.ShoppingCartDao;
+import com.geektext.form.CartItem;
 import com.geektext.form.ShoppingCart;
 import com.geektext.form.Userdetails;
 
@@ -30,4 +33,8 @@ public class ShoppingCartServiceImpl {
 		shoppingCartDao.updateShoppingCart(cart);
     }
 
+	@Transactional
+	public List<CartItem> getCartItems(int id) {
+		return shoppingCartDao.getCartItems(id);
+	}
 }
