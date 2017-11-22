@@ -61,9 +61,9 @@ public class PaymentMethodController {
 		payment.setExpirationMonth(expirationMonth);
 		payment.setExpirationYear(expirationYear);
 		payment.setExpirationYear(expirationYear);
+		payment.setUser(userdetails);
 		
 		userdetails.addCards(payment);
-		
 		serviceuser.updateUserdetails(userdetails);
 		model.addAttribute("userdetails", userdetails);
 		

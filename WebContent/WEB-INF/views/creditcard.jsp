@@ -6,36 +6,49 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>GeekText user registration</title>
+<title>Credit-Card-Edit</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- Le styles -->
-<link href="resources/css/bootstrap.css" rel="stylesheet">
-<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="resources/css/custom.css">
+
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="max-1200 container-fluid">
-				<div class="row-fluid">
-					<div class="span4">
-						<a class="brand" href="#"> <img
-							src="resources/img/books-logo.png">
-						</a>
-					</div>
-					<div class="span8">
-						<p class="masthead">Great Books, for Geeks &amp; for All!</p>
-					</div>
-				</div>
+<div class="row site-nav">
+		<div class="col-md-12">
+			<div class="logo">
+				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
+			<ul class="nav-list">
+				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="/cart.jsp"/>">Cart</a></li>
+				
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
+
+			</ul>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
-			<legend>Payment Method</legend>
+		<div class="col-sm-12" style="margin-left:30px;">
+			<h1>${userdetails.firstname} Account</h1>
 			<form class="form-horizontal" id="registerHere" >
 				<fieldset>
 					
@@ -80,15 +93,16 @@
 									<button type="submit" class="btn btn-primary"  onClick="addCreditCard()">Submit</button>
 								</div>
 								<div class="btn-group">
-									<button id="cancel" type="button" class="btn btn-primary" title="first tooltip">Back to home</button>
+									<button type="cancel" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</fieldset>
 			</form>
-			<form id="formCancel" method='GET' action='.'></form>
+			<form id="formCancel" method='GET' action='/profilemanagement'></form>
 		</div>
+	</div>
 	</div>
 	<hr>
 
@@ -101,37 +115,41 @@
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="resources/js/jquery.js"></script>
-	<script	src="resources/js/bootstrap-transition.js"></script>
-	<script	src="resources/js/bootstrap-alert.js"></script>
-	<script	src="resources/js/bootstrap-modal.js"></script>
-	<script	src="resources/js/bootstrap-dropdown.js"></script>
-	<script	src="resources/js/bootstrap-scrollspy.js"></script>
-	<script	src="resources/js/bootstrap-tab.js"></script>
-	<script	src="resources/js/bootstrap-tooltip.js"></script>
-	<script	src="resources/js/bootstrap-popover.js"></script>
-	<script src="resources/js/bootstrap-fileupload.js"></script>
-	<script type="text/javascript"	src="resources/js/jquery.validate.js"></script>
-	<script src="resources/js/maps/error-replace.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	
 	function addCreditCard() {
-		//DO FORMS
 			
+		var cardHolderName = document.getElementById("cardHolderName").value;
+		var cardnumber = document.getElementById("cardnumber").value;
+		var cvv = document.getElementById("cvv").value;
+		var expirationMonth = document.getElementById("expirationMonth").value;
+		var expirationYear = document.getElementById("expirationYear").value;
+		
 		var param = {
-			cardHolderName : "asfgsdf",
-			cardnumber : 1234,
-			cvv : 123,
-			expirationMonth : 01 ,
-			expirationYear : 02
+			cardHolderName : cardHolderName,
+			cardnumber : cardnumber,
+			cvv : cvv,
+			expirationMonth : expirationMonth,
+			expirationYear : expirationYear
 		}
-		alert("we made it");
 		$.ajax({
 			type : "POST",
 			url : "addCreditCard",
 			data : param,
 			success : function(result) {
-				alert("It worked!");
-
 			},
 			error : function(jqXHR, exception) {
 				var msg = '';
@@ -262,6 +280,22 @@
 			});
 		});
 	</script> -->
+	
+	<div class="row footer">
+			<div class="col-md footer-left">
+				<ul class="footer-list">
+					<li><a href="/GeekText">Home</a></li>
+					<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+					<li><a href="<c:url value="/profilemanagement"/>">Profile</a></li>
+					<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
+				</ul>
+			</div>
+			<div class="col-md footer-right">
+				<h5>Team Marvelous</h5>
+				<p>Software Engineering 1<br>Professor Alex Roque<br>Fall 2017</p>
+			</div>
+		</div>
+	
 </body>
 </html>
 

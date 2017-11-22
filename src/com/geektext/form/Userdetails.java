@@ -127,6 +127,10 @@ public class Userdetails {
     public void addCards(PaymentMethod card) {
     	this.cards.add(card);
     }
+    
+    public void removeCards(PaymentMethod card){
+    	this.cards.remove(card) ;
+    }
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(
