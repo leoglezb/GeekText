@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import sun.security.timestamp.TSRequest;
+
 @Entity
 @Table(name="Userdetails")
 public class Userdetails {
@@ -43,6 +45,20 @@ public class Userdetails {
 	@JoinColumn(name = "HomeAddressId")
 	private Address homeAddress ;
 	
+	/*
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	//@JoinColumn(mappedBy = "user")
+	private ShoppingCart shoppingCart ;
+	
+	
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+*/
 	public void setHomeAddress(Address homeAddress) {
 		this.homeAddress = homeAddress;
 	}
@@ -116,6 +132,7 @@ public class Userdetails {
 	}
 	
     public void addShippingAddress(Address address) {
-    	this.shippingAddresses.add(address);
+    		this.shippingAddresses.add(address);
     }
+    
 }    	

@@ -29,6 +29,7 @@
 				<!--  value>com.geektext.form.ShippingAddress</value>-->
 				<value>com.geektext.form.PaymentMethod</value>  
 				<value>com.geektext.form.ShoppingCart</value>
+				 <value>com.geektext.form.CartItem</value>
 			</list>
 		</property>
 	</bean>
