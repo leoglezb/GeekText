@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.GeneratedValue;
 import java.io.Serializable;
@@ -55,8 +57,9 @@ public class ShoppingCart implements Serializable{
 	        mappedBy = "cart", 
 	        cascade = CascadeType.ALL, 
 	        //orphanRemoval = true ,
-	        fetch = FetchType.LAZY
+	        fetch = FetchType.EAGER
 	    )
+	@Fetch(value = FetchMode.SUBSELECT)
 	    private List<CartItem> items = new ArrayList<>();
 	
 	public List<CartItem> getItems() {
