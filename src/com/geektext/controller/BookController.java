@@ -146,10 +146,13 @@ public class BookController {
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		Book book = bookService.bookById(bookId);
 		List<BookRating> ratingList = ratingService.listRating(bookId);
+		
+		boolean canComment = bookService.canComment(loggedInUserName(), bookId);
 
 		model.addAttribute("book", book);
 		model.addAttribute("userdetails", userdetails);
 		model.addAttribute("ratingList", ratingList);
+		model.addAttribute("canComment", canComment);
 		return "bookdetails";
 	}
 
