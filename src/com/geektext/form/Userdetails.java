@@ -15,8 +15,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+=======
+import sun.security.timestamp.TSRequest;
+>>>>>>> cdb0995630969522a74ac8f65dd25be1757ec4ad
 
 @Entity
 @Table(name="Userdetails")
@@ -25,6 +29,58 @@ public class Userdetails {
 	@Id
     @Column(name="username") //column name
     private String username; //variable of our object
+<<<<<<< HEAD
+=======
+
+    @Column(name="firstname")
+    private String firstname;
+	
+    @Column(name="lastname")
+    private String lastname;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="nickname")
+    private String nickname;
+    
+    @Column(name="anonymous")
+    private int anonymous;
+    
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "HomeAddressId")
+	private Address homeAddress ;
+	
+	/*
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	//@JoinColumn(mappedBy = "user")
+	private ShoppingCart shoppingCart ;
+	
+	
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+*/
+	public void setHomeAddress(Address homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+	
+	public Address getHomeAddress() {
+		return homeAddress;
+	}
+	
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable(
+		name = "ShippingAddress",
+		joinColumns = { @JoinColumn(name = "username") }, 
+		inverseJoinColumns = { @JoinColumn(name = "addressId") }
+	)
+	List<Address> shippingAddresses = new ArrayList<Address>();
+>>>>>>> cdb0995630969522a74ac8f65dd25be1757ec4ad
 	
 	public String getUsername() {
 		return username;
@@ -139,7 +195,11 @@ public class Userdetails {
 	}
 	
     public void addShippingAddress(Address address) {
-    	this.shippingAddresses.add(address);
+    		this.shippingAddresses.add(address);
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> cdb0995630969522a74ac8f65dd25be1757ec4ad
 }    	
