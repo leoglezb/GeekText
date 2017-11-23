@@ -30,7 +30,7 @@ public class CartItem implements Serializable{
 	private Long cartItemId;
 	
 	
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
 	@JoinColumn(name = "BookId")
 	private Book book;
 	

@@ -36,7 +36,7 @@ public class ShoppingCart implements Serializable{
 	private double subtotal;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "username")
+	@JoinColumn(name = "username", insertable = false, updatable = false)
 	private Userdetails user;
 	
 	/**
@@ -96,7 +96,74 @@ public class ShoppingCart implements Serializable{
 	
 	
 	public void addCartItem(CartItem item) {
-		this.items.add(item);
+		boolean newItem = true;
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(item.getBook().getBookid() == current.getBook().getBookid()) {
+				newItem = false;
+				int qty = current.getQuantity();
+				current.setQuantity(++qty);
+				break;
+			}
+		}
+		if(newItem)
+			this.items.add(item);
+	}
+	
+	public double getTotal() {
+		double total = 0;
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(!current.isSavedForLater())
+				total += current.getQuantity() * current.getBook().getPrice();
+		}
+		return total;
+	}
+	
+	public void updateQty(int itemId, int qty) {
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(current.getCartItemId() == itemId) {
+				current.setQuantity(qty);
+				return;
+			}	
+		}
+	}
+	
+	public List<CartItem> getItemsInCart(){
+		List<CartItem> inCart = new ArrayList<CartItem>();
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(!current.isSavedForLater())
+				inCart.add(current);
+		}
+		return inCart;
+	}
+	
+	public List<CartItem> getItemsSaved(){
+		List<CartItem> inCart = new ArrayList<CartItem>();
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(current.isSavedForLater())
+				inCart.add(current);
+		}
+		return inCart;
+	}
+	
+	public void saveForLater(int itemId) {
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(current.getCartItemId() == itemId)
+				current.setSavedForLater(true);
+		}
+	}
+	
+	public void backToCart(int itemId) {
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(current.getCartItemId() == itemId)
+				current.setSavedForLater(false);
+		}
 	}
 	
 }

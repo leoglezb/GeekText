@@ -50,16 +50,16 @@ public class Book implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "authorid")
+	@OneToOne
+	@JoinColumn(name = "authorid",insertable = false, updatable = false)
 	private Author author;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "genreid")
+	@OneToOne
+	@JoinColumn(name = "genreid",insertable = false, updatable = false)
 	private Genre genre;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "publisherid")
+	@OneToOne
+	@JoinColumn(name = "publisherid",insertable = false, updatable = false)
 	private Publisher publisher;
 	
 	@Column(name = "sold")

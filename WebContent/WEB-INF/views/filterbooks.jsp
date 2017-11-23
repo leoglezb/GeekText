@@ -22,7 +22,7 @@
 		<div class="col-sm-3">
 			<h3 class="book-information">${book.title}</h3>
 			<a
-				href="<c:url value="browsebooks?authorid=${book.author.authorid}"/>"><h5
+				href="<c:url value="author?authorid=${book.author.authorid}"/>"><h5
 					class="book-information">${book.author.firstname}&nbsp;${book.author.lastname}</h5></a>
 		</div>
 		<div class="col-sm-3">
