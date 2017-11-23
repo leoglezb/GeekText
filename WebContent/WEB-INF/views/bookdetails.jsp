@@ -8,7 +8,8 @@
 
 <title>Book Details</title>
 
-<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,7 +55,8 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">Hello ${userdetails.firstname}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+								<a class="dropdown-item"
+									href="<c:url value="/profilemanagement"/>">Profile</a> <a
 									class="dropdown-item" href="<c:url value="/signout"/>">Log
 									Out</a>
 							</div>
@@ -82,42 +84,53 @@
 			<p>Publisher: ${book.publisher.name}</p>
 			<p>Release Date: ${book.releasedate}</p>
 			<p>Average Book Rating: ${book.avgrating}</p>
-			<a href="<c:url value="addCart?bookId=${book.bookid}"/>"><button type="button"
-					class="btn btn-lg">Add to Shopping Cart</button></a>
+			<a href="<c:url value="addCart?bookId=${book.bookid}"/>"><button
+					type="button" class="btn btn-lg">Add to Shopping Cart</button></a>
+		</div>
+	</div>
+	<div class="col-md-3">
+		-
+		<div class="rowRating" style="margin-right: 100px">
+			<input type=hidden id=bookid value="${book.bookid}">
+
+			<div id="ratingErr">*Must add a star rating*</div>
+			<input class="star star-5" id="star-5" type="radio" name="star" /> <label
+				class="star star-5" for="star-5"></label> <input class="star star-4"
+				id="star-4" type="radio" name="star" /> <label class="star star-4"
+				for="star-4"></label> <input class="star star-3" id="star-3"
+				type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
+			<input class="star star-2" id="star-2" type="radio" name="star" /> <label
+				class="star star-2" for="star-2"></label> <input class="star star-1"
+				id="star-1" type="radio" name="star" /> <label class="star star-1"
+				for="star-1"></label>
 		</div>
 	</div>
 
-	<div class="rowRatingTextbox">
-		<input type=hidden id=bookid value="${book.bookid}">
-
-		<div id="ratingErr">*Must add a star rating*</div>
-		<input class="star star-5" id="star-5" type="radio" name="star" /> <label
-			class="star star-5" for="star-5"></label> <input class="star star-4"
-			id="star-4" type="radio" name="star" /> <label class="star star-4"
-			for="star-4"></label> <input class="star star-3" id="star-3"
-			type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
-		<input class="star star-2" id="star-2" type="radio" name="star" /> <label
-			class="star star-2" for="star-2"></label> <input class="star star-1"
-			id="star-1" type="radio" name="star" /> <label class="star star-1"
-			for="star-1"></label>
-
+	<div class="rowTextbox" style="margin-left: 100px">
 		<div id="commentErr">*Cannot leave an empty comment*</div>
 		<textarea id="commentArea" rows="4" cols="40" maxlength=140></textarea>
-		<button type="button" id="sendButton" onclick="sendFunc()">Send</button>
+		<!--  <button type="button" id="sendButton" onclick="sendFunc()">Send</button>-->
 
 		<c:if test="${!canComment}">
 			<script type="text/javascript">
-				document.getElementById("commentArea").disabled = true;
-				document.getElementById("sendButton").disabled = true;
-				document.getElementById("star-1").disabled = true;
-				document.getElementById("star-2").disabled = true;
-				document.getElementById("star-3").disabled = true;
-				document.getElementById("star-4").disabled = true;
-				document.getElementById("star-5").disabled = true;
-				document.getElementById("reviewHelp").innerHTML = "Please log-in to leave a review";
+				function winLoad() {
+					document.getElementById("commentArea").disabled = true;
+					document.getElementById("sendButton").disabled = true;
+					document.getElementById("star-1").disabled = true;
+					document.getElementById("star-2").disabled = true;
+					document.getElementById("star-3").disabled = true;
+					document.getElementById("star-4").disabled = true;
+					document.getElementById("star-5").disabled = true;
+				}
+				window.onload = winLoad;
 			</script>
 		</c:if>
 	</div>
+	<div>
+		<button type="button" id="sendButton" onclick="sendFunc()"
+			style="margin-left: 100px">Send</button>
+	</div>
+
 
 	<div class="row comments">
 		<div class="col-md">
