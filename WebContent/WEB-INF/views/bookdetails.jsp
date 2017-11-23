@@ -43,7 +43,7 @@
 			</div>
 			<ul class="nav-list">
 				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
-				<li><a href="<c:url value="/cart.jsp"/>">Cart</a></li>
+				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
 
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
@@ -82,8 +82,10 @@
 			<p>Publisher: ${book.publisher.name}</p>
 			<p>Release Date: ${book.releasedate}</p>
 			<p>Average Book Rating: ${book.avgrating}</p>
-			<a href="<c:url value="addCart?bookId=${book.bookid}"/>"><button type="button"
+			<c:if test="${not empty  userdetails}">
+				<a href="<c:url value="addCart?bookId=${book.bookid}"/>"><button type="button"
 					class="btn btn-lg">Add to Shopping Cart</button></a>
+			</c:if>
 		</div>
 	</div>
 

@@ -71,19 +71,120 @@ public class ShoppingCartController {
 		
 		cart.addCartItem(item);
 		
-		/**
-		List<CartItem> items = cartService.getCartItems(cart.getShoppingCartId());
-		items.add(item);
-		cart.setItems(items);
-		 **/
-		
 		cartService.updateShoppingCart(cart);
 		
+		double total = cart.getTotal();
+		
+		List<CartItem> items = cart.getItemsInCart();
+		List<CartItem> saved = cart.getItemsSaved();
 		
 		model.addAttribute("userdetails", userdetails);
 		model.addAttribute("cart", cart);
+		model.addAttribute("inCart", items);
+		model.addAttribute("saved", saved);
+		model.addAttribute("total", total);
 
 		return "shoppingcart";
+	}
+	
+	@RequestMapping(value = "/shoppingcart", method = RequestMethod.GET)
+	public String shoppingCart(HttpServletRequest request, Model model) {
+
+		String user = loggedInUserName();
+		
+		if(user.equals("GeekTextUserNotLoggedIn"))
+			return "logIn";
+		
+		Userdetails userdetails = serviceuser.getUserdetails(user);
+		ShoppingCart cart = cartService.getShoppingCartByUser(user);
+
+		double total = cart.getTotal();
+		
+		List<CartItem> items = cart.getItemsInCart();
+		List<CartItem> saved = cart.getItemsSaved();
+		
+		model.addAttribute("userdetails", userdetails);
+		model.addAttribute("cart", cart);
+		model.addAttribute("inCart", items);
+		model.addAttribute("saved", saved);
+		model.addAttribute("total", total);
+		
+		return "shoppingcart";
+	}
+	
+	@RequestMapping(value = "/updateQty", method = RequestMethod.GET)
+	public String updateQty(HttpServletRequest request, Model model, @RequestParam(value = "itemId") int itemId, @RequestParam(value = "qty") int qty) {
+
+		String user = loggedInUserName();
+		
+		Userdetails userdetails = serviceuser.getUserdetails(user);
+		ShoppingCart cart = cartService.getShoppingCartByUser(user);
+		cart.updateQty(itemId, qty);
+		
+		cartService.updateShoppingCart(cart);
+		
+		double total = cart.getTotal();
+		
+		List<CartItem> items = cart.getItemsInCart();
+		List<CartItem> saved = cart.getItemsSaved();
+		
+		model.addAttribute("userdetails", userdetails);
+		model.addAttribute("cart", cart);
+		model.addAttribute("inCart", items);
+		model.addAttribute("saved", saved);
+		model.addAttribute("total", total);
+		
+		return "refreshcart";
+	}
+	
+	@RequestMapping(value = "/saveForLater", method = RequestMethod.GET)
+	public String saveForLater(HttpServletRequest request, Model model, @RequestParam(value = "itemId") int itemId) {
+
+		String user = loggedInUserName();
+		
+		Userdetails userdetails = serviceuser.getUserdetails(user);
+		ShoppingCart cart = cartService.getShoppingCartByUser(user);
+		
+		cart.saveForLater(itemId);
+		cartService.updateShoppingCart(cart);
+		
+		double total = cart.getTotal();
+		
+		List<CartItem> items = cart.getItemsInCart();
+		List<CartItem> saved = cart.getItemsSaved();
+		
+		model.addAttribute("userdetails", userdetails);
+		model.addAttribute("cart", cart);
+		model.addAttribute("inCart", items);
+		model.addAttribute("saved", saved);
+		model.addAttribute("total", total);
+		
+		return "refreshcart";
+	}
+	
+	@RequestMapping(value = "/backToCart", method = RequestMethod.GET)
+	public String backToCart(HttpServletRequest request, Model model, @RequestParam(value = "itemId") int itemId) {
+
+		String user = loggedInUserName();
+		
+		Userdetails userdetails = serviceuser.getUserdetails(user);
+		ShoppingCart cart = cartService.getShoppingCartByUser(user);
+		
+		cart.backToCart(itemId);
+		cartService.updateShoppingCart(cart);
+		
+		double total = cart.getTotal();
+		
+		List<CartItem> items = cart.getItemsInCart();
+		List<CartItem> saved = cart.getItemsSaved();
+		
+		model.addAttribute("userdetails", userdetails);
+		model.addAttribute("cart", cart);
+		model.addAttribute("inCart", items);
+		model.addAttribute("saved", saved);
+		model.addAttribute("total", total);
+		
+		return "refreshcart";
 	}
 
 	private String loggedInUserName() {

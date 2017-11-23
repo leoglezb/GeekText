@@ -33,7 +33,7 @@
 			</div>
 			<ul class="nav-list">
 				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
-				<li><a href="<c:url value="/cart.jsp"/>">Cart</a></li>
+				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
 
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
