@@ -17,14 +17,14 @@
 
 </head>
 <body>
-<div class="row site-nav">
+	<div class="row site-nav">
 		<div class="col-md-12">
 			<div class="logo">
 				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
 				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
-				<li><a href="<c:url value="/cart.jsp"/>">Cart</a></li>
+				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
 				
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
@@ -93,7 +93,7 @@
 									<button type="submit" class="btn btn-primary"  onClick="addCreditCard()">Submit</button>
 								</div>
 								<div class="btn-group">
-									<button type="cancel" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
+									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
 								</div>
 							</div>
 						</div>
