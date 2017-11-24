@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.geektext.service.UserdetailsService;
 import org.springframework.security.core.Authentication;
@@ -110,6 +111,31 @@ public class RegisteruserController {
 		return "registeruser";
 	}	
 
+	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
+	public String editUser(HttpServletRequest request, Model model) {
+		Userdetails userdetails = service.getUserdetails(loggedInUserName());
+		
+		model.addAttribute("userdetails", userdetails);
+		
+		return "editprofile";
+	}
+	
+	@RequestMapping(value="/updateuser", method=RequestMethod.POST)
+	public String updateUser(HttpServletRequest request, Model model, @RequestParam(value = "user_firstname") String user_firstname,
+			@RequestParam(value = "user_lastname") String user_lastname, @RequestParam(value = "user_nickname") String user_nickname){
+	
+		Userdetails userdetails= service.getUserdetails(loggedInUserName()) ;
+
+		userdetails.setFirstname(user_firstname);
+		userdetails.setLastname(user_lastname);
+		userdetails.setNickname(user_nickname);
+		
+		service.updateUserdetails(userdetails);
+		model.addAttribute("userdetails", userdetails);
+				
+		return "editprofile";
+	}	
+	
 	@RequestMapping(value="/profilemanagement", method=RequestMethod.GET)
 	public String updateUser(HttpServletRequest request, Model model) {
 		Userdetails userdetails = service.getUserdetails(loggedInUserName());

@@ -6,12 +6,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Credit-Card-Edit</title>
+<title>GeekText</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-
-
+<!-- Le styles -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css">
 
@@ -41,66 +40,49 @@
 							</div>
 						</div></li>
 				</c:if>
-
 			</ul>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 		<div class="col-sm-12" style="margin-left:30px;">
-			<h1>${userdetails.firstname} Account</h1>
-			<form class="form-horizontal" id="registerHere" >
+        	<h1>${userdetails.firstname} Account</h1>
+				<form class="form-horizontal" id="updateuser">
 				<fieldset>
-					
-					<div class="span6" id="PaymentMethod">
+					<div class="span6">
 						<div class="control-group">
-							<label class="control-label" for="input01">CardHolder Name</label>
+							<label class="control-label" for="input01">First name</label>
 							<div class="controls">
-								<input type="text" id="cardHolderName" name="cardHolderName" required minlength = "2" maxlength = "45">
+								<input type="text" id="user_firstname" name="user_firstname">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">Card Number</label>
+							<label class="control-label" for="input01">Last name</label>
 							<div class="controls">
-								<input type="text" id="cardnumber"
-									name="cardnumber" required minlength = "1" maxlength = "16"> <!--  FIX MIN LENGTH -->
+								<input type="text" id="user_lastname" name="user_lastname">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">CVV</label>
+							<label class="control-label" for="input01">Nickname</label>
 							<div class="controls">
-								<input type="text" id="cvv"
-									name="cvv" required minlength = "3" maxlength = "3" numeric>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="input01">Expiration Month</label>
-							<div class="controls">
-								<input type="text" id="expirationMonth"
-									name="expirationMonth" required minlength = "2" maxlength = "2"  numeric>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="input01">Expiration Year</label>
-							<div class="controls">
-								<input type="text" id="expirationYear" name="expirationYear" required minlength = "2" maxlength = "2" numeric>
+								<input type="text" id="user_nickname" name="user_nickname">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01"></label>
 							<div class="controls">
 								<div class="btn-group">
-									<button type="submit" class="btn btn-primary"  onClick="addCreditCard()">Submit</button>
+									<button type="submit" class="btn btn-full" onClick="addNewInfo()">Update</button>
 								</div>
 								<div class="btn-group">
-									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
+									<button type="cancel" class="btn btn-full" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Home</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</fieldset>
 			</form>
-			<form id="formCancel" method='GET' action='/profilemanagement'></form>
+			<form id="formCancel" method='GET' action='.'></form>
 		</div>
 	</div>
 	</div>
@@ -140,28 +122,35 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
-<script
-	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script type="text/javascript">
 	
-	function addCreditCard() {
+	<script src="resources/js/jquery.js"></script>
+	<script	src="resources/js/bootstrap-transition.js"></script>
+	<script	src="resources/js/bootstrap-alert.js"></script>
+	<script	src="resources/js/bootstrap-modal.js"></script>
+	<script	src="resources/js/bootstrap-dropdown.js"></script>
+	<script	src="resources/js/bootstrap-scrollspy.js"></script>
+	<script	src="resources/js/bootstrap-tab.js"></script>
+	<script	src="resources/js/bootstrap-tooltip.js"></script>
+	<script	src="resources/js/bootstrap-popover.js"></script>
+	<script src="resources/js/bootstrap-fileupload.js"></script>
+	<script type="text/javascript"	src="resources/js/jquery.validate.js"></script>
+	<script src="resources/js/maps/error-replace.js"></script>
+	<script type="text/javascript">
+
+function addNewInfo() {
 		
-		var cardHolderName = document.getElementById("cardHolderName").value;
-		var cardnumber = document.getElementById("cardnumber").value;
-		var cvv = document.getElementById("cvv").value;
-		var expirationMonth = document.getElementById("expirationMonth").value;
-		var expirationYear = document.getElementById("expirationYear").value;
+		var user_firstname = document.getElementById("user_firstname").value;
+		var user_lastname = document.getElementById("user_lastname").value;
+		var user_nickname = document.getElementById("user_nickname").value;
 		
 		var param = {
-			cardHolderName : cardHolderName,
-			cardnumber : cardnumber,
-			cvv : cvv,
-			expirationMonth : expirationMonth,
-			expirationYear : expirationYear
+				user_firstname : user_firstname,
+				user_lastname : user_lastname,
+				user_nickname : user_nickname
 		}
 		$.ajax({
 			type : "POST",
-			url : "addCreditCard",
+			url : "updateuser",
 			data : param,
 			success : function(result) {
 			},
@@ -185,12 +174,12 @@
 				alert("Error " + msg);
 			}
 		});
-		cardHolderName = [ 0 ];
+		user_firstname = [ 0 ];
 		sortProperty = "";
 		sortOrder = "";
 	}
+	
 	</script>
 </body>
 </html>
 
-	

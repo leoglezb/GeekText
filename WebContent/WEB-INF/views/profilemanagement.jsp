@@ -59,7 +59,7 @@
 								<p><span style="font-weight: bold;">Email: </span>${userdetails.username}</p>
 
 								<div class="button-awesome">
-									<a href="<c:url value="address"/>" class="btn btn-full">Edit Profile</a>
+									<a href="<c:url value="editprofile"/>" class="btn btn-full">Edit Profile</a>
 									<a href="<c:url value="address"/>" class="btn btn-full">Add Address</a>
 									<a href="<c:url value="creditcard"/>" class="btn btn-full">Add Credit Card</a>
 							</div>
