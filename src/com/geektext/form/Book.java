@@ -1,9 +1,12 @@
 package com.geektext.form;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -12,8 +15,11 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
-
+import javax.persistence.OneToMany;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.io.Serializable;
 
@@ -67,6 +73,23 @@ public class Book implements Serializable {
 	
 	@Column(name = "avgrating")
 	private double avgrating;
+	
+	@OneToMany(
+	        mappedBy = "book", 
+	        cascade = CascadeType.ALL, 
+	        orphanRemoval = true ,
+	        fetch = FetchType.EAGER
+	    )
+	@Fetch(value = FetchMode.SUBSELECT)
+    private List<BookRating> ratings = new ArrayList<>();
+
+	public List<BookRating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<BookRating> ratings) {
+		this.ratings = ratings;
+	}
 
 	public int getBookid() {
 		return bookid;
@@ -144,4 +167,13 @@ public class Book implements Serializable {
 		this.avgrating = avgrating;
 	}
 
+	public void addRating(Userdetails user, int rating, String comment) {
+		BookRating r = new BookRating();
+		r.setBook(this);
+		r.setComment(comment);
+		r.setRating(rating);
+		r.setUser(user);
+		ratings.add(r);
+		
+	}
 }
