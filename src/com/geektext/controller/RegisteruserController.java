@@ -111,6 +111,26 @@ public class RegisteruserController {
 		return "registeruser";
 	}	
 
+	@RequestMapping(value = "/editpassword", method = RequestMethod.GET)
+	public String editUserPassword(HttpServletRequest request, Model model) {
+		Userdetails userdetails = service.getUserdetails(loggedInUserName());
+		
+		model.addAttribute("userdetails", userdetails);
+		
+		model.addAttribute("userdetails", userdetails);
+		
+		return "editpassword";
+	}
+	
+	@RequestMapping(value="/updatepassword", method=RequestMethod.POST)
+	public String updateUserPass(HttpServletRequest request, Model model, @RequestParam(value = "password") String password,
+			@RequestParam(value = "cpwd") String cpwd){
+	
+		/*Not sure how to proceed*/
+				
+		return "editpassword";
+	}	
+	
 	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
 	public String editUser(HttpServletRequest request, Model model) {
 		Userdetails userdetails = service.getUserdetails(loggedInUserName());

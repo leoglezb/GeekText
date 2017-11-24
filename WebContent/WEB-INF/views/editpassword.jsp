@@ -51,28 +51,24 @@
 				<fieldset>
 					<div class="span6">
 						<div class="control-group">
-							<label class="control-label" for="input01">First name</label>
+							<label class="control-label" for="input01">Password</label>
 							<div class="controls">
-								<input type="text" id="user_firstname" required name="user_firstname">
+								<input type="password" id="password" required
+									name="password">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="input01">Last name</label>
+							<label class="control-label" for="input01">Confirm Password</label>
 							<div class="controls">
-								<input type="text" id="user_lastname" required name="user_lastname">
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="input01">Nickname</label>
-							<div class="controls">
-								<input type="text" id="user_nickname" required name="user_nickname">
+								<input type="password" id="cpwd" required
+									name="cpwd">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01"></label>
 							<div class="controls">
 								<div class="btn-group">
-									<button type="submit" class="btn btn-full" onClick="addNewInfo()">Update</button>
+									<button type="submit" class="btn btn-full" onClick="addNewPassword()">Update</button>
 								</div>
 								<div class="btn-group">
 									<button type="cancel" class="btn btn-full" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Home</button>
@@ -137,20 +133,18 @@
 	<script src="resources/js/maps/error-replace.js"></script>
 	<script type="text/javascript">
 
-function addNewInfo() {
+function addNewPassword() {
 		
-		var user_firstname = document.getElementById("user_firstname").value;
-		var user_lastname = document.getElementById("user_lastname").value;
-		var user_nickname = document.getElementById("user_nickname").value;
+		var password = document.getElementById("password").value;
+		var cpwd = document.getElementById("cpwd").value;
 		
 		var param = {
-				user_firstname : user_firstname,
-				user_lastname : user_lastname,
-				user_nickname : user_nickname
+				password : user_firstname,
+				cpwd : cpwd
 		}
 		$.ajax({
 			type : "POST",
-			url : "updateuser",
+			url : "updatepassword",
 			data : param,
 			success : function(result) {
 			},
@@ -174,7 +168,7 @@ function addNewInfo() {
 				alert("Error " + msg);
 			}
 		});
-		user_firstname = [ 0 ];
+		password = [ 0 ];
 		sortProperty = "";
 		sortOrder = "";
 	}
