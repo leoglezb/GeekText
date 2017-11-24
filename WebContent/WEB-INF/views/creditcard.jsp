@@ -56,34 +56,34 @@
 						<div class="control-group">
 							<label class="control-label" for="input01">CardHolder Name</label>
 							<div class="controls">
-								<input type="text" id="cardHolderName" name="cardHolderName">
+								<input type="text" id="cardHolderName" name="cardHolderName" required minlength = "2" maxlength = "45">
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">Card Number</label>
 							<div class="controls">
 								<input type="text" id="cardnumber"
-									name="cardnumber">
+									name="cardnumber" required minlength = "1" maxlength = "16"> <!--  FIX MIN LENGTH -->
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">CVV</label>
 							<div class="controls">
 								<input type="text" id="cvv"
-									name="cvv">
+									name="cvv" required minlength = "3" maxlength = "3" numeric>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">Expiration Month</label>
 							<div class="controls">
 								<input type="text" id="expirationMonth"
-									name="expirationMonth">
+									name="expirationMonth" required minlength = "2" maxlength = "2"  numeric>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">Expiration Year</label>
 							<div class="controls">
-								<input type="text" id="expirationYear" name="expirationYear">
+								<input type="text" id="expirationYear" name="expirationYear" required minlength = "2" maxlength = "2" numeric>
 							</div>
 						</div>
 						<div class="control-group">
@@ -131,7 +131,7 @@
 	<script type="text/javascript">
 	
 	function addCreditCard() {
-			
+		
 		var cardHolderName = document.getElementById("cardHolderName").value;
 		var cardnumber = document.getElementById("cardnumber").value;
 		var cvv = document.getElementById("cvv").value;
@@ -176,111 +176,6 @@
 		sortOrder = "";
 	}
 	</script>
-	<!-- script type="text/javascript">
-		$(document).ready(function() {
-			jQuery.validator.addMethod("accept", function(value, element, param) {
-				if(value==null || value==""){
-					return true;
-				}
-				var validator =new RegExp(param);
-				var result = validator.test(value.toLowerCase());
-				return result;
-			});	
-			$("#registerHere").validate({
-				rules : {
-					address1 : {
-						required : true,
-						minlength: 3, 
-						maxlength : 45
-					},
-					address2 : {
-						required : false,
-						maxlength : 45
-					},
-					city: {
-						required : true,
-						minlength: 3, 
-						maxlength : 45
-					},
-					state : {
-						required : true,
-						minlength : 2,
-						maxlength : 2
-					},
-					country: {
-						required : true,
-						minlength : 3,
-						maxlength : 45
-					},
-					zipCode : {
-						required : true,
-						minlength : 5,
-						maxlength : 5
-					},					
-				},
-				messages : {
-					address1 : {
-						address1: "Enter your address",
-						required : "Address 1 Field is required",
-						minlength : "Minimum length is 3 characters",
-						maxlength : "Maximum length is 45 characters"
-					},
-					address2 : {
-						address2: "Enter your address",
-						required : "Address 2 Field is not required",
-						maxlength : "Maximum length is 45 characters"
-					},
-					city : {
-						city: "City is required",
-						required : "City is required",
-						minlength : "Minimum length is 3 characters",
-						maxlength : "Maximum length is 45 characters"
-					},
-					state : {
-						state: "State is required",
-						required : "State is required",
-						minlength : "Minimum length is 2 characters",
-						maxlenth: "Maximum length is 2 characters"
-					},
-					country : {
-						country: "Country is required",
-						required : "Country is required",
-						minlength : "Minimum length is 3 characters",
-						maxlength : "Maximum length is 45 characters"
-					},
-					zipCode : {
-						zipCode: "Zip code is required",
-						required : "Zip code is required",
-						minlength : "Zip code must be 5 characters",
-						maxlength : "Maximum length is 5 characters"
-					},
-				},
-			    errorClass: "error",
-			    validClass: "checked",
-			    errorPlacement: function(error, element) {
-			    	var wrapedError = wrapError(error,element,'leftarrow')
-			        wrapedError.insertAfter(element);
-			    	var img = $("<div class='errorImage'></div>");
-			    	img.insertBefore(wrapedError);
-			        wrapedError.css('left',element.offset().left + element.width() + 47);
-			        wrapedError.css("top", element.offset().top);
-			    },
-			    success: function(element) {
-			    	$(element).addClass("checked");
-			    },
-			    highlight: function (element, errorClass, validClass) {
-	                $(element).addClass(errorClass).removeClass(validClass);
-		        },
-		        unhighlight: function (element, errorClass, validClass) {
-		                $(element).removeClass(errorClass).addClass(validClass);
-		        }		    
-			});
-			$('#cancel').click(function() {
-				$('#formCancel').submit();
-			});
-		});
-	</script> -->
-	
 	<div class="row footer">
 			<div class="col-md footer-left">
 				<ul class="footer-list">
