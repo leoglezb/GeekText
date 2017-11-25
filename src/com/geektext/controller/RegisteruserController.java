@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.geektext.service.AddressService;
 import com.geektext.service.UserdetailsService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -23,6 +27,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
 
+import com.geektext.form.Address;
 import com.geektext.form.BeanRegisterUser;
 import com.geektext.form.Userdetails;
 /**
@@ -39,6 +44,8 @@ public class RegisteruserController {
 	private SaltSource saltSource;
 	@Autowired
 	private UserdetailsService service;
+	@Autowired
+	private AddressService addressService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -133,14 +140,19 @@ public class RegisteruserController {
 	}
 	
 	@RequestMapping(value="/updateuser", method=RequestMethod.POST)
+	//@ResponseStatus(value = HttpStatus.OK)
 	public String updateUser(HttpServletRequest request, Model model, @RequestParam(value = "user_firstname") String user_firstname,
-			@RequestParam(value = "user_lastname") String user_lastname, @RequestParam(value = "user_nickname") String user_nickname){
+			@RequestParam(value = "user_lastname") String user_lastname, @RequestParam(value = "user_nickname") String user_nickname,
+			@RequestParam(value = "user_addressId") int user_addressId){
 	
 		Userdetails userdetails= service.getUserdetails(loggedInUserName()) ;
 
 		userdetails.setFirstname(user_firstname);
 		userdetails.setLastname(user_lastname);
 		userdetails.setNickname(user_nickname);
+		
+		Address a = addressService.getAddress(user_addressId);
+		userdetails.setHomeAddress(a);
 		
 		service.updateUserdetails(userdetails);
 		model.addAttribute("userdetails", userdetails);

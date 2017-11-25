@@ -21,9 +21,8 @@
 				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
-				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
 				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
 				</c:if>
@@ -33,14 +32,12 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">Hello ${userdetails.firstname}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item"
-									href="<c:url value="/profilemanagement"/>">Profile</a> <a
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
 									class="dropdown-item" href="<c:url value="/signout"/>">Log
 									Out</a>
 							</div>
 						</div></li>
 				</c:if>
-
 			</ul>
 		</div>
 	</div>
@@ -100,12 +97,12 @@
 			<p>
 				<span style="font-weight: bold;">Email:</span> ${userdetails.email}
 			</p>
-			<!-- 
+			
 			<p>
 				<span style="font-weight: bold;">Shipping Address:</span> <select
 					name="addresss">
-					<c:forEach items="${addresses}" var="address">
-						<option value="card1">${address.address1}  &#44; ${address.city} &nbsp; ${address.state}  &nbsp; ${address.state}  &nbsp; ${address.zipCode}</option>
+					<c:forEach items="${userdetails.addresses}" var="address">
+						<option value="card1">${address.address1} &#44; ${address.city} &nbsp; ${address.state}  &nbsp; ${address.country}</option>
 					</c:forEach>
 				</select>
 			</p>
@@ -113,31 +110,29 @@
 			<p>
 				<span style="font-weight: bold;">Credit Card:</span> <select
 					name="cards">
-					<c:forEach items="${cards}" var="card">
-						<option value="card1">${card.cardnumber}</option>
+					<c:forEach items="${userdetails.cards}" var="card">
+						<option value="card1">${card.description}</option>
 					</c:forEach>
 				</select>
 			</p>
-			-->
+			
 			
 			<h3 style="text-align: right;">
 				Total:<span>${total}</span>
 			</h3>
-			<a href="profile.html" style="float: left;" class="btn btn-full">Select
+			<a href="<c:url value="/profilemanagement"/>" style="float: left;" class="btn btn-full">Select
 				Different Info</a> <a href="<c:url value="/confirmorder"/>" style="float: right;"
 				class="btn btn-full">Confirm</a>
 		</div>
 	</div>
 
-
-
 	<div class="row footer">
 		<div class="col-md footer-left">
 			<ul class="footer-list">
-				<li><a href="index">Home</a></li>
-				<li><a href="books.html">Browse</a></li>
-				<li><a href="profile.html">Profile</a></li>
-				<li><a href="shoppingCart.html">Cart</a></li>
+				<li><a href="/GeekText">Home</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="topsellers"/>">Top Sellers</a></li>
+				<li><a href="<c:url value="shoppingcart"/>">Cart</a></li>
 			</ul>
 		</div>
 		<div class="col-md footer-right">

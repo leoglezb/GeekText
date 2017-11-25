@@ -26,7 +26,7 @@ public class AddressDaoImpl implements AddressDao{
 	}
 	
 	@Transactional(readOnly = true)
-	public Address getAddress(Address id) {
+	public Address getAddress(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Address u = (Address) session.get(Address.class, id);
 		return u;

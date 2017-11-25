@@ -47,7 +47,7 @@ public class Address implements Serializable {
 	@Column(name = "ZipCode")
 	private int zipCode;
 	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "shippingAddresses")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "addresses")
 	private List<Userdetails> users = new ArrayList<>();
 	 
 	public List<Userdetails> getUsers() {

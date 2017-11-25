@@ -97,7 +97,7 @@ public class Userdetails {
 		this.anonymous = anonymous;
 	}
     
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "HomeAddressId")
 	private Address homeAddress ;
 	
@@ -138,18 +138,18 @@ public class Userdetails {
 		joinColumns = { @JoinColumn(name = "username") }, 
 		inverseJoinColumns = { @JoinColumn(name = "addressId") }
 	)
-	List<Address> shippingAddresses = new ArrayList<Address>();
+	List<Address> addresses = new ArrayList<Address>();
 	 
-	public List<Address> getShippingAddresses() {
-		return shippingAddresses;
+    public List<Address> getAddresses() {
+		return addresses;
 	}
-	
-	public void setShippingAddresses(List<Address> billingAddresses) {
-		this.shippingAddresses = billingAddresses;
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
-	
-    public void addShippingAddress(Address address) {
-    		this.shippingAddresses.add(address);
+
+	public void addShippingAddress(Address address) {
+    		this.addresses.add(address);
     }
 
 }    	

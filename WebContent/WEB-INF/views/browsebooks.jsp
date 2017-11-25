@@ -18,9 +18,8 @@
 				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
-				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
 				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
 				</c:if>
@@ -30,14 +29,12 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">Hello ${userdetails.firstname}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item"
-									href="<c:url value="/profilemanagement"/>">Profile</a> <a
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
 									class="dropdown-item" href="<c:url value="/signout"/>">Log
 									Out</a>
 							</div>
 						</div></li>
 				</c:if>
-
 			</ul>
 		</div>
 	</div>
@@ -177,16 +174,8 @@
 
 				</div>
 			</div>
-
-
 		</div>
-
-
 	</div>
-
-
-
-
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

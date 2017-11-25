@@ -17,7 +17,7 @@ public class AddressServiceImpl implements AddressService{
 	private AddressDao AddressDAO;
 
 	@Transactional
-	public Address getAddress(Address id) {
+	public Address getAddress(int id) {
 		return AddressDAO.getAddress(id);
 	}
 

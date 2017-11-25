@@ -23,9 +23,8 @@
 				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
-				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
 				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-				
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
 				</c:if>
@@ -41,7 +40,6 @@
 							</div>
 						</div></li>
 				</c:if>
-
 			</ul>
 		</div>
 	</div>
@@ -53,6 +51,12 @@
 				<fieldset>
 					
 					<div class="span6" id="PaymentMethod">
+					<div class="control-group">
+							<label class="control-label" for="input01">Card Description</label>
+							<div class="controls">
+								<input type="text" id="Description" name="Description" required  maxlength = "45">
+							</div>
+						</div>
 						<div class="control-group">
 							<label class="control-label" for="input01">CardHolder Name</label>
 							<div class="controls">
@@ -106,23 +110,23 @@
 	</div>
 	<hr>
 
-	<footer>
-		<div class="container"></div>
-			<div class="row footer">
-			<div class="col-md footer-left">
-				<ul class="footer-list">
-					<li><a href="/GeekText">Home</a></li>
-					<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
-					<li><a href="<c:url value="/profilemanagement"/>">Profile</a></li>
-					<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-				</ul>
-			</div>
-			<div class="col-md footer-right">
-				<h5>Team Marvelous</h5>
-				<p>Software Engineering 1<br>Professor Alex Roque<br>Fall 2017</p>
-			</div>
+	<div class="row footer">
+		<div class="col-md footer-left">
+			<ul class="footer-list">
+				<li><a href="/GeekText">Home</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="topsellers"/>">Top Sellers</a></li>
+				<li><a href="<c:url value="shoppingcart"/>">Cart</a></li>
+			</ul>
 		</div>
-	</footer>
+		<div class="col-md footer-right">
+			<h5>Team Marvelous</h5>
+			<p>
+				Software Engineering 1<br>Professor Alex Roque<br>Fall
+				2017
+			</p>
+		</div>
+	</div>
 
 	<!--/.fluid-container-->
 
@@ -146,6 +150,7 @@
 	
 	function addCreditCard() {
 		
+		var Description = document.getElementById("Description").value;
 		var cardHolderName = document.getElementById("cardHolderName").value;
 		var cardnumber = document.getElementById("cardnumber").value;
 		var cvv = document.getElementById("cvv").value;
@@ -153,6 +158,7 @@
 		var expirationYear = document.getElementById("expirationYear").value;
 		
 		var param = {
+			description : Description,
 			cardHolderName : cardHolderName,
 			cardnumber : cardnumber,
 			cvv : cvv,

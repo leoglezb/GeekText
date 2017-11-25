@@ -32,9 +32,8 @@
 				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
-				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
 				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
 				</c:if>
@@ -44,14 +43,12 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">Hello ${userdetails.firstname}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item"
-									href="<c:url value="/profilemanagement"/>">Profile</a> <a
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
 									class="dropdown-item" href="<c:url value="/signout"/>">Log
 									Out</a>
 							</div>
 						</div></li>
 				</c:if>
-
 			</ul>
 		</div>
 	</div>
@@ -94,10 +91,10 @@
 	<div class="row footer">
 		<div class="col-md footer-left">
 			<ul class="footer-list">
-				<li><a href="index">Home</a></li>
-				<li><a href="books.html">Browse</a></li>
-				<li><a href="profile.html">Profile</a></li>
-				<li><a href="shoppingCart.html">Cart</a></li>
+				<li><a href="/GeekText">Home</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="topsellers"/>">Top Sellers</a></li>
+				<li><a href="<c:url value="shoppingcart"/>">Cart</a></li>
 			</ul>
 		</div>
 		<div class="col-md footer-right">

@@ -48,13 +48,14 @@ public class PaymentMethodController {
 	}
 	
 	@RequestMapping(value="/addCreditCard", method=RequestMethod.POST)
-	public String addPaymentMethod(HttpServletRequest request, Model model, @RequestParam(value = "cardHolderName") String cardHolderName,
+	public String addPaymentMethod(HttpServletRequest request, Model model, @RequestParam(value = "cardHolderName") String cardHolderName, @RequestParam(value = "description") String description,
 			@RequestParam(value = "cardnumber") String cardnumber, @RequestParam(value = "cvv") int cvv, 
 			@RequestParam(value = "expirationMonth") int expirationMonth, @RequestParam(value = "expirationYear") int expirationYear){
 		
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		
 		PaymentMethod payment = new PaymentMethod() ;
+		payment.setDescription(description);
 		payment.setcardHolderName(cardHolderName);
 		payment.setCardnumber(cardnumber);
 		payment.setCvv(cvv);

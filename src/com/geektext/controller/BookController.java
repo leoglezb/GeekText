@@ -207,7 +207,9 @@ public class BookController {
 		bookService.updateBook(book);
 		
 		List<BookRating> ratingList = ratingService.listRating(bookid);
+		model.addAttribute("userdetails", userdetails);
 		model.addAttribute("ratingList", ratingList);
+		model.addAttribute("book", book);
 		return "ratinglist";
 	}
 

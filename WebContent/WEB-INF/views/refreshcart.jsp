@@ -47,6 +47,7 @@
 						</div>
 						<div class="col-sm">
 							<a style="color: black" onClick="saveForLater(${item.cartItemId})">Save for Later</a>
+							<br/><a style="color: black" onClick="removeFromCart(${item.cartItemId})">Remove from cart</a>
 						</div>
 					</div>
 				</div>
@@ -55,11 +56,11 @@
 
 		<div class="row">
 			<div class="col-sm">
-				<h3 style="text-align: right;">
+				<h3 style="text-align: right; padding-right: 15px;">
 					Total:<span>${total}</span>
 				</h3>
 				<c:if test="${fn:length(inCart) gt 0}">
-				<a href="checkout.html" style="float: right;" class="btn btn-full">Check
+				<a href="<c:url value="/checkout"/>" style="float: right;" class="btn btn-full">Check
 					Out</a>
 				</c:if>
 			</div>
@@ -100,6 +101,7 @@
 							</div>
 							<div class="col-sm">
 								<a style="color: black;" onClick="backToCart(${item.cartItemId})">Move Back to Cart</a>
+								<br/><a style="color: black" onClick="removeFromCart(${item.cartItemId})">Remove from cart</a>
 							</div>
 						</div>
 					</div>
