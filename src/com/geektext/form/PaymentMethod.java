@@ -103,4 +103,15 @@ public class PaymentMethod implements Serializable {
 	public void setUser(Userdetails user) {
 		this.user = user;
 	}
+	
+	@Column(name = "Description")
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

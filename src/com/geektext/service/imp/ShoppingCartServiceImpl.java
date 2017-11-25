@@ -37,4 +37,8 @@ public class ShoppingCartServiceImpl {
 	public List<CartItem> getCartItems(int id) {
 		return shoppingCartDao.getCartItems(id);
 	}
+	@Transactional
+	public void insertOrderItem(CartItem item, Userdetails user) {
+		shoppingCartDao.insertOrderItem(item, user);
+	}
 }

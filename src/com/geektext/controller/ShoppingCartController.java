@@ -253,6 +253,8 @@ public class ShoppingCartController {
 
 		ArrayList<CartItem> del = new ArrayList<CartItem>();
 
+		
+		
 		for (int i = 0; i < cart.getItems().size(); i++) {
 			CartItem current = cart.getItems().get(i);
 			if (!current.isSavedForLater()) {
@@ -260,7 +262,7 @@ public class ShoppingCartController {
 				b.setSold(b.getSold() + current.getQuantity());
 				bookService.updateBook(b);
 				del.add(cart.getItems().get(i));
-
+				cartService.insertOrderItem(cart.getItems().get(i), userdetails);
 			}
 		}
 

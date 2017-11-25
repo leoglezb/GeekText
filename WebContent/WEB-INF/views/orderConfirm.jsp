@@ -5,24 +5,24 @@
 <%@ page trimDirectiveWhitespaces="true"%><!DOCTYPE html>
 <html lang="en">
 
-	<head>
+<head>
 
-		<title>Geek Text</title>
+<title>Geek Text</title>
 
-		<link href="resource/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<link href="resources/css/style.css" rel="stylesheet" type="text/css">
-	</head>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
+</head>
 
-	<body>
-		<div class="row site-nav">
+<body>
+	<div class="row site-nav">
 		<div class="col-md-12">
 			<div class="logo">
 				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
 			<ul class="nav-list">
-				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
 				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-
 				<c:if test="${empty userdetails}">
 					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
 				</c:if>
@@ -39,36 +39,38 @@
 							</div>
 						</div></li>
 				</c:if>
-
 			</ul>
 		</div>
 	</div>
 
-		<div class="row welcome-message">
-			<div class="col-md-12">
-				<h1>Your order has been placed!</h1>
-				<div class="button-awesome">
-					<a href="/GeekText" class="btn btn-full">Go Back to Geek Books</a>
-				</div>
+	<div class="row welcome-message">
+		<div class="col-md-12">
+			<h1>Your order has been placed!</h1>
+			<div class="button-awesome">
+				<a href="/GeekText" class="btn btn-full">Go Back to Geek Books</a>
 			</div>
 		</div>
+	</div>
 
-		<div class="row footer">
-			<div class="col-md footer-left">
-				<ul class="footer-list">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="books.html">Browse</a></li>
-					<li><a href="profile.html">Profile</a></li>
-					<li><a href="shoppingCart.html">Cart</a></li>
-				</ul>
-			</div>
-			<div class="col-md footer-right">
-				<h5>Team Marvelous</h5>
-				<p>Software Engineering 1<br>Professor Alex Roque<br>Fall 2017</p>
-			</div>
+	<div class="row footer">
+		<div class="col-md footer-left">
+			<ul class="footer-list">
+				<li><a href="/GeekText">Home</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="topsellers"/>">Top Sellers</a></li>
+				<li><a href="<c:url value="shoppingcart"/>">Cart</a></li>
+			</ul>
 		</div>
+		<div class="col-md footer-right">
+			<h5>Team Marvelous</h5>
+			<p>
+				Software Engineering 1<br>Professor Alex Roque<br>Fall
+				2017
+			</p>
+		</div>
+	</div>
 
-	</body>
+</body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
