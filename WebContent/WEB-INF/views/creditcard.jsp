@@ -63,7 +63,7 @@
 							<label class="control-label" for="input01">Card Number</label>
 							<div class="controls">
 								<input type="text" id="cardnumber"
-									name="cardnumber" required minlength = "1" maxlength = "16"> <!--  FIX MIN LENGTH -->
+									name="cardnumber" required minlength = "16" maxlength = "16" title="Please enter a valid credit card number (16 digits)"> <!--  FIX MIN LENGTH -->
 							</div>
 						</div>
 						<div class="control-group">
@@ -166,23 +166,7 @@
 			success : function(result) {
 			},
 			error : function(jqXHR, exception) {
-				var msg = '';
-				if (jqXHR.status === 0) {
-					msg = 'Not connect.\n Verify Network.';
-				} else if (jqXHR.status == 404) {
-					msg = 'Requested page not found. [404]';
-				} else if (jqXHR.status == 500) {
-					msg = 'Internal Server Error [500].';
-				} else if (exception === 'parsererror') {
-					msg = 'Requested JSON parse failed.';
-				} else if (exception === 'timeout') {
-					msg = 'Time out error.';
-				} else if (exception === 'abort') {
-					msg = 'Ajax request aborted.';
-				} else {
-					msg = 'Uncaught Error.\n' + jqXHR.responseText;
-				}
-				alert("Error " + msg);
+				
 			}
 		});
 		cardHolderName = [ 0 ];

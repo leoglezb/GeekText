@@ -33,7 +33,7 @@ public class PaymentMethodDaoImpl implements PaymentMethodDao{
 	}
 
 	@Override
-	public PaymentMethod addPaymentMethod(String cardHolderName, int cardnumber, int cvv,  int expirationMonth, int expirationYear) {
+	public PaymentMethod addPaymentMethod(String cardHolderName, String cardnumber, int cvv,  int expirationMonth, int expirationYear) {
 		PaymentMethod payment = new PaymentMethod() ;
 		payment.setcardHolderName(cardHolderName);
 		payment.setCardnumber(cardnumber);

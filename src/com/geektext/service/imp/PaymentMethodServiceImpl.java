@@ -22,7 +22,7 @@ public class PaymentMethodServiceImpl {
 	}
 
 	@Transactional
-	public PaymentMethod addPaymentMethod(String cardHolderName, int cardnumber, int cvv,  int expirationMonth, int expirationYear) {
+	public PaymentMethod addPaymentMethod(String cardHolderName, String cardnumber, int cvv,  int expirationMonth, int expirationYear) {
 		return PaymentMethodDAO.addPaymentMethod(cardHolderName, cardnumber, cvv, expirationMonth, expirationYear);
 
 	}

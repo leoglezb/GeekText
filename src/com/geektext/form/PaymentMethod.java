@@ -49,13 +49,13 @@ public class PaymentMethod implements Serializable {
 	}
 	
 	@Column(name = "CardNumber")
-	private int cardnumber;
+	private String cardnumber;
 	
-	public int getCardnumber() {
+	public String getCardnumber() {
 		return cardnumber;
 	}
 
-	public void setCardnumber(int cardnumber) {
+	public void setCardnumber(String cardnumber) {
 		this.cardnumber = cardnumber;
 	}
 
