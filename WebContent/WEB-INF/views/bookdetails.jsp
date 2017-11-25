@@ -89,27 +89,26 @@
 		</div>
 	</div>
 	<div class="col-md-3">
-		-
 		<div class="rowRating" style="margin-right: 100px">
 			<input type=hidden id=bookid value="${book.bookid}">
 
 			<div id="ratingErr">*Must add a star rating*</div>
-			<input class="star star-5" id="star-5" type="radio" name="star" /> <label
-				class="star star-5" for="star-5"></label> <input class="star star-4"
-				id="star-4" type="radio" name="star" /> <label class="star star-4"
-				for="star-4"></label> <input class="star star-3" id="star-3"
-				type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
-			<input class="star star-2" id="star-2" type="radio" name="star" /> <label
-				class="star star-2" for="star-2"></label> <input class="star star-1"
-				id="star-1" type="radio" name="star" /> <label class="star star-1"
-				for="star-1"></label>
+			<input class="star star-5" id="star-5" type="radio" name="star" /> 
+	        <label class="star star-5" for="star-5"></label> 
+	        <input class="star star-4" id="star-4" type="radio" name="star" /> 
+	        <label class="star star-4" for="star-4"></label>
+	        <input class="star star-3" id="star-3" type="radio" name="star" /> 
+	        <label class="star star-3" for="star-3"></label>
+			<input class="star star-2" id="star-2" type="radio" name="star" /> 
+			<label class="star star-2" for="star-2"></label> 
+			<input class="star star-1" id="star-1" type="radio" name="star" /> 
+			<label class="star star-1"for="star-1"></label>
 		</div>
 	</div>
 
-	<div class="rowTextbox" style="margin-left: 100px">
+	<div class="rowTextbox" style="margin-left: 30px">
 		<div id="commentErr">*Cannot leave an empty comment*</div>
 		<textarea id="commentArea" rows="4" cols="40" maxlength=140></textarea>
-		<!--  <button type="button" id="sendButton" onclick="sendFunc()">Send</button>-->
 
 		<c:if test="${!canComment}">
 			<script type="text/javascript">
@@ -128,7 +127,7 @@
 	</div>
 	<div>
 		<button type="button" id="sendButton" onclick="sendFunc()"
-			style="margin-left: 100px">Send</button>
+			style="margin-left: 30px">Send</button>
 	</div>
 
 

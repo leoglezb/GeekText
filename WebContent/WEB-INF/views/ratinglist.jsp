@@ -15,18 +15,18 @@
 
 <body>
 	<c:forEach items="${ratingList}" var="rating">
-		<p>
+		<h5>
 			<c:choose>
 				<c:when test="${rating.user.anonymous == 1}">
-					Name: Anonymous<br />
+							Name: Anonymous<br />
 				</c:when>
 				<c:otherwise>
-					Name: ${rating.user.nickname}<br />
+							Name: ${rating.user.nickname}<br />
 				</c:otherwise>
 			</c:choose>
-			Rating: ${rating.rating} <br /> Comment: ${rating.comment}
-		</p>
-		<br />
+		</h5>
+		<p style="margin: 0px;">${rating.comment}</p>
+		<p style="margin: 0px;">Rating: ${rating.rating}</p>
 	</c:forEach>
 </body>
 </html>
