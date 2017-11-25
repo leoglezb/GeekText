@@ -14,4 +14,7 @@ public interface BookDao {
     public List<Book> paginate(int[] range);
     public boolean exist(Book id);
     public Book bookById(int bookId);
+    public boolean canComment(String username, int bookId);
+    public List<Book> listTopSellers();
+    public void updateBook(Book book);
 }

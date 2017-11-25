@@ -12,4 +12,7 @@ public interface BookService {
     public void removeBook(Book id);
     public boolean exist(Book id);  
     public Book bookById(int bookId);
+    public boolean canComment(String username, int bookId);
+    public List<Book> listTopSellers();
+    public void updateBook(Book book);
 }

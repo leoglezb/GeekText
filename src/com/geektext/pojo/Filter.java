@@ -6,6 +6,7 @@ public class Filter {
 	private int minRating;
 	private String sortBy;
 	private String order;
+	private String searchCrit;
 
 	public Filter() {
 		authorId = 0;
@@ -13,6 +14,7 @@ public class Filter {
 		minRating = 0;
 		sortBy = "";
 		order = "";
+		searchCrit = "";
 	}
 
 	public Filter(Integer[] genres, int minRating) {
@@ -68,5 +70,13 @@ public class Filter {
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public String getSearchCrit() {
+		return searchCrit;
+	}
+
+	public void setSearchCrit(String searchCrit) {
+		this.searchCrit = searchCrit;
 	}
 }

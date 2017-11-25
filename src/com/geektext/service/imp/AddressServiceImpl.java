@@ -11,7 +11,7 @@ import com.geektext.form.Address;
 import com.geektext.service.AddressService;
 
 @Service
-public class AddressServiceImpl {
+public class AddressServiceImpl implements AddressService{
 
 	@Autowired
 	private AddressDao AddressDAO;
@@ -22,8 +22,8 @@ public class AddressServiceImpl {
 	}
 
 	@Transactional
-	public void addAddress(Address address) {
-		AddressDAO.addAddress(address);
+	public Address addAddress(String address1, String address2, String city,  String state, String country, int zipCode) {	
+		return AddressDAO.addAddress( address1, address2, city, state, country, zipCode);
 
 	}
 

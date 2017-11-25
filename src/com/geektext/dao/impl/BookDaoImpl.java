@@ -1,10 +1,12 @@
 package com.geektext.dao.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.BookDao;
 import com.geektext.form.Book;
+import com.geektext.form.ShoppingCart;
 import com.geektext.pojo.Filter;
 
 @Repository
@@ -49,6 +52,7 @@ public class BookDaoImpl implements BookDao {
 		Integer[] genres = filter.getGenres();
 		String sortBy = filter.getSortBy();
 		String order = filter.getOrder();
+		String searchCrit = filter.getSearchCrit();
 		
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(Book.class);
 		crit.createAlias("author", "a");
@@ -64,8 +68,27 @@ public class BookDaoImpl implements BookDao {
 			else
 				crit.addOrder(Order.desc(sortBy.equals("firstname")?"a.firstname":sortBy));
 		}
+		if(!searchCrit.equals("")) {
+			crit.add(Restrictions.disjunction()
+					.add(Restrictions.ilike("title", searchCrit, MatchMode.ANYWHERE))
+					.add(Restrictions.ilike("a.firstname", searchCrit, MatchMode.ANYWHERE))
+					.add(Restrictions.ilike("a.lastname", searchCrit, MatchMode.ANYWHERE))
+					.add(Restrictions.ilike("g.name", searchCrit, MatchMode.ANYWHERE))
+					);
+		}
 		return crit.list();
 	}
+	
+	
+	@Transactional(readOnly = true)
+	@SuppressWarnings("unchecked")
+	public List<Book> listTopSellers() {
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(Book.class);
+		crit.addOrder(Order.desc("sold"));
+		crit.setMaxResults(10);
+		return crit.list();
+	}
+	
 	
 	@Transactional(readOnly = true)
 	public Book bookById(int bookId) {
@@ -97,4 +120,27 @@ public class BookDaoImpl implements BookDao {
 		boolean result = session.get(Book.class, id) != null;
 		return result;
 	}
+	
+	@Transactional(readOnly = true)
+	public boolean canComment(String username, int bookId) {
+		Session session = sessionFactory.getCurrentSession();
+	    Query query = session
+	            .createSQLQuery("CALL CanComment(:username,:bookId)");
+	    query.setParameter("username", username);
+	    query.setParameter("bookId", bookId);
+	    BigInteger result = (BigInteger) query.uniqueResult();	
+	    return result.equals(BigInteger.valueOf(1)) ? true : false;
+	}
+	
+	public void updateBook(Book book) {
+		int sum = 0;
+		int count = book.getRatings().size();
+		for(int i = 0; i < book.getRatings().size(); i++) {
+			sum += book.getRatings().get(i).getRating();
+		}
+		if(count > 0) {
+			book.setAvgrating((double)sum/count);
+		}
+        sessionFactory.getCurrentSession().saveOrUpdate(book);
+    }
 }

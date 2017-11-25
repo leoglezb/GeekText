@@ -1,226 +1,205 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page trimDirectiveWhitespaces="true"%><!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+<title>Geek Text - Books</title>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"
 	type="text/css">
-<link rel="stylesheet" href="resources/css/leandro prototype.css"
-	type="text/css">
+<link rel="stylesheet" href="resources/css/style.css" type="text/css">
+
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-md bg-primary navbar-dark">
-		<div class="container">
-			<a class="navbar-brand" href="<c:url value="browsebooks"/>"><b>
-					Browse Books</b></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbar2SupportedContent"
-				aria-controls="navbar2SupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse text-center justify-content-end"
-				id="navbar2SupportedContent">
-				<a class="btn navbar-btn ml-2 text-white btn-secondary"><i
-					class="fa d-inline fa-lg fa-user-circle-o"></i> Hello
-					${userdetails.firstname}</a> <a
-					class="btn navbar-btn ml-2 text-white btn-secondary"
-					href="<c:url value="cart.jsp"/>"><i
-					class="fa d-inline fa-lg fa-shopping-cart"></i> Cart</a>
+	<div class="row site-nav">
+		<div class="col-md-12">
+			<div class="logo">
+				<a href="/GeekText"><h1>Geek Books</h1></a>
+			</div>
+			<ul class="nav-list">
+				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
+
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item"
+									href="<c:url value="/profilemanagement"/>">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="row books-details">
+		<div class="col-sm-6" style="padding-left:30px;">
+			<h3>
+				<a href="<c:url value="browsebooks"/>"
+					style="text-decoration: underline; color: black;">Browse All</a> <a
+					href="<c:url value="topsellers"/>" style="color: black;">Top
+					Seller</a>
+			</h3>
+
+		</div>
+		<div class="col-sm-1">
+			<label>View</label> <select id="PageSize" onChange="doWork()">
+				<option value="10" selected="selected">10</option>
+				<option value="20">20</option>
+			</select>
+		</div>
+		<div class="col-sm-2 sort-button">
+			<div class="dropdown">
+				<button type="button" class="btn dropdown-toggle"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" id="TitleASC">Title Asc.</a> <a
+						class="dropdown-item" id="TitleDESC">Title Desc.</a> <a
+						class="dropdown-item" id="AuthorASC">Author Asc.</a> <a
+						class="dropdown-item" id="AuthorDESC">Author Desc.</a> <a
+						class="dropdown-item" id="PriceASC">Price Asc.</a> <a
+						class="dropdown-item" id="PriceDESC">Price Desc.</a> <a
+						class="dropdown-item" id="RatingASC">Rating Asc.</a> <a
+						class="dropdown-item" id="RatingDESC">Rating Desc.</a> <a
+						class="dropdown-item" id="ReleaseDtASC">Release Date Asc.</a> <a
+						class="dropdown-item" id="ReleaseDtDESC">Release Date Desc</a>
+
+				</div>
 			</div>
 		</div>
-	</nav>
-
-	<div class="py-5 text-center bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="pb-3 text-secondary">Find Great Books.&nbsp;</h1>
+		<div class="col-sm-3">
+			<div class="input-group">
+				<input type="text" id="srch-term">
+				<div class="input-group-btn">
+					<button class="btn btn-default" id="srch-btn" onClick="doWork()">Search</button>
 				</div>
-			</div>
-			<div class="row">
-				<div class="text-right col-md-3">
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<div id="GenreDiv">
-								<h6 class="text-primary">Genre</h6>
-								<c:forEach items="${genreList}" var="genre">
-									<label><input type="checkbox" name="genres[]"
-										value="${genre.genreid}" /> ${genre.name}</label>
-									<br />
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">See Top Sellers</h6>
-						</div>
-					</div>
-
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12"
-							id="RatingDiv">
-							<h5 class="text-primary">Rating</h5>
-							<h6 class="text-primary" id="Rating4">4 & Up</h6>
-							<h6 class="text-primary" id="Rating3">3 & Up</h6>
-							<h6 class="text-primary" id="Rating2">2 & Up</h6>
-							<h6 class="text-primary" id="Rating1">1 & Up</h6>
-						</div>
-					</div>
-
-
-					<div class="row my-5">
-						<div class="col-10 text-lg-right text-left order-lg-1 col-md-12">
-							<h6 class="text-primary">Sort</h6>
-							<h6 class="text-primary" id="TitleDESC">Title DESC</h6>
-							<h6 class="text-primary" id="TitleASC">Title ASC</h6>
-							<h6 class="text-primary" id="PriceDESC">Price DESC</h6>
-							<h6 class="text-primary" id="PriceASC">Price ASC</h6>
-							<h6 class="text-primary" id="ReleaseDtDESC">ReleaseDt DESC</h6>
-							<h6 class="text-primary" id="ReleaseDtASC">ReleaseDt ASC</h6>
-							<h6 class="text-primary" id="AuthorDESC">Author DESC</h6>
-							<h6 class="text-primary" id="AuthorASC">Author ASC</h6>
-							<h6 class="text-primary" id="RatingDESC">Rating DESC</h6>
-							<h6 class="text-primary" id="RatingASC">Rating ASC</h6>
-						</div>
-					</div>
-
-
-				</div>
-				<div class="text-left col-md-9">
-					<div class="row my-5" id="test">
-						<c:forEach items="${bookList}" var="book">
-							<div class="col-10 col-md-4">
-								<h4 class="text-primary">
-									<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>">
-										${book.title} <br>
-									</a>
-								</h4>
-								<p>
-									Author: <a
-										href="<c:url value="browsebooks?authorid=${book.author.authorid}"/>">
-										${book.author.firstname}&nbsp;${book.author.lastname}<br>
-									</a>
-								</p>
-							</div>
-							<div class="col-md-4">
-								<p>
-									${book.price} <br>
-								</p>
-								<p>
-									Link Add to cart <br>
-								</p>
-							</div>
-							<div class="col-md-4">
-								<img class="img-fluid d-block"
-									src="resources/img/bookcover/${book.bookid}.png">
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-
-
-
-
-				<div class="text-left col-md-9">
-					<div class="row my-5" id="test">
-						<div class="well">
-							<div class="list-group">
-
-								<c:forEach items="${bookList}" var="book">
-
-									<a href="#" class="list-group-item active">
-										<div class="media col-md-3">
-											<figure class="pull-left">
-												<img class="media-object img-rounded img-responsive"
-													src="http://placehold.it/350x250"
-													alt="placehold.it/350x250">
-											</figure>
-										</div>
-										<div class="col-md-6">
-											<h4 class="list-group-item-heading">List group heading</h4>
-											<p class="list-group-item-text">Qui diam libris ei,
-												vidisse incorrupte at mel. His euismod salutandi dissentiunt
-												eu. Habeo offendit ea mea. Nostro blandit sea ea, viris
-												timeam molestiae an has. At nisl platonem eum. Vel et nonumy
-												gubergren, ad has tota facilis probatus. Ea legere legimus
-												tibique cum, sale tantas vim ea, eu vivendo expetendis vim.
-												Voluptua vituperatoribus et mel, ius no elitr deserunt
-												mediocrem. Mea facilisi torquatos ad.</p>
-										</div>
-										<div class="col-md-3 text-center">
-											<h2>
-												14240 <small> votes </small>
-											</h2>
-											<button type="button"
-												class="btn btn-default btn-lg btn-block">Vote Now!</button>
-											<div class="stars">
-												<span class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star-empty"></span>
-											</div>
-											<p>
-												Average 4.5 <small> / </small> 5
-											</p>
-										</div>
-									</a>
-
-
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</div>
-	<!-- FOOTER -->
-	<div class="container">
-		<div class="row">
-			<footer>
-				<p class="pull-right">
-					<a href="#">Back to top</a>
-				</p>
-				<p>
-					&copy; Geektext &middot; <a href="#">Home</a> &middot;
-				</p>
-			</footer>
+
+	<div class="row books-row">
+		<div class="col-md-2 books-sidebar">
+
+			<div class="col-md-12 books-sidewidget" id="GenreDiv">
+				<h3>Genre</h3>
+				<c:forEach items="${genreList}" var="genre">
+					<label><input type="checkbox" name="genres[]"
+						value="${genre.genreid}" /> ${genre.name}</label>
+					<br />
+				</c:forEach>
+			</div>
+
+			<div class="col-md-12 books-sidewidget" id="RatingDiv">
+				<h3>Rating</h3>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating4">4
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating3">3
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating2">2
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="Rating1">1
+						and Up</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="optradio" id="All"
+						checked="checked">All </label>
+				</div>
+				<div>
+					<a href="<c:url value="/browsebooks"/>"><small id="ClearRating">Clear</small></a>
+				</div>
+			</div>
 		</div>
+
+		<div class="col-md-10 books-mainside">
+			<div class="row books-book" id="Books">
+				<c:set var="pageListHolder" value="${bookList}" />
+				<c:forEach items="${pageListHolder.pageList}" var="book">
+					<div class="col-sm-3">
+						<div class="col-sm">
+							<img src="resources/img/bookcover/${book.bookid}.png">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<h3 class="book-information">${book.title}</h3>
+						<a href="<c:url value="author?authorid=${book.author.authorid}"/>"><h5
+								class="book-information">${book.author.firstname}&nbsp;${book.author.lastname}</h5></a>
+					</div>
+					<div class="col-sm-3">
+						<p class="book-information" style="margin: 15px;">${book.avgrating}</p>
+						<p class="book-information" style="margin: 15px;">${book.price}</p>
+						<p class="book-information" style="margin: 15px;">${book.releasedate}</p>
+					</div>
+					<div class="col-sm-3">
+						<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>"><p
+								class="btn btn-full">See More</p></a>
+					</div>
+
+				</c:forEach>
+
+				<div class="row page-index" id="PageDiv">
+				
+					<div class="col-md-12" style="margin-left: 500px;">
+						<nav aria-label="Page navigation example text-xs-center">
+							<ul class="pagination">
+								<!--  <li class="page-item" id="Prev"><a class="page-link" onClick="getPage('prev')"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+							</a></li>-->
+								<c:forEach begin="0" end="${pageListHolder.pageCount-1}"
+									varStatus="loop">
+									<li class="page-item" value="${loop.index}"><a
+										class="page-link" onClick="getPage(${loop.index})">${loop.index+1}</a></li>
+								</c:forEach>
+								<!--<li class="page-item" id="Next"><a class="page-link" onClick="getPage('next')"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+									class="sr-only">Next</span>
+							</a></li>-->
+							</ul>
+						</nav>
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+
 	</div>
+
+
+
+
 </body>
-<script src="resources/js/jquery.js"></script>
-<script src="resources/js/jquery-ui.custom.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.validate.js"></script>
-<script src="resources/js/jquery.form.js"></script>
-<script src="resources/js/tag-it.min.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="resources/js/tag-it-function.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="resources/js/jquery.nicescroll.min.js"
-	type="text/javascript" charset="utf-8"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -321,12 +300,19 @@
 
 		doWork();
 	});
+	
+	$('#All').click(function(e) {
+		minRating = 0;
+
+		doWork();
+	});
 
 	var genreDiv = document.getElementById("GenreDiv");
 	var ratingDiv = document.getElementById("RatingDiv");
 
 	//get reference to input elements in toppings container element
 	var genreInput = genreDiv.getElementsByTagName('input');
+	var ratingInput = ratingDiv.getElementsByTagName('input');
 
 	var selectedGenre = [ 0 ];
 
@@ -337,24 +323,39 @@
 		}
 	}
 
+	document.getElementById("srch-term")
+    .addEventListener("keyup", function(event) {
+	    event.preventDefault();
+	    if (event.keyCode === 13) {
+	        document.getElementById("srch-btn").click();
+	    }
+	});
+
+	
 	function doWork() {
 		for (var j = 0, l = genreInput.length; j < l; j++) {
 			if (genreInput[j].checked)
 				selectedGenre.push(genreInput[j].value);
 		}
 
+		var pageSize = document.getElementById("PageSize").value;
+		
+		var searchCrit = document.getElementById("srch-term").value;
+		
 		var search = {
 			genres : selectedGenre,
 			minRating : minRating,
 			sortBy : sortProperty,
-			order : sortOrder
+			order : sortOrder,
+			pageSize : pageSize,
+			searchCrit : searchCrit
 		}
 		$.ajax({
 			type : "GET",
 			url : "filterbooks",
 			data : search,//JSON.stringify(search), // Note it is important
 			success : function(result) {
-				$('#test').html(result);
+				$('#Books').html(result);
 			},
 			error : function(jqXHR, exception) {
 				var msg = '';
@@ -377,9 +378,58 @@
 			}
 		});
 		selectedGenre = [ 0 ];
-		minRating = 0;
 		sortProperty = "";
 		sortOrder = "";
 	}
+	
+	function getPage(page){
+		for (var j = 0, l = genreInput.length; j < l; j++) {
+			if (genreInput[j].checked)
+				selectedGenre.push(genreInput[j].value);
+		}
+
+		var pageSize = document.getElementById("PageSize").value;
+		
+		var search = {
+			genres : selectedGenre,
+			minRating : minRating,
+			sortBy : sortProperty,
+			order : sortOrder,
+			page : page,
+			pageSize : pageSize 
+		}
+		$.ajax({
+			type : "GET",
+			url : "page",
+			data : search,//JSON.stringify(search), // Note it is important
+			success : function(result) {
+				$('#Books').html(result);
+			},
+			error : function(jqXHR, exception) {
+				var msg = '';
+				if (jqXHR.status === 0) {
+					msg = 'Not connect.\n Verify Network.';
+				} else if (jqXHR.status == 404) {
+					msg = 'Requested page not found. [404]';
+				} else if (jqXHR.status == 500) {
+					msg = 'Internal Server Error [500].';
+				} else if (exception === 'parsererror') {
+					msg = 'Requested JSON parse failed.';
+				} else if (exception === 'timeout') {
+					msg = 'Time out error.';
+				} else if (exception === 'abort') {
+					msg = 'Ajax request aborted.';
+				} else {
+					msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				}
+				alert("Error " + msg);
+			}
+		});
+		selectedGenre = [ 0 ];
+		sortProperty = "";
+		sortOrder = "";
+		
+	}
 </script>
+
 </html>

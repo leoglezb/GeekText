@@ -31,11 +31,20 @@ public class AddressDaoImpl implements AddressDao{
 		Address u = (Address) session.get(Address.class, id);
 		return u;
 	}
-
+	
 	@Override
-	public void addAddress(Address address) {
-		sessionFactory.getCurrentSession().save(address);
+	public Address addAddress(String address1, String address2, String city,  String state, String country, int zipCode) {
+		Address address = new Address() ;
+		address.setAddress1(address1);
+		address.setAddress2(address2);
+		address.setCity(city);
+		address.setCountry(country);
+		address.setZipCode(zipCode) ;
+		address.setState(state);
 		
+		sessionFactory.getCurrentSession().save(address);
+	
+		return address;
 	}
 
 	@Transactional(readOnly = true)

@@ -25,7 +25,7 @@ public class AuthorDaoImpl implements AuthorDao{
 	}
 
 	@Transactional(readOnly = true)
-	public Author getAuthor(Author id) {
+	public Author getAuthor(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Author u = (Author) session.get(Author.class, id);
 		return u;

@@ -33,6 +33,11 @@ public class BookServiceImpl implements BookService {
 	public List<Book> listBook(Filter filter) {
 		return BookDAO.listBook(filter);
 	}
+	
+	@Transactional
+	public List<Book> listTopSellers() {
+		return BookDAO.listTopSellers();
+	}
 
 	@Transactional
 	public void removeBook(Book id) {
@@ -50,6 +55,13 @@ public class BookServiceImpl implements BookService {
 		return BookDAO.bookById(bookId);
 	}
 	
+	@Transactional
+	public boolean canComment(String username, int bookId) {
+		return BookDAO.canComment(username, bookId);
+	}	
 	
-
+	@Transactional
+	public void updateBook(Book book) {
+		BookDAO.updateBook(book);
+	}
 }

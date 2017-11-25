@@ -4,189 +4,85 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>GeekText</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<!-- Le styles -->
-<link href="resources/css/bootstrap.css" rel="stylesheet">
-<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="resources/css/custom.css">
-<link rel="stylesheet" href="resources/css/font-awesome.min.css">
+
+<title>Geek Text</title>
+
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-	<!-- Header START -->
-	<!-- Nav START -->
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="max-1200 container-fluid">
-				<div class="row-fluid">
-					<div class="span4">
-						<a class="brand" href="#"> <img
-							src="resources/img/books-logo.png" alt="">
-						</a>
-					</div>
-					<div class="span8">
-						<p class="masthead">Great Books, for Geeks &amp; for All!</p>
-					</div>
-					<!-- >div class="display-pic">
-						<img class="img-circle"
-							src="resources/profiles/${userdetails.username}-profile.jpg"
-							alt="">
-					</div-->
-					<ul class="nav pull-left">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">
-								<h4>
-									Hello ${userdetails.firstname} &nbsp;<i class="icon-caret-down"></i>
-								</h4>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="<c:url value="profilemanagement"/>">My Profile</a></li>
-								<li><a href="<c:url value="/signout"/>">Logout</a></li>
-							</ul></li>
-					</ul>
-				</div>
+	<div class="row site-nav">
+		<div class="col-md-12">
+			<div class="logo">
+				<a href="/GeekText"><h1>Geek Books</h1></a>
+			</div>
+			<ul class="nav-list">
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row welcome-message">
+		<div class="col-md-12">
+			<h1>Welcome to Geek Books.</h1>
+			<h2>Are you ready to find your next favorite book?</h2>
+			<div class="button-awesome">
+				<a href="<c:url value="browsebooks"/>" class="btn btn-full">Browse All Books</a> 
+				<a href="<c:url value="topsellers"/>" class="btn btn-full">See Top Sellers</a>
 			</div>
 		</div>
 	</div>
-	<!-- Nav END -->
-	<!-- Header END -->
-	<!-- Container START -->
-	<div class="container">
-		<div class="row">
-			<div class="span8">
-				<h2>Actions:</h2>
-				<hr>
-				<!-- Dynamic Info START -->
-				<div class="dynamic-info">
-					<div class="result">
-						<p>
-							<!--  >a href="browsebooks">Browse Books</a-->
-							<a href="<c:url value="browsebooks"/>">Browse Books</a>
-						</p>
-					</div>
-				</div>
-				<!-- Dynamic Info END -->
-				<!-- Search input START -->
-				<!-- Search input END -->
-			</div>
+
+	<div class="row footer">
+		<div class="col-md footer-left">
+			<ul class="footer-list">
+				<li><a href="/GeekText">Home</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="topsellers"/>">Top Sellers</a></li>
+				<li><a href="<c:url value="shoppingcart"/>">Cart</a></li>
+			</ul>
 		</div>
-		<!-- Sidebar END -->
-	</div>
-
-
-	<!-- FOOTER -->
-	<div class="container">
-		<div class="row">
-			<footer>
-				<p class="pull-right">
-					<a href="#">Back to top</a>
-				</p>
-				<p>
-					&copy; Geektext &middot; <a href="#">Home</a> &middot;
-				</p>
-			</footer>
+		<div class="col-md footer-right">
+			<h5>Team Marvelous</h5>
+			<p>
+				Software Engineering 1<br>Professor Alex Roque<br>Fall
+				2017
+			</p>
 		</div>
 	</div>
 
-	<!-- Le javascript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="resources/js/jquery.js"></script>
-	<script src="resources/js/bootstrap-transition.js"></script>
-	<script src="resources/js/bootstrap-alert.js"></script>
-	<script src="resources/js/bootstrap-modal.js"></script>
-	<script src="resources/js/bootstrap-dropdown.js"></script>
-	<script src="resources/js/bootstrap-scrollspy.js"></script>
-	<script src="resources/js/bootstrap-tab.js"></script>
-	<script src="resources/js/bootstrap-tooltip.js"></script>
-	<script src="resources/js/bootstrap-popover.js"></script>
-	<script src="resources/js/bootstrap-button.js"></script>
-	<script src="resources/js/bootstrap-collapse.js"></script>
-	<script src="resources/js/bootstrap-carousel.js"></script>
-	<script src="resources/js/bootstrap-typeahead.js"></script>
-	<script type="text/javascript" src="resources/js/jquery.validate.js"></script>
-	<script src="resources/js/maps/error-replace.js"></script>
-	<script type="text/javascript" src="resources/js/jquery.montage.min.js"></script>
-	<script src="resources/js/simple-slider.js"></script>
-	<script type="text/javascript"
-		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD4SGJSgVm4BaQGj8Hwtc6eezGm0SuZ3zE&sensor=true&libraries=places&language=en-US"></script>
-	<script src="resources/js/maps/google-maps.js"></script>
-	<script>
-		$(document)
-				.ready(
-						function() {
-							$("[data-slider]").each(
-									function() {
-										var input = $(this);
-										$("<span>").addClass("output")
-												.insertAfter($(this));
-									}).bind(
-									"slider:ready slider:changed",
-									function(event, data) {
-										$(this).nextAll(".output:first").html(
-												data.value.toFixed(3));
-									});
-							$(function() {
-								/* 
-								 * just for this demo:
-								 */
-								$('#showcode').toggle(
-										function() {
-											$(this).addClass('up').removeClass(
-													'down').next().slideDown();
-										},
-										function() {
-											$(this).addClass('down')
-													.removeClass('up').next()
-													.slideUp();
-										});
-								$('#panel').toggle(
-										function() {
-											$(this).addClass('show')
-													.removeClass('hide');
-											$('#overlay').stop().animate(
-													{
-														left : -$('#overlay')
-																.width()
-																+ 20 + 'px'
-													}, 300);
-										},
-										function() {
-											$(this).addClass('hide')
-													.removeClass('show');
-											$('#overlay').stop().animate({
-												left : '0px'
-											}, 300);
-										});
-
-								var $container = $('#am-container'), $imgs = $container
-										.find('img').hide(), totalImgs = $imgs.length, cnt = 0;
-
-								$imgs.each(function(i) {
-									var $img = $(this);
-									$('<img/>').load(function() {
-										++cnt;
-										if (cnt === totalImgs) {
-											$imgs.show();
-											$container.montage({
-												fixedHeight : 150
-											});
-
-											/* 
-											 * just for this demo:
-											 */
-											$('#overlay').fadeIn(500);
-										}
-									}).attr('src', $img.attr('src'));
-								});
-							});
-							initialize();
-						});
-	</script>
 </body>
+
 </html>
+
