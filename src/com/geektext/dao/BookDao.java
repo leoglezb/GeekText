@@ -16,4 +16,5 @@ public interface BookDao {
     public Book bookById(int bookId);
     public boolean canComment(String username, int bookId);
     public List<Book> listTopSellers();
+    public void updateBook(Book book);
 }

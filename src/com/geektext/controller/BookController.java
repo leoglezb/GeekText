@@ -199,9 +199,13 @@ public class BookController {
 
 		Userdetails userdetails = serviceuser.getUserdetails(loggedInUserName());
 		Book book = bookService.bookById(bookid);
-
+		
+		/**
 		ratingService.addRating(book, userdetails, rating, comment);
-
+		**/
+		book.addRating(userdetails, rating, comment);
+		bookService.updateBook(book);
+		
 		List<BookRating> ratingList = ratingService.listRating(bookid);
 		model.addAttribute("ratingList", ratingList);
 		return "ratinglist";

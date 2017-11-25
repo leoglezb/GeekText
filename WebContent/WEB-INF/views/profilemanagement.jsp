@@ -11,66 +11,74 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Le styles -->
-<link href="resources/css/bootstrap.css" rel="stylesheet">
-<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="resources/css/custom.css">
-<link rel="stylesheet" href="resources/css/font-awesome.min.css">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="max-1200 container-fluid">
-				<div class="row-fluid">
-					<div class="span4">
-						<a class="brand" href="#"> <img
-							src="resources/img/books-logo.png" alt="">
-						</a>
-					</div>
-					<div class="span8">
-						<p class="masthead">Great Books, for Geeks &amp; for All!</p>
-					</div>
-					<!-- >div class="display-pic">
-						<img class="img-circle"
-							src="resources/profiles/${userdetails.username}-profile.jpg"
-							alt="">
-					</div-->
-					<ul class="nav pull-left">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">
-								<h4>
-									Hello ${userdetails.firstname} &nbsp;<i class="icon-caret-down"></i>
-								</h4>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="<c:url value="profilepage"/>">My Profile</a></li>
-								<li><a href="<c:url value="/signout"/>">Logout</a></li>
-							</ul></li>
-					</ul>
-				</div>
+	<div class="row site-nav">
+		<div class="col-md-12">
+			<div class="logo">
+				<a href="/GeekText"><h1>Geek Books</h1></a>
 			</div>
+			<ul class="nav-list">
+				<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
+				
+				<c:if test="${empty userdetails}">
+					<li><a href="<c:url value="/logIn"/>">Sign In</a></li>
+				</c:if>
+				<c:if test="${not empty userdetails}">
+					<li><div class="dropdown">
+							<button type="button" class="btn dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Hello ${userdetails.firstname}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<c:url value="/profilemanagement"/>">Profile</a> <a
+									class="dropdown-item" href="<c:url value="/signout"/>">Log
+									Out</a>
+							</div>
+						</div></li>
+				</c:if>
+			</ul>
 		</div>
 	</div>
-	<h1>Profile Management</h1>
+	<div class="container">
+		<div class="row">
+		<div class="col-sm-12" style="margin-left:30px;">
+			<h1>${userdetails.firstname} Account</h1>
+			<form class="form-horizontal" id="registerHere" >
+				<fieldset>
+				
+				<div class="span6" id="ProfileManagement">
+
 							<div class="col-10 col-md-4">
-								<p>
-									First Name: ${userdetails.firstname}<br/>
-								</p>
-								<p>
-									Last name: ${userdetails.lastname}<br/>
-								</p>
-								<p>
-									Nickname: ${userdetails.nickname}<br/>
-								</p>
-								<p>
-									Email: ${userdetails.username}<br/>
-								</p>
+								<p><span style="font-weight: bold;">First Name: </span>${userdetails.firstname}</p>
+								<p><span style="font-weight: bold;">Last Name: </span>${userdetails.lastname}</p>
+								<p><span style="font-weight: bold;">Nick Name: </span>${userdetails.nickname}</p>
+								<p><span style="font-weight: bold;">Email: </span>${userdetails.username}</p>
+
 								<div class="button-awesome">
-									<a href="<c:url value="address"/>" class="btn btn-full">Edit Profile Information</a>
-									<a href="<c:url value="address"/>" class="btn btn-full">Addresses on File</a>
-									<a href="<c:url value="creditcard"/>" class="btn btn-full">Credit Cards on File</a>
+									<a href="<c:url value="editprofile"/>" class="btn btn-full">Edit Profile</a>
+									<a href="<c:url value="editpassword"/>" class="btn btn-full">Edit Password</a>
+									<a href="<c:url value="address"/>" class="btn btn-full">Add Address</a>
+									<a href="<c:url value="creditcard"/>" class="btn btn-full">Add Credit Card</a>
 							</div>
-							<script src="resources/js/jquery.js"></script>
+							</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	</div>
+	<hr>
+
+	<footer>
+		<div class="container"></div>
+	</footer>
+	
+	
+	<script src="resources/js/jquery.js"></script>
 	<script src="resources/js/bootstrap-transition.js"></script>
 	<script src="resources/js/bootstrap-alert.js"></script>
 	<script src="resources/js/bootstrap-modal.js"></script>
@@ -90,6 +98,21 @@
 	<script type="text/javascript"
 		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD4SGJSgVm4BaQGj8Hwtc6eezGm0SuZ3zE&sensor=true&libraries=places&language=en-US"></script>
 	<script src="resources/js/maps/google-maps.js"></script>
+	
+		<div class="row footer">
+			<div class="col-md footer-left">
+				<ul class="footer-list">
+					<li><a href="/GeekText">Home</a></li>
+					<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+					<li><a href="<c:url value="/profilemanagement"/>">Profile</a></li>
+					<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
+				</ul>
+			</div>
+			<div class="col-md footer-right">
+				<h5>Team Marvelous</h5>
+				<p>Software Engineering 1<br>Professor Alex Roque<br>Fall 2017</p>
+			</div>
+		</div>
 							
-					</body>
+</body>
 </html>

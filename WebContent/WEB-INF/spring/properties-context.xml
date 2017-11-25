@@ -12,7 +12,7 @@
 		<prop key="jdbc.driverClassName">com.mysql.jdbc.Driver</prop>		
 		<prop key="jdbc.url">jdbc:mysql://localhost:3306/GeekText</prop>
 		<prop key="jdbc.username">root</prop>
-		<prop key="jdbc.password"></prop>		
+		<prop key="jdbc.password">bullet1994</prop>		
 	</util:properties>
 	
 </beans>

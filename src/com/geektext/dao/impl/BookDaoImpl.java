@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.geektext.dao.BookDao;
 import com.geektext.form.Book;
+import com.geektext.form.ShoppingCart;
 import com.geektext.pojo.Filter;
 
 @Repository
@@ -130,4 +131,16 @@ public class BookDaoImpl implements BookDao {
 	    BigInteger result = (BigInteger) query.uniqueResult();	
 	    return result.equals(BigInteger.valueOf(1)) ? true : false;
 	}
+	
+	public void updateBook(Book book) {
+		int sum = 0;
+		int count = book.getRatings().size();
+		for(int i = 0; i < book.getRatings().size(); i++) {
+			sum += book.getRatings().get(i).getRating();
+		}
+		if(count > 0) {
+			book.setAvgrating((double)sum/count);
+		}
+        sessionFactory.getCurrentSession().saveOrUpdate(book);
+    }
 }

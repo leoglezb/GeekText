@@ -3,8 +3,10 @@ package com.geektext.form;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
@@ -30,11 +32,11 @@ public class BookRating implements Serializable{
 	@Column(name = "Comment")
 	private String comment ;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "bookid")
-	private Book book;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "BookId")
+    private Book book;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "username")
 	private Userdetails user;
 	

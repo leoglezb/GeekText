@@ -91,7 +91,6 @@ public class AddressController {
 		
 		//userdetails.setHomeAddress(address);
 		userdetails.addShippingAddress(address);
-		
 		serviceuser.updateUserdetails(userdetails);
 		model.addAttribute("userdetails", userdetails);
 		
