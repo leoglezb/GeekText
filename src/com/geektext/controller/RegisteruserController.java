@@ -117,16 +117,16 @@ public class RegisteruserController {
 		
 		model.addAttribute("userdetails", userdetails);
 		
-		model.addAttribute("userdetails", userdetails);
-		
 		return "editpassword";
 	}
 	
 	@RequestMapping(value="/updatepassword", method=RequestMethod.POST)
-	public String updateUserPass(HttpServletRequest request, Model model, @RequestParam(value = "password") String password,
-			@RequestParam(value = "cpwd") String cpwd){
+	public String updateUserPass(HttpServletRequest request, Model model, @RequestParam(value = "password") String password){
+
 	
-		/*Not sure how to proceed*/
+		userDetailsManager.changePassword("password", password);
+		model.addAttribute(password) ;
+		//model.addAttribute("password", password) ;
 				
 		return "editpassword";
 	}	
@@ -134,6 +134,7 @@ public class RegisteruserController {
 	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
 	public String editUser(HttpServletRequest request, Model model) {
 		Userdetails userdetails = service.getUserdetails(loggedInUserName());
+		
 		
 		model.addAttribute("userdetails", userdetails);
 		
