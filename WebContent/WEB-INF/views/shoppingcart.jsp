@@ -90,7 +90,7 @@
 
 		<div class="row">
 			<div class="col-sm">
-				<h3 style="text-align: right;">
+				<h3 style="text-align: right; padding-right: 15px;">
 					Total:<span>${total}</span>
 				</h3>
 				<c:if test="${fn:length(inCart) gt 0}">
