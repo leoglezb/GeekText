@@ -40,6 +40,7 @@
 							</div>
 						</div></li>
 				</c:if>
+
 			</ul>
 		</div>
 	</div>
@@ -57,14 +58,9 @@
 								<p><span style="font-weight: bold;">Last Name: </span>${userdetails.lastname}</p>
 								<p><span style="font-weight: bold;">Nick Name: </span>${userdetails.nickname}</p>
 								<p><span style="font-weight: bold;">Email: </span>${userdetails.username}</p>
-							</div>
-					</div>
-				</fieldset>
-			</form>
-		</div>
-	</div>
-	
-	<div class="button-awesome row">
+
+									
+						<div class="button-awesome row">
 									<div class="col-md-3" style="margin: 0px; padding: 0px;">
 									<a href="<c:url value="editprofile"/>" class="btn btn-full">Edit Profile</a>
 									</div>
@@ -78,7 +74,12 @@
 									<a href="<c:url value="creditcard"/>" class="btn btn-full">Add Credit Card</a>
 									</div>
 							</div>
-	
+							</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
 	</div>
 	<hr>
 

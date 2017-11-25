@@ -66,15 +66,6 @@ public class RegisteruserController {
 		if(password.length() > 8){
 			return false ;
 		}
-		else if(!hasUpperCase) {
-			return false ;
-		}
-		else if(!hasLowerCase){
-			return false ;
-		}
-		else if(!hasSpecial) {
-			return false ;
-		}
 		else {
 			return true ;	
 		}
