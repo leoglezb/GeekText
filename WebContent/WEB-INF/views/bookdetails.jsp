@@ -88,7 +88,7 @@
 					type="button" class="btn btn-lg">Add to Shopping Cart</button></a>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-12">
 		<div class="rowRating" style="margin-right: 100px">
 			<input type=hidden id=bookid value="${book.bookid}">
 
@@ -109,7 +109,6 @@
 	<div class="rowTextbox" style="margin-left: 30px">
 		<div id="commentErr">*Cannot leave an empty comment*</div>
 		<textarea id="commentArea" rows="4" cols="40" maxlength=140></textarea>
-
 		<c:if test="${!canComment}">
 			<script type="text/javascript">
 				function winLoad() {

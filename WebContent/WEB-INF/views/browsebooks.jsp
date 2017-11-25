@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="row books-details">
-		<div class="col-sm-4">
+		<div class="col-sm-6" style="padding-left:30px;">
 			<h3>
 				<a href="<c:url value="browsebooks"/>"
 					style="text-decoration: underline; color: black;">Browse All</a> <a
@@ -52,7 +52,7 @@
 			</h3>
 
 		</div>
-		<div class="col-sm-2">
+		<div class="col-sm-1">
 			<label>View</label> <select id="PageSize" onChange="doWork()">
 				<option value="10" selected="selected">10</option>
 				<option value="20">20</option>
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<div class="input-group">
 				<input type="text" id="srch-term">
 				<div class="input-group-btn">
@@ -154,8 +154,8 @@
 				</c:forEach>
 
 				<div class="row page-index" id="PageDiv">
-					<div class="col-md-4"></div>
-					<div class="col-md-4" style="margin-left: 50px;">
+				
+					<div class="col-md-12" style="margin-left: 500px;">
 						<nav aria-label="Page navigation example text-xs-center">
 							<ul class="pagination">
 								<!--  <li class="page-item" id="Prev"><a class="page-link" onClick="getPage('prev')"
@@ -174,7 +174,6 @@
 							</ul>
 						</nav>
 					</div>
-					<div class="col-md-4"></div>
 
 				</div>
 			</div>
