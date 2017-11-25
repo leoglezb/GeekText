@@ -1,5 +1,6 @@
 package com.geektext.dao.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -62,5 +63,19 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         sessionFactory.getCurrentSession().saveOrUpdate(cart);
     }
 	
+	public void insertOrderItem(CartItem item, Userdetails user) {
+		Session session = sessionFactory.getCurrentSession(); 
+		Query query = session.createSQLQuery("select orderid from salesorder where username = :username");
+		query.setParameter("username", user.getUsername());
+		Integer result = (Integer) query.uniqueResult();	
+		
+		
+		query = session.createSQLQuery("insert orderitem (orderid, bookid, qty) values (:orderid, :bookid, :qty)");
+		query.setParameter("orderid", result);
+		query.setParameter("bookid", item.getBook().getBookid());
+		query.setParameter("qty", 1);
+		query.executeUpdate();
+		
+	}
 
 }
