@@ -93,7 +93,7 @@
 									<button type="submit" class="btn btn-primary"  onClick="addCreditCard()">Submit</button>
 								</div>
 								<div class="btn-group">
-									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
+									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to Profile</button>
 								</div>
 							</div>
 						</div>

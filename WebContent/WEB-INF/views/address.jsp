@@ -76,7 +76,7 @@
 						<div class="control-group">
 							<label class="control-label" for="input01">State</label>
 							<div class="controls">
-								<input type="text" id="state"
+								<input type="text" id="state" minlength="2" maxlength="2"
 									name="state">
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 						<div class="control-group">
 							<label class="control-label" for="input01">Zip</label>
 							<div class="controls">
-								<input type="text" id="zipCode" name="zipCode">
+								<input type="text" id="zipCode" name="zipCode" maxlength="5">
 							</div>
 						</div>
 						<div class="control-group">
@@ -99,7 +99,7 @@
 									<button type="submit" class="btn btn-primary"  onClick="addAddress()">Submit</button>
 								</div>
 								<div class="btn-group">
-									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
+									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to Profile</button>
 								</div>
 							</div>
 						</div>
@@ -152,29 +152,27 @@
 	function addAddress() {
 		//DO FORMS
 		
-		//var address1 = document.getElementById("address1").value;
-		//var address2 = document.getElementById("address2").value;
-		//var city = document.getElementById("city").value;
-	//	var state = document.getElementById("state").value;
-		//var country = document.getElementById("country").value;
-		//var zip = document.getElementById("zip").value;
+		var address1 = document.getElementById("address1").value;
+		var address2 = document.getElementById("address2").value;
+		var city = document.getElementById("city").value;
+		var state = document.getElementById("state").value;
+		var country = document.getElementById("country").value;
+		var zip = document.getElementById("zipCode").value;
 			
 		var param = {
-			address1 : "asfgsdf",
-			address2 : "sdgfsdfgsfd",
-			city : "asdgggggggg",
-			state : "as" ,
-			country : "USA",
-			zip : 33014
+			address1 : address1,
+			address2 : address2,
+			city : city,
+			state : state ,
+			country : country,
+			zip : zip
 		}
-		alert("we made it");
 		$.ajax({
 			type : "POST",
 			url : "addAddress",
 			data : param,
 			success : function(result) {
-				alert("It worked!");
-
+				
 			},
 			error : function(jqXHR, exception) {
 				var msg = '';
@@ -193,7 +191,7 @@
 				} else {
 					msg = 'Uncaught Error.\n' + jqXHR.responseText;
 				}
-				alert("Error " + msg);
+				//alert("Error " + msg);
 			}
 		});
 		address1 = [ 0 ];

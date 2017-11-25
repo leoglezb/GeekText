@@ -82,7 +82,7 @@
 									</div>
 									<div class="btn-group">
 										<button type="cancel" class="btn btn-full"
-											onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Home</button>
+											onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to Profile</button>
 									</div>
 								</div>
 							</div>
@@ -147,23 +147,19 @@
 	<script src="resources/js/maps/error-replace.js"></script>
 	<script type="text/javascript">
 		function addNewInfo() {
-			alert("First");
 			var user_firstname = document.getElementById("user_firstname").value;
 			var user_lastname = document.getElementById("user_lastname").value;
 			var user_nickname = document.getElementById("user_nickname").value;
-			alert("Second");
 			var param = {
 				user_firstname : user_firstname,
 				user_lastname : user_lastname,
 				user_nickname : user_nickname
 			}
-			alert("JSON");
 			$.ajax({
 				type : "POST",
 				url : "updateuser",
 				data : param,
 				success : function(result) {
-					alert("yess");
 				},
 				error : function(jqXHR, exception) {
 					var msg = '';

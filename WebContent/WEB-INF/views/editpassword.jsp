@@ -71,7 +71,7 @@
 									<button type="submit" class="btn btn-full" onClick="addNewPassword()">Update</button>
 								</div>
 								<div class="btn-group">
-									<button type="cancel" class="btn btn-full" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Home</button>
+									<button type="cancel" class="btn btn-full" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to Profile</button>
 								</div>
 							</div>
 						</div>
