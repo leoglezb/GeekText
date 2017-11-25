@@ -59,5 +59,9 @@ public class BookServiceImpl implements BookService {
 	public boolean canComment(String username, int bookId) {
 		return BookDAO.canComment(username, bookId);
 	}	
-
+	
+	@Transactional
+	public void updateBook(Book book) {
+		BookDAO.updateBook(book);
+	}
 }
