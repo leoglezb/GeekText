@@ -13,6 +13,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.geektext.dao.impl.BookDaoImpl;
+import com.geektext.service.BookService;
+import com.geektext.service.imp.BookServiceImpl;
+
 import javax.persistence.GeneratedValue;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -163,6 +167,31 @@ public class ShoppingCart implements Serializable{
 			CartItem current = items.get(i);
 			if(current.getCartItemId() == itemId)
 				current.setSavedForLater(false);
+		}
+	}
+	
+	public void removeFromCart(int itemId) {
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(current.getCartItemId() == itemId) {
+				items.remove(i);
+				return;
+			}
+		}
+	}
+	
+	public void confirmOrder() {
+		BookService bookdao = new BookServiceImpl();
+		
+		for(int i = 0; i < items.size(); i++) {
+			CartItem current = items.get(i);
+			if(!current.isSavedForLater()) {
+				Book b = current.getBook();
+				b.setSold(current.getQuantity());
+				bookdao.updateBook(b);
+				items.remove(i);
+				return;
+			}
 		}
 	}
 	

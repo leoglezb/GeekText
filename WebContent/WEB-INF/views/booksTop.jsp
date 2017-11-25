@@ -86,6 +86,7 @@
 						<p class="book-information" style="margin: 15px;">${book.avgrating}</p>
 						<p class="book-information" style="margin: 15px;">${book.price}</p>
 						<p class="book-information" style="margin: 15px;">${book.releasedate}</p>
+						<p class="book-information" style="margin:15px;">Sold: ${book.sold}</p>
 					</div>
 					<div class="col-sm-3">
 						<a href="<c:url value="bookdetails?bookid=${book.bookid}"/>"><p

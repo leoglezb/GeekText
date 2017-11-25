@@ -67,11 +67,10 @@
 	<div class="row footer">
 		<div class="col-md footer-left">
 			<ul class="footer-list">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="books.html">Browse</a></li>
-				<li><a href="top-sellers.html">Top Sellers</a></li>
-				<li><a href="#">Account</a></li>
-				<li><a href="#">Cart</a></li>
+				<li><a href="/GeekText">Home</a></li>
+				<li><a href="<c:url value="browsebooks"/>">Browse</a></li>
+				<li><a href="<c:url value="topsellers"/>">Top Sellers</a></li>
+				<li><a href="<c:url value="shoppingcart"/>">Cart</a></li>
 			</ul>
 		</div>
 		<div class="col-md footer-right">

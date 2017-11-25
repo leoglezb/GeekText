@@ -81,6 +81,7 @@
 						</div>
 						<div class="col-sm">
 							<a style="color: black" onClick="saveForLater(${item.cartItemId})">Save for Later</a>
+							<br/><a style="color: black" onClick="removeFromCart(${item.cartItemId})">Remove from cart</a>
 						</div>
 					</div>
 				</div>
@@ -93,7 +94,7 @@
 					Total:<span>${total}</span>
 				</h3>
 				<c:if test="${fn:length(inCart) gt 0}">
-				<a href="checkout.html" style="float: right;" class="btn btn-full">Check
+				<a href="<c:url value="/checkout"/>" style="float: right;" class="btn btn-full">Check
 					Out</a>
 				</c:if>
 			</div>
@@ -134,6 +135,7 @@
 							</div>
 							<div class="col-sm">
 								<a style="color: black;" onClick="backToCart(${item.cartItemId})">Move Back to Cart</a>
+								<br/><a style="color: black" onClick="removeFromCart(${item.cartItemId})">Remove from cart</a>
 							</div>
 						</div>
 					</div>
@@ -254,6 +256,40 @@ function backToCart(itemId) {
 	$.ajax({
 		type : "GET",
 		url : "backToCart",
+		data : search,
+		success : function(result) {
+			$('#CartInfo').html(result);
+		},
+		error : function(jqXHR, exception) {
+			var msg = '';
+			if (jqXHR.status === 0) {
+				msg = 'Not connect.\n Verify Network.';
+			} else if (jqXHR.status == 404) {
+				msg = 'Requested page not found. [404]';
+			} else if (jqXHR.status == 500) {
+				msg = 'Internal Server Error [500].';
+			} else if (exception === 'parsererror') {
+				msg = 'Requested JSON parse failed.';
+			} else if (exception === 'timeout') {
+				msg = 'Time out error.';
+			} else if (exception === 'abort') {
+				msg = 'Ajax request aborted.';
+			} else {
+				msg = 'Uncaught Error.\n' + jqXHR.responseText;
+			}
+			alert("Error " + msg);
+		}
+	});
+	
+}
+
+function removeFromCart(itemId) {
+	var search = {
+			itemId : itemId
+		}
+	$.ajax({
+		type : "GET",
+		url : "removeFromCart",
 		data : search,
 		success : function(result) {
 			$('#CartInfo').html(result);
