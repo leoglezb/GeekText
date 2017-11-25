@@ -6,14 +6,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Addres-Edit</title>
+<title>Address-Edit</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 
 <!-- Le styles -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -99,7 +99,7 @@
 									<button type="submit" class="btn btn-primary"  onClick="addAddress()">Submit</button>
 								</div>
 								<div class="btn-group">
-									<button type="cancel" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
+									<button type="cancel" class="btn btn-primary" onclick="window.location='http://localhost:8080/GeekText/profilemanagement';return false;">Back to home</button>
 								</div>
 							</div>
 						</div>
@@ -114,6 +114,20 @@
 
 	<footer>
 		<div class="container"></div>
+			<div class="row footer">
+			<div class="col-md footer-left">
+				<ul class="footer-list">
+					<li><a href="/GeekText">Home</a></li>
+					<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
+					<li><a href="<c:url value="/profilemanagement"/>">Profile</a></li>
+					<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
+				</ul>
+			</div>
+			<div class="col-md footer-right">
+				<h5>Team Marvelous</h5>
+				<p>Software Engineering 1<br>Professor Alex Roque<br>Fall 2017</p>
+			</div>
+		</div>
 	</footer>
 
 	<!--/.fluid-container-->
@@ -138,20 +152,20 @@
 	function addAddress() {
 		//DO FORMS
 		
-		var address1 = document.getElementById("address1").value;
-		var address2 = document.getElementById("address2").value;
-		var city = document.getElementById("city").value;
-	 	var state = document.getElementById("state").value;
-		var country = document.getElementById("country").value;
-		var zip = document.getElementById("zip").value;
+		//var address1 = document.getElementById("address1").value;
+		//var address2 = document.getElementById("address2").value;
+		//var city = document.getElementById("city").value;
+	//	var state = document.getElementById("state").value;
+		//var country = document.getElementById("country").value;
+		//var zip = document.getElementById("zip").value;
 			
 		var param = {
-			address1 : address1,
-			address2 : address2,
-			city : city,
-			state : state ,
-			country : country,
-			zip : zip
+			address1 : "asfgsdf",
+			address2 : "sdgfsdfgsfd",
+			city : "asdgggggggg",
+			state : "as" ,
+			country : "USA",
+			zip : 33014
 		}
 		alert("we made it");
 		$.ajax({
@@ -187,7 +201,7 @@
 		sortOrder = "";
 	}
 	</script>
-
+	<!-- script type="text/javascript">
 		$(document).ready(function() {
 			jQuery.validator.addMethod("accept", function(value, element, param) {
 				if(value==null || value==""){
@@ -290,23 +304,9 @@
 				$('#formCancel').submit();
 			});
 		});
-	</script> 
+	</script> -->
 	
-		<div class="row footer">
-			<div class="col-md footer-left">
-				<ul class="footer-list">
-					<li><a href="/GeekText">Home</a></li>
-					<li><a href="<c:url value="/browsebooks"/>">Browse</a></li>
-					<li><a href="<c:url value="/profilemanagement"/>">Profile</a></li>
-					<li><a href="<c:url value="/shoppingcart"/>">Cart</a></li>
-				</ul>
-			</div>
-			<div class="col-md footer-right">
-				<h5>Team Marvelous</h5>
-				<p>Software Engineering 1<br>Professor Alex Roque<br>Fall 2017</p>
-			</div>
-		</div>
-		
+	
 </body>
 </html>
 
