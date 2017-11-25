@@ -47,7 +47,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12" style="margin-left: 30px;">
-				<h1>${userdetails.firstname}'s &nbsp; Account</h1>
+				<h1>${userdetails.firstname}'s&nbsp; Account</h1>
 				<form class="form-horizontal" id="updateuser">
 					<fieldset>
 						<div class="span6">
@@ -89,6 +89,19 @@
 									</select>
 								</div>
 							</div>
+							<div class="control-group">
+								<div class="controls">
+									<c:if test="${userdetails.anonymous == 1}">
+										<label><input type="checkbox" id="user_anonymous"
+										class="form-control" placeholder="User anonymous" checked="checked">Anonymous?</label>
+									</c:if>
+									<c:if test="${userdetails.anonymous == 0}">
+									<label><input type="checkbox" id="user_anonymous"
+										class="form-control" placeholder="User anonymous">Anonymous?</label>
+										</c:if>
+								</div>
+							</div>
+
 							<div class="control-group">
 								<label class="control-label" for="input01"></label>
 								<div class="controls">
@@ -165,11 +178,14 @@
 			var user_lastname = document.getElementById("user_lastname").value;
 			var user_nickname = document.getElementById("user_nickname").value;
 			var user_addressId = document.getElementById("HomeId").value;
+			var user_anonymous = document.getElementById("user_anonymous").checked;
+			
 			var param = {
 				user_firstname : user_firstname,
 				user_lastname : user_lastname,
 				user_nickname : user_nickname,
-				user_addressId : user_addressId
+				user_addressId : user_addressId,
+				user_anonymous : user_anonymous
 			}
 			$.ajax({
 				type : "POST",

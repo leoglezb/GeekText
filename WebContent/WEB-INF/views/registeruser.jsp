@@ -80,13 +80,7 @@
 								<input type="password" id="cpwd" class="form-control"
 									placeholder="Confirm Password" required name="cpwd">
 							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<label><input type="checkbox" id="user_anonymous" class="form-control"
-									placeholder="User anonymous" >Anonymous?</label>
-							</div>
-						</div>
+						</div>					
 						<div class="control-group">
 							<label class="sr-only" for="input01"></label>
 							<div class="controls">

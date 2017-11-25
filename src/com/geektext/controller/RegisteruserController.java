@@ -143,13 +143,14 @@ public class RegisteruserController {
 	//@ResponseStatus(value = HttpStatus.OK)
 	public String updateUser(HttpServletRequest request, Model model, @RequestParam(value = "user_firstname") String user_firstname,
 			@RequestParam(value = "user_lastname") String user_lastname, @RequestParam(value = "user_nickname") String user_nickname,
-			@RequestParam(value = "user_addressId") int user_addressId){
+			@RequestParam(value = "user_addressId") int user_addressId, @RequestParam(value = "user_anonymous") boolean user_anonymous){
 	
 		Userdetails userdetails= service.getUserdetails(loggedInUserName()) ;
 
 		userdetails.setFirstname(user_firstname);
 		userdetails.setLastname(user_lastname);
 		userdetails.setNickname(user_nickname);
+		userdetails.setAnonymous(user_anonymous ? 1 : 0);
 		
 		Address a = addressService.getAddress(user_addressId);
 		userdetails.setHomeAddress(a);
