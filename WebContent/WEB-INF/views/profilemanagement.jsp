@@ -52,7 +52,7 @@
 				
 				<div class="span6" id="ProfileManagement">
 
-							<div class="col-10 col-md-4">
+							<div class="col-10 col-md-10">
 								<p><span style="font-weight: bold;">First Name: </span>${userdetails.firstname}</p>
 								<p><span style="font-weight: bold;">Last Name: </span>${userdetails.lastname}</p>
 								<p><span style="font-weight: bold;">Nick Name: </span>${userdetails.nickname}</p>
